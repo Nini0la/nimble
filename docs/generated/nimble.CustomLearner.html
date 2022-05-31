@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>CustomLearner &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="CustomLearner.learnerType" href="nimble.CustomLearner.learnerType.html" />
+    <link rel="prev" title="Init" href="nimble.Init.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/cleaning_data.html">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/exploring_data.html">Exploring Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/unsupervised_learning.html">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/merging_and_tidying_data.html">Merging and Tidying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/additional_functionality.html">Additional Functionality</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Nimble API Documentation</a><ul>
+      <li>Previous: <a href="nimble.Init.html" title="previous chapter">Init</a></li>
+      <li>Next: <a href="nimble.CustomLearner.learnerType.html" title="next chapter">CustomLearner.learnerType</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="customlearner">
+<h1>CustomLearner<a class="headerlink" href="#customlearner" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="nimble.CustomLearner">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">nimble.</span></code><code class="sig-name descname"><span class="pre">CustomLearner</span></code><a class="headerlink" href="#nimble.CustomLearner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for creating custom learners for use within the Nimble API.</p>
+<p>Base class defining a hierarchy of objects which encapsulate what is
+needed to be a single learner callable through the Custom Universal
+Interface. At minimum, a subclass must provide a <code class="docutils literal notranslate"><span class="pre">learnerType</span></code>
+attribute, an implementation for the method <code class="docutils literal notranslate"><span class="pre">apply</span></code> and at least
+one out of <code class="docutils literal notranslate"><span class="pre">train</span></code> or <code class="docutils literal notranslate"><span class="pre">incrementalTrain</span></code>. If
+<code class="docutils literal notranslate"><span class="pre">incrementalTrain</span></code> is implemented yet <code class="docutils literal notranslate"><span class="pre">train</span></code> is not, then
+<code class="docutils literal notranslate"><span class="pre">incrementalTrain</span></code> is used in place of calls to <code class="docutils literal notranslate"><span class="pre">train</span></code>.
+Furthermore, a subclass must not require any arguments for its
+<code class="docutils literal notranslate"><span class="pre">__init__</span></code> method.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="nimble.train.html#nimble.train" title="nimble.train"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nimble.train</span></code></a>, <a class="reference internal" href="nimble.normalizeData.html#nimble.normalizeData" title="nimble.normalizeData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nimble.normalizeData</span></code></a>, <a class="reference internal" href="nimble.fillMatching.html#nimble.fillMatching" title="nimble.fillMatching"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nimble.fillMatching</span></code></a></p>
+</div>
+<p class="rubric">Keywords</p>
+<p>algorithm, model, regression, classification, neural network,
+clustering, supervised learning, unsupervised learning,
+deep learning, predictor, estimator</p>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.CustomLearner.learnerType.html#nimble.CustomLearner.learnerType" title="nimble.CustomLearner.learnerType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">learnerType</span></code></a></p></td>
+<td><p>Describe the type of the learner.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.CustomLearner.apply.html#nimble.CustomLearner.apply" title="nimble.CustomLearner.apply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code></a>(testX)</p></td>
+<td><p>Apply the learner to the testing data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.CustomLearner.getApplyDefaults.html#nimble.CustomLearner.getApplyDefaults" title="nimble.CustomLearner.getApplyDefaults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getApplyDefaults</span></code></a>()</p></td>
+<td><p>Class method used to determine the default values of only the apply method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.CustomLearner.getApplyParameters.html#nimble.CustomLearner.getApplyParameters" title="nimble.CustomLearner.getApplyParameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getApplyParameters</span></code></a>()</p></td>
+<td><p>Class method used to determine the parameters of only the apply method.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.CustomLearner.getLearnerDefaultValues.html#nimble.CustomLearner.getLearnerDefaultValues" title="nimble.CustomLearner.getLearnerDefaultValues"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getLearnerDefaultValues</span></code></a>()</p></td>
+<td><p>Class method used by the a custom learner interface to supply learner parameter default values to the user through the standard nimble functions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.CustomLearner.getLearnerParameterNames.html#nimble.CustomLearner.getLearnerParameterNames" title="nimble.CustomLearner.getLearnerParameterNames"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getLearnerParameterNames</span></code></a>()</p></td>
+<td><p>Class method used by the a custom learner interface to supply learner parameters to the user through the standard nimble functions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.CustomLearner.getScores.html#nimble.CustomLearner.getScores" title="nimble.CustomLearner.getScores"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getScores</span></code></a>(testX)</p></td>
+<td><p>If this learner is a classifier, then return the scores for each class on each data point, otherwise raise an exception.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.CustomLearner.getTrainDefaults.html#nimble.CustomLearner.getTrainDefaults" title="nimble.CustomLearner.getTrainDefaults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getTrainDefaults</span></code></a>()</p></td>
+<td><p>Class method used to determine the default values of only the train method.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.CustomLearner.getTrainParameters.html#nimble.CustomLearner.getTrainParameters" title="nimble.CustomLearner.getTrainParameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getTrainParameters</span></code></a>()</p></td>
+<td><p>Class method used to determine the parameters of only the train method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.CustomLearner.incrementalTrain.html#nimble.CustomLearner.incrementalTrain" title="nimble.CustomLearner.incrementalTrain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">incrementalTrain</span></code></a>(trainX, trainY)</p></td>
+<td><p>Train or continue training the learner on new training data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.CustomLearner.train.html#nimble.CustomLearner.train" title="nimble.CustomLearner.train"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code></a>(trainX, trainY)</p></td>
+<td><p>Train the learner on the training data.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/docs/generated/nimble.CustomLearner.rst"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

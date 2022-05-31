@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>nimble.trainAndTestOnTrainingData &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="nimble.normalizeData" href="nimble.normalizeData.html" />
+    <link rel="prev" title="nimble.trainAndTest" href="nimble.trainAndTest.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/cleaning_data.html">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/exploring_data.html">Exploring Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/unsupervised_learning.html">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/merging_and_tidying_data.html">Merging and Tidying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/additional_functionality.html">Additional Functionality</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Nimble API Documentation</a><ul>
+      <li>Previous: <a href="nimble.trainAndTest.html" title="previous chapter">nimble.trainAndTest</a></li>
+      <li>Next: <a href="nimble.normalizeData.html" title="next chapter">nimble.normalizeData</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="nimble-trainandtestontrainingdata">
+<h1>nimble.trainAndTestOnTrainingData<a class="headerlink" href="#nimble-trainandtestontrainingdata" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="nimble.trainAndTestOnTrainingData">
+<code class="sig-prename descclassname"><span class="pre">nimble.</span></code><code class="sig-name descname"><span class="pre">trainAndTestOnTrainingData</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">learnerName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">performanceFunction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trainX</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trainY</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crossValidationFolds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arguments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiClassStrategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomSeed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tuning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">useLog</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwarguments</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nimble.trainAndTestOnTrainingData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Train a model using the train data and get the performance results.</p>
+<p><code class="docutils literal notranslate"><span class="pre">trainAndTestOnTrainingData</span></code> is the function for doing learner
+creation and evaluation in a single step with only a single data set
+(no withheld testing set). By default, this will calculate training
+error for the learner trained on that data set. However, cross
+validation error can instead be calculated by setting the parameter
+<code class="docutils literal notranslate"><span class="pre">crossValidationFolds</span></code> to an integer. In that case, we will
+partition the training set into that number of folds, and
+iteratively withhold each single fold to be used as the testing set
+of the learner trained on the rest of the data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>learnerName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The learner to be called. This can be a string in the form
+‘package.learner’ or the learner class object.</p></li>
+<li><p><strong>performanceFunction</strong> (<em>function</em>) – The function used to determine the performance of the learner.
+Pre-made functions are available in nimble.calculate. If
+hyperparameter tuning and the Tuning instance does not have a
+set performanceFunction, it will utilize this function as well.</p></li>
+<li><p><strong>trainX</strong> (<em>nimble Base object</em>) – Data to be used for training.</p></li>
+<li><p><strong>trainY</strong> (<em>identifier</em><em>, </em><em>nimble Base object</em>) – A name or index of the feature in <code class="docutils literal notranslate"><span class="pre">trainX</span></code> containing the
+labels or another nimble Base object containing the labels that
+correspond to <code class="docutils literal notranslate"><span class="pre">trainX</span></code>.</p></li>
+<li><p><strong>crossValidationFolds</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – When None, the learner is trained on the training data and then
+tested using the same data. When an integer, the training data
+is partitioned into that number of folds. Each fold is
+iteratively withheld and used as the testing set for a learner
+trained on the combination of all of the non-withheld data. The
+performance results for each of those tests are then averaged
+together to act as the return value.</p></li>
+<li><p><strong>arguments</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – Mapping argument names (strings) to their values, to be used
+during training and application (e.g., {‘dimensions’:5, ‘k’:5}).
+Multiple values for arguments can be provided by using a
+<code class="docutils literal notranslate"><span class="pre">Tune</span></code> object (e.g., {‘k’: Tune([3, 5, 7])}) to initiate
+hyperparameter tuning and return the learner trained on the best
+set of arguments. To provide an argument that is an object from
+the same package as the learner, use a <code class="docutils literal notranslate"><span class="pre">nimble.Init</span></code> object
+with the object name and its instantiation arguments (e.g.,
+{‘optimizer’: nimble.Init(‘SGD’, learning_rate=0.01}).
+Note: learner arguments can also be passed as <code class="docutils literal notranslate"><span class="pre">kwarguments</span></code> so
+this dictionary will be merged with any keyword arguments.</p></li>
+<li><p><strong>multiClassStrategy</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – May be ‘OneVsAll’ or ‘OneVsOne’ to train the learner using that
+multiclass strategy. When None, the learner is trained on the
+data as provided.</p></li>
+<li><p><strong>randomSeed</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Set a random seed for the operation. When None, the randomness is
+controlled by Nimble’s random seed. Ignored if learner does not
+depend on randomness.</p></li>
+<li><p><strong>tuning</strong> (<a class="reference internal" href="nimble.Tuning.html#nimble.Tuning" title="nimble.Tuning"><em>nimble.Tuning</em></a><em>, </em><em>performanceFunction</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – Applies when hyperparameter tuning is initiated by <code class="docutils literal notranslate"><span class="pre">Tune</span></code>
+objects in the arguments. A Tuning instance details how the
+argument sets will be selected and validated. For convenience,
+a performanceFunction may instead be provided or None will
+provide the performanceFunction from this function and this will
+trigger construction of a Tuning instance using the default
+consecutive selection method with 5-fold cross validation.</p></li>
+<li><p><strong>useLog</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – Local control for whether to send results/timing to the logger.
+If None (default), use the value as specified in the “logger”
+“enabledByDefault” configuration option. If True, send to the
+logger regardless of the global option. If False, do <strong>NOT</strong>
+send to the logger, regardless of the global option.</p></li>
+<li><p><strong>kwarguments</strong> – Keyword arguments specified variables that are passed to the
+learner. These are combined with the <code class="docutils literal notranslate"><span class="pre">arguments</span></code> parameter.
+Multiple values for arguments can be provided by using a
+<code class="docutils literal notranslate"><span class="pre">Tune</span></code> object (e.g., k=Tune([3, 5, 7])) to initiate
+hyperparameter tuning and return the learner trained on the best
+set of arguments. To provide an argument that is an object from
+the same package as the learner, use a <code class="docutils literal notranslate"><span class="pre">nimble.Init</span></code> object
+with the object name and its instantiation arguments (e.g.,
+optimizer=nimble.Init(‘SGD’, learning_rate=0.01)).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>performance</em> – The results of the test.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="nimble.train.html#nimble.train" title="nimble.train"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code></a>, <a class="reference internal" href="nimble.trainAndTest.html#nimble.trainAndTest" title="nimble.trainAndTest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trainAndTest</span></code></a>, <a class="reference internal" href="nimble.Init.html#nimble.Init" title="nimble.Init"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nimble.Init</span></code></a>, <a class="reference internal" href="nimble.Tune.html#nimble.Tune" title="nimble.Tune"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nimble.Tune</span></code></a>, <a class="reference internal" href="nimble.Tuning.html#nimble.Tuning" title="nimble.Tuning"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nimble.Tuning</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<p>Train and test datasets which contains the labels.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lstTrain</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>            <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>            <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+<span class="gp">... </span>            <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>            <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>            <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ftNames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trainData</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">lstTrain</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">featureNames</span><span class="o">=</span><span class="n">ftNames</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">perform</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">trainAndTestOnTrainingData</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;nimble.KNNClassifier&#39;</span><span class="p">,</span> <span class="n">nimble</span><span class="o">.</span><span class="n">calculate</span><span class="o">.</span><span class="n">fractionIncorrect</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">trainX</span><span class="o">=</span><span class="n">trainData</span><span class="p">,</span> <span class="n">trainY</span><span class="o">=</span><span class="s1">&#39;label&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">perform</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+<p>Passing arguments to the learner. Both the arguments parameter and
+kwarguments can be utilized, they will be merged. Below, <code class="docutils literal notranslate"><span class="pre">C</span></code> and
+<code class="docutils literal notranslate"><span class="pre">kernel</span></code> are parameters for scikit-learn’s SVC learner.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lstTrainX</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>             <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>             <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>             <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>             <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>             <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lstTrainY</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trainX</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">lstTrainX</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trainY</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">lstTrainY</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">perform</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">trainAndTestOnTrainingData</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;sciKitLearn.SVC&#39;</span><span class="p">,</span> <span class="n">nimble</span><span class="o">.</span><span class="n">calculate</span><span class="o">.</span><span class="n">fractionIncorrect</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">trainX</span><span class="o">=</span><span class="n">trainX</span><span class="p">,</span> <span class="n">trainY</span><span class="o">=</span><span class="n">trainY</span><span class="p">,</span> <span class="n">arguments</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">},</span>
+<span class="gp">... </span>    <span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">perform</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+<p>Keywords: 
+performance, in-sample, in sample, supervised, score, model,
+training, machine learning, predict, error, measure, accuracy,
+performance</p>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/docs/generated/nimble.trainAndTestOnTrainingData.rst"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

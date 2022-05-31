@@ -1,0 +1,17 @@
+*~
+*.pyc
+.DS_Store
+*logs-nimble
+configuration.ini
+documentation/doctrees
+documentation/html
+documentation/source/_static/cheatsheet.html
+documentation/source/cheatsheet.rst
+documentation/source/_static/cheatsheet.pdf
+documentation/source/examples/Metro_Interstate_Traffic_Volume_Cleaned.csv
+.coverage
+coverage_html
+*.ipynb
+.ipynb_checkpoints
+dist
+generated

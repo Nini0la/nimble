@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Features.sort &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Features.splitByParsing" href="nimble.core.data.Features.splitByParsing.html" />
+    <link rel="prev" title="Features.similarities" href="nimble.core.data.Features.similarities.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/cleaning_data.html">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/exploring_data.html">Exploring Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/unsupervised_learning.html">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/merging_and_tidying_data.html">Merging and Tidying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/additional_functionality.html">Additional Functionality</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Nimble API Documentation</a><ul>
+  <li><a href="nimble.core.data.Features.html">Features</a><ul>
+      <li>Previous: <a href="nimble.core.data.Features.similarities.html" title="previous chapter">Features.similarities</a></li>
+      <li>Next: <a href="nimble.core.data.Features.splitByParsing.html" title="next chapter">Features.splitByParsing</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="features-sort">
+<h1>Features.sort<a class="headerlink" href="#features-sort" title="Permalink to this headline">¶</a></h1>
+<dl class="py method">
+<dt id="nimble.core.data.Features.sort">
+<code class="sig-prename descclassname"><span class="pre">Features.</span></code><code class="sig-name descname"><span class="pre">sort</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">by</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">useLog</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nimble.core.data.Features.sort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Arrange the features in this object.</p>
+<p>This sort is stable, meaning the initial feature order is
+retained for features that evaluate as equal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>by</strong> (<em>identifier</em><em>(</em><em>s</em><em>)</em><em>, </em><em>function</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – <p>Based on the parameter type:</p>
+<ul>
+<li><p>identifier(s) - a single point index or name or a list
+of point indices and/or names. For lists, sorting occurs
+according to the first index with ties being broken in the
+order of the subsequent indices. Sort follows the natural
+ordering of the values in the identifier(s).</p></li>
+<li><p>function - a scorer or comparator function. Must take
+either one or two positional arguments accepting feature
+views.</p></li>
+<li><p>None - sort by the feature names.</p></li>
+</ul>
+</p></li>
+<li><p><strong>reverse</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Reverse the sorted order.</p></li>
+<li><p><strong>useLog</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – Local control for whether to send object creation to the
+logger. If None (default), use the value as specified in the
+“logger” “enabledByDefault” configuration option. If True,
+send to the logger regardless of the global option. If
+False, do <strong>NOT</strong> send to the logger, regardless of the
+global option.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="nimble.core.data.Features.permute.html#nimble.core.data.Features.permute" title="nimble.core.data.Features.permute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">permute</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<p>Sort by feature names.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lst</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">64</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="mi">64</span><span class="p">],</span>
+<span class="gp">... </span>       <span class="p">[</span><span class="mi">68</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">66</span><span class="p">],</span>
+<span class="gp">... </span>       <span class="p">[</span><span class="mi">73</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">70</span><span class="p">],</span>
+<span class="gp">... </span>       <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">51</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Denver&#39;</span><span class="p">,</span> <span class="s1">&#39;Boulder&#39;</span><span class="p">,</span> <span class="s1">&#39;Fort Collins&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">highTemps</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">featureNames</span><span class="o">=</span><span class="n">fts</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">highTemps</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">highTemps</span>
+<span class="go">&lt;Matrix 4pt x 3ft</span>
+<span class="go">     &#39;Boulder&#39; &#39;Denver&#39; &#39;Fort Collins&#39;</span>
+<span class="go">   ┌──────────────────────────────────</span>
+<span class="go"> 0 │     67       64          64</span>
+<span class="go"> 1 │     71       68          66</span>
+<span class="go"> 2 │     71       73          70</span>
+<span class="go"> 3 │     40       45          51</span>
+<span class="go">&gt;</span>
+</pre></div>
+</div>
+<p>Sort by points.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lst</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>       <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span>
+<span class="gp">... </span>       <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">21</span><span class="p">],</span>
+<span class="gp">... </span>       <span class="p">[</span><span class="mi">300</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">31</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">orders</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">orders</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">orders</span>
+<span class="go">&lt;Matrix 4pt x 5ft</span>
+<span class="go">     0 1 2  3   4</span>
+<span class="go">   ┌──────────────</span>
+<span class="go"> 0 │ 0 1 2  2   3</span>
+<span class="go"> 1 │ 0 1 10 11 100</span>
+<span class="go"> 2 │ 0 2 20 21 200</span>
+<span class="go"> 3 │ 0 3 30 31 300</span>
+<span class="go">&gt;</span>
+</pre></div>
+</div>
+<p>Sort using function.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lst</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">64</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="mi">64</span><span class="p">],</span>
+<span class="gp">... </span>       <span class="p">[</span><span class="mi">68</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">66</span><span class="p">],</span>
+<span class="gp">... </span>       <span class="p">[</span><span class="mi">73</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">70</span><span class="p">],</span>
+<span class="gp">... </span>       <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">51</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Denver&#39;</span><span class="p">,</span> <span class="s1">&#39;Boulder&#39;</span><span class="p">,</span> <span class="s1">&#39;Fort Collins&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">highTemps</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">featureNames</span><span class="o">=</span><span class="n">fts</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">averageHighTemp</span><span class="p">(</span><span class="n">ft</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">nimble</span><span class="o">.</span><span class="n">calculate</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">ft</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">highTemps</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">averageHighTemp</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">highTemps</span>
+<span class="go">&lt;Matrix 4pt x 3ft</span>
+<span class="go">     &#39;Fort Collins&#39; &#39;Denver&#39; &#39;Boulder&#39;</span>
+<span class="go">   ┌──────────────────────────────────</span>
+<span class="go"> 0 │       64          64        67</span>
+<span class="go"> 1 │       66          68        71</span>
+<span class="go"> 2 │       70          73        71</span>
+<span class="go"> 3 │       51          45        40</span>
+<span class="go">&gt;</span>
+</pre></div>
+</div>
+<p>Keywords: 
+arrange, order</p>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/docs/generated/nimble.core.data.Features.sort.rst"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

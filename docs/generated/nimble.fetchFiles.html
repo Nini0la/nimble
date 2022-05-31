@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>nimble.fetchFiles &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="nimble.exceptions" href="nimble.exceptions.html" />
+    <link rel="prev" title="nimble.fetchFile" href="nimble.fetchFile.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/cleaning_data.html">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/exploring_data.html">Exploring Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/unsupervised_learning.html">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/merging_and_tidying_data.html">Merging and Tidying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/additional_functionality.html">Additional Functionality</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Nimble API Documentation</a><ul>
+      <li>Previous: <a href="nimble.fetchFile.html" title="previous chapter">nimble.fetchFile</a></li>
+      <li>Next: <a href="nimble.exceptions.html" title="next chapter">nimble.exceptions</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="nimble-fetchfiles">
+<h1>nimble.fetchFiles<a class="headerlink" href="#nimble-fetchfiles" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="nimble.fetchFiles">
+<code class="sig-prename descclassname"><span class="pre">nimble.</span></code><code class="sig-name descname"><span class="pre">fetchFiles</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nimble.fetchFiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get data files from the web or local storage.</p>
+<p>Downloads new data files from the web and stores them in a
+“nimbleData” directory placed in a configurable location (see next
+paragraph). Once stored, any subsequent calls to fetch the same
+data will identify that the data is already available locally,
+avoiding repeated downloads. For zip and tar files, extraction
+will be attempted. If successful, the returned list paths will
+include the extracted files, otherwise it will include the archive
+file.</p>
+<p>The location to place the “nimbleData” directory is configurable
+through nimble.settings by setting the “location” option in the
+“fetch” section. By default, the location is the home directory
+(pathlib.Path.home()). The file path within “nimbleData” matches the
+the download url, except for files extracted from zip and tar files.</p>
+<p>Special support for the UCI repository is included. The <code class="docutils literal notranslate"><span class="pre">source</span></code>
+can be ‘uci::&lt;Name of Dataset&gt;’ or the url to the main page for a
+specific dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Downloadable url or valid string to UCI database (see above).</p></li>
+<li><p><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – If True, will overwrite any files stored locally with the data
+currently available from the source.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>list</em> – The paths to the available files.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="nimble.fetchFile.html#nimble.fetchFile" title="nimble.fetchFile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fetchFile</span></code></a>, <a class="reference internal" href="nimble.data.html#nimble.data" title="nimble.data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">data</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<p>A single dataset from a downloadable url.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://openml.org/data/get_csv/16826755/phpMYEkMl&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">titanic</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">fetchFiles</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>Replacing the path to the root storage location with an ellipsis and
+using a Unix operating system, the <code class="docutils literal notranslate"><span class="pre">titanic</span></code> return is
+<code class="docutils literal notranslate"><span class="pre">['.../nimbleData/openml.org/data/get_csv/16826755/phpMYEkMl']</span></code>.
+Note how the directory structure mirrors the url.</p>
+<p>For the UCI database, two additional options are available. A string
+starting with ‘uci:’ followed by the name of a UCI dataset or the
+url to the main page of the dataset.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">fetchFiles</span><span class="p">(</span><span class="s1">&#39;uci::Iris&#39;</span><span class="p">)</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://archive.ics.uci.edu/ml/datasets/Wine+Quality&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wineQuality</span> <span class="o">=</span> <span class="n">fetchFiles</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>Keywords: 
+get, download, local, store, files, url, obtain, retrieve, get,
+open, create, folder</p>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/docs/generated/nimble.fetchFiles.rst"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

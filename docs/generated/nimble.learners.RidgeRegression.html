@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>RidgeRegression &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="RidgeRegression.learnerType" href="nimble.learners.RidgeRegression.learnerType.html" />
+    <link rel="prev" title="MultiOutputRidgeRegression.train" href="nimble.learners.MultiOutputRidgeRegression.train.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/cleaning_data.html">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/exploring_data.html">Exploring Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/unsupervised_learning.html">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/merging_and_tidying_data.html">Merging and Tidying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/additional_functionality.html">Additional Functionality</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Nimble API Documentation</a><ul>
+  <li><a href="nimble.learners.html">nimble.learners</a><ul>
+      <li>Previous: <a href="nimble.learners.MultiOutputRidgeRegression.train.html" title="previous chapter">MultiOutputRidgeRegression.train</a></li>
+      <li>Next: <a href="nimble.learners.RidgeRegression.learnerType.html" title="next chapter">RidgeRegression.learnerType</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="ridgeregression">
+<h1>RidgeRegression<a class="headerlink" href="#ridgeregression" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="nimble.learners.RidgeRegression">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">nimble.learners.</span></code><code class="sig-name descname"><span class="pre">RidgeRegression</span></code><a class="headerlink" href="#nimble.learners.RidgeRegression" title="Permalink to this definition">¶</a></dt>
+<dd><p>A least squares regression with a regularization penalty.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">lamb</span></code> parameter determines how much to penalize the size of
+the parameter estimates. When lamb is set to 0, this is the same as
+Ordinary Least Squares (OLS) regression.</p>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.learners.RidgeRegression.learnerType.html#nimble.learners.RidgeRegression.learnerType" title="nimble.learners.RidgeRegression.learnerType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">learnerType</span></code></a></p></td>
+<td><p>Describe the type of the learner.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.learners.RidgeRegression.apply.html#nimble.learners.RidgeRegression.apply" title="nimble.learners.RidgeRegression.apply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code></a>(testX)</p></td>
+<td><p>Apply the learner to the testing data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.learners.RidgeRegression.getApplyDefaults.html#nimble.learners.RidgeRegression.getApplyDefaults" title="nimble.learners.RidgeRegression.getApplyDefaults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getApplyDefaults</span></code></a>()</p></td>
+<td><p>Class method used to determine the default values of only the apply method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.learners.RidgeRegression.getApplyParameters.html#nimble.learners.RidgeRegression.getApplyParameters" title="nimble.learners.RidgeRegression.getApplyParameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getApplyParameters</span></code></a>()</p></td>
+<td><p>Class method used to determine the parameters of only the apply method.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.learners.RidgeRegression.getLearnerDefaultValues.html#nimble.learners.RidgeRegression.getLearnerDefaultValues" title="nimble.learners.RidgeRegression.getLearnerDefaultValues"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getLearnerDefaultValues</span></code></a>()</p></td>
+<td><p>Class method used by the a custom learner interface to supply learner parameter default values to the user through the standard nimble functions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.learners.RidgeRegression.getLearnerParameterNames.html#nimble.learners.RidgeRegression.getLearnerParameterNames" title="nimble.learners.RidgeRegression.getLearnerParameterNames"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getLearnerParameterNames</span></code></a>()</p></td>
+<td><p>Class method used by the a custom learner interface to supply learner parameters to the user through the standard nimble functions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.learners.RidgeRegression.getScores.html#nimble.learners.RidgeRegression.getScores" title="nimble.learners.RidgeRegression.getScores"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getScores</span></code></a>(testX)</p></td>
+<td><p>If this learner is a classifier, then return the scores for each class on each data point, otherwise raise an exception.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.learners.RidgeRegression.getTrainDefaults.html#nimble.learners.RidgeRegression.getTrainDefaults" title="nimble.learners.RidgeRegression.getTrainDefaults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getTrainDefaults</span></code></a>()</p></td>
+<td><p>Class method used to determine the default values of only the train method.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.learners.RidgeRegression.getTrainParameters.html#nimble.learners.RidgeRegression.getTrainParameters" title="nimble.learners.RidgeRegression.getTrainParameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getTrainParameters</span></code></a>()</p></td>
+<td><p>Class method used to determine the parameters of only the train method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.learners.RidgeRegression.incrementalTrain.html#nimble.learners.RidgeRegression.incrementalTrain" title="nimble.learners.RidgeRegression.incrementalTrain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">incrementalTrain</span></code></a>(trainX, trainY)</p></td>
+<td><p>Train or continue training the learner on new training data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.learners.RidgeRegression.train.html#nimble.learners.RidgeRegression.train" title="nimble.learners.RidgeRegression.train"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code></a>(trainX, trainY[, lamb])</p></td>
+<td><p>Train the learner on the training data.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/docs/generated/nimble.learners.RidgeRegression.rst"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

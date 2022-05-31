@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>SessionConfiguration &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="SessionConfiguration.get" href="nimble.core.configuration.SessionConfiguration.get.html" />
+    <link rel="prev" title="nimble.settings" href="nimble.settings.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/cleaning_data.html">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/exploring_data.html">Exploring Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/unsupervised_learning.html">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/merging_and_tidying_data.html">Merging and Tidying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/additional_functionality.html">Additional Functionality</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Nimble API Documentation</a><ul>
+      <li>Previous: <a href="nimble.settings.html" title="previous chapter">nimble.settings</a></li>
+      <li>Next: <a href="nimble.core.configuration.SessionConfiguration.get.html" title="next chapter">SessionConfiguration.get</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="sessionconfiguration">
+<h1>SessionConfiguration<a class="headerlink" href="#sessionconfiguration" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="nimble.core.configuration.SessionConfiguration">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">nimble.core.configuration.</span></code><code class="sig-name descname"><span class="pre">SessionConfiguration</span></code><a class="headerlink" href="#nimble.core.configuration.SessionConfiguration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returned by nimble.settings to manage configurable settings.</p>
+<p>Settings can be changed for the current session only or saved to
+become the new default settings. Default settings are saved to a
+file (configuration.ini) and loaded on import.</p>
+<p>Settings are divided into sections and options. Options are the
+configurable variables and sections define groups of options used
+for a similar purpose. To see the current settings call
+<code class="docutils literal notranslate"><span class="pre">nimble.settings.get()</span></code>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="nimble.settings.html#nimble.settings" title="nimble.settings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nimble.settings</span></code></a></p>
+</div>
+<p class="rubric">Keywords</p>
+<p>configure, configuration, options</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.configuration.SessionConfiguration.get.html#nimble.core.configuration.SessionConfiguration.get" title="nimble.core.configuration.SessionConfiguration.get"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code></a>([section, option])</p></td>
+<td><p>Query the current settings.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.configuration.SessionConfiguration.hook.html#nimble.core.configuration.SessionConfiguration.hook" title="nimble.core.configuration.SessionConfiguration.hook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hook</span></code></a>(section, option, toCall)</p></td>
+<td><p>Assign a function to be called the next time the value of the specified section/option combination is changed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.configuration.SessionConfiguration.saveChanges.html#nimble.core.configuration.SessionConfiguration.saveChanges" title="nimble.core.configuration.SessionConfiguration.saveChanges"><code class="xref py py-obj docutils literal notranslate"><span class="pre">saveChanges</span></code></a>([section, option])</p></td>
+<td><p>Permanently set changes made to the configuration file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.configuration.SessionConfiguration.set.html#nimble.core.configuration.SessionConfiguration.set" title="nimble.core.configuration.SessionConfiguration.set"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set</span></code></a>(section, option, value)</p></td>
+<td><p>Set an option for this session.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.configuration.SessionConfiguration.setDefault.html#nimble.core.configuration.SessionConfiguration.setDefault" title="nimble.core.configuration.SessionConfiguration.setDefault"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setDefault</span></code></a>(section, option, value)</p></td>
+<td><p>Permanently set a value in the configuration file.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/docs/generated/nimble.core.configuration.SessionConfiguration.rst"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

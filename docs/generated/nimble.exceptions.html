@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>nimble.exceptions &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="nimble.exceptions.FileFormatException" href="nimble.exceptions.FileFormatException.html" />
+    <link rel="prev" title="nimble.fetchFiles" href="nimble.fetchFiles.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/cleaning_data.html">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/exploring_data.html">Exploring Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/unsupervised_learning.html">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/merging_and_tidying_data.html">Merging and Tidying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/additional_functionality.html">Additional Functionality</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Nimble API Documentation</a><ul>
+      <li>Previous: <a href="nimble.fetchFiles.html" title="previous chapter">nimble.fetchFiles</a></li>
+      <li>Next: <a href="nimble.exceptions.FileFormatException.html" title="next chapter">nimble.exceptions.FileFormatException</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-nimble.exceptions">
+<span id="nimble-exceptions"></span><h1>nimble.exceptions<a class="headerlink" href="#module-nimble.exceptions" title="Permalink to this headline">¶</a></h1>
+<p>Module defining exceptions used in Nimble.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.exceptions.FileFormatException.html#nimble.exceptions.FileFormatException" title="nimble.exceptions.FileFormatException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FileFormatException</span></code></a>(message)</p></td>
+<td><p>Raised when the formatting of a file is not as expected.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.exceptions.ImproperObjectAction.html#nimble.exceptions.ImproperObjectAction" title="nimble.exceptions.ImproperObjectAction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImproperObjectAction</span></code></a>(message)</p></td>
+<td><p>Raised when the characteristics of the object prevent the operation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.exceptions.InvalidArgumentType.html#nimble.exceptions.InvalidArgumentType" title="nimble.exceptions.InvalidArgumentType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InvalidArgumentType</span></code></a>(message)</p></td>
+<td><p>Raised when an argument type causes a failure.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.exceptions.InvalidArgumentTypeCombination.html#nimble.exceptions.InvalidArgumentTypeCombination" title="nimble.exceptions.InvalidArgumentTypeCombination"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InvalidArgumentTypeCombination</span></code></a>(message)</p></td>
+<td><p>Raised when the types of two or more arguments causes a failure.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.exceptions.InvalidArgumentValue.html#nimble.exceptions.InvalidArgumentValue" title="nimble.exceptions.InvalidArgumentValue"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InvalidArgumentValue</span></code></a>(message)</p></td>
+<td><p>Raised when an argument value causes a failure.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.exceptions.InvalidArgumentValueCombination.html#nimble.exceptions.InvalidArgumentValueCombination" title="nimble.exceptions.InvalidArgumentValueCombination"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InvalidArgumentValueCombination</span></code></a>(message)</p></td>
+<td><p>Raised when the values of two or more arguments causes a failure.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.exceptions.NimbleException.html#nimble.exceptions.NimbleException" title="nimble.exceptions.NimbleException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NimbleException</span></code></a>(message)</p></td>
+<td><p>Override Python’s Exception, requiring a message upon instantiation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.exceptions.PackageException.html#nimble.exceptions.PackageException" title="nimble.exceptions.PackageException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PackageException</span></code></a>(message)</p></td>
+<td><p>Raised when a package is not installed, but needed.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/docs/generated/nimble.exceptions.rst"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

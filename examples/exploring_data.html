@@ -1,0 +1,686 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Exploring Data &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Unsupervised Learning" href="unsupervised_learning.html" />
+    <link rel="prev" title="Supervised Learning" href="supervised_learning.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="cleaning_data.html">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Exploring Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unsupervised_learning.html">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="merging_and_tidying_data.html">Merging and Tidying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="additional_functionality.html">Additional Functionality</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="supervised_learning.html" title="previous chapter">Supervised Learning</a></li>
+      <li>Next: <a href="unsupervised_learning.html" title="next chapter">Unsupervised Learning</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<style>
+    .nbinput .prompt,
+    .nboutput .prompt {
+        display: none;
+    }
+</style><section id="Exploring-Data">
+<h1>Exploring Data<a class="headerlink" href="#Exploring-Data" title="Permalink to this headline">¶</a></h1>
+<section id="Analyzing-the-behaviors-of-online-shoppers">
+<h2>Analyzing the behaviors of online shoppers<a class="headerlink" href="#Analyzing-the-behaviors-of-online-shoppers" title="Permalink to this headline">¶</a></h2>
+<p>Our dataset, <code class="docutils literal notranslate"><span class="pre">online_shoppers_intention_clean.csv</span></code>, stores data on the behaviors of visitors to an online shopping website. Our goal is to study this behavior via a variety of Nimble features in order to extract insights on the users.</p>
+<p>In this example we will learn about:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="#Exploring-data-through-Nimble%E2%80%99s-calculate-module">Calculating statistics using the nimble.calculate module</a></p></li>
+<li><p><a class="reference external" href="#Exploring-data-through-data-object-methods">Calculating statistics using data object methods</a></p></li>
+<li><p><a class="reference external" href="#Exploring-data-through-plotting">Plotting data</a></p></li>
+</ul>
+<div class="line-block">
+<div class="line"><a class="reference external" href="https://colab.research.google.com/drive/1QwTiHODLKlZp94pOGJCcnvNKA903uov1?usp=sharing">Open this example in Google Colab</a></div>
+<div class="line"><a class="reference internal" href="files.html#exploring-data"><span class="std std-ref">Download this example as a script or notebook</span></a></div>
+<div class="line"><a class="reference internal" href="../datasets.html#exploring-data"><span class="std std-ref">Download the dataset for this example</span></a></div>
+</div>
+<section id="Getting-Started">
+<h3>Getting Started<a class="headerlink" href="#Getting-Started" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <a class="nimble-hyperlink" href="../docs/index.html" target="_blank"><span class="nn">nimble</span></a>
+
+<span class="n">bucket</span> <span class="o">=</span> <span class="s1">&#39;https://storage.googleapis.com/nimble/datasets/&#39;</span>
+<span class="n">visits</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.data.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">data</span></a><span class="p">(</span><span class="n">bucket</span> <span class="o">+</span> <span class="s1">&#39;online_shoppers_intention_explore.csv&#39;</span><span class="p">,</span>
+                     <span class="n">returnType</span><span class="o">=</span><span class="s2">&quot;Matrix&quot;</span><span class="p">)</span>
+<span class="n">featureNames</span> <span class="o">=</span> <span class="n">visits</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.getNames.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">getNames</span></a><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Data-Overview">
+<h3>Data Overview<a class="headerlink" href="#Data-Overview" title="Permalink to this headline">¶</a></h3>
+<p>This dataset has 18 features, too many to show at one time. Let’s begin exploring our data by looking at groups of similar features.</p>
+<p>This online shopping website is composed of three different types of webpages (Admininstrative, Informational, and Product Related). Our first 6 features record the counts and durations of time spent on each page type for each visit.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pageActivityFts</span> <span class="o">=</span> <span class="n">featureNames</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">visits</span><span class="p">[:,</span> <span class="n">pageActivityFts</span><span class="p">]</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html" target="_blank"><span class="n">show</span></a><span class="p">(</span><span class="s1">&#39;Page activity features&#39;</span><span class="p">,</span> <span class="n">maxHeight</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Page activity features
+12212pt x 6ft
+        &#39;Administrative&#39; &#39;Admin_Duration&#39; &#39;Informational&#39; &#39;Info_Duration&#39; &#39;ProductRelated&#39; &#39;Product_Duration&#39;
+      ┌──────────────────────────────────────────────────────────────────────────────────────────────────────
+    0 │        0              0.000              0             0.000             1               0.000
+    1 │        0              0.000              0             0.000             2               64.000
+    2 │        0              0.000              0             0.000             1               0.000
+    │ │        │                │                │               │               │                 │
+12209 │        0              0.000              0             0.000             6              184.250
+12210 │        4              75.000             0             0.000             15             346.000
+12211 │        0              0.000              0             0.000             3               21.250
+
+</pre></div></div>
+</div>
+<p>The next 3 features are website analytics collected during the visit.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">analyticFts</span> <span class="o">=</span> <span class="n">featureNames</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">9</span><span class="p">]</span>
+<span class="n">visits</span><span class="p">[:,</span> <span class="n">analyticFts</span><span class="p">]</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html" target="_blank"><span class="n">show</span></a><span class="p">(</span><span class="s1">&#39;Website analytic features&#39;</span><span class="p">,</span> <span class="n">maxHeight</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Website analytic features
+12212pt x 3ft
+        &#39;BounceRates&#39; &#39;ExitRates&#39; &#39;PageValues&#39;
+      ┌───────────────────────────────────────
+    0 │     0.200        0.200       0.000
+    1 │     0.000        0.100       0.000
+    2 │     0.200        0.200       0.000
+    │ │       │            │           │
+12209 │     0.083        0.087       0.000
+12210 │     0.000        0.021       0.000
+12211 │     0.000        0.067       0.000
+
+</pre></div></div>
+</div>
+<p>The last 9 features are details about the visit or visitor.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">visitDetailFts</span> <span class="o">=</span> <span class="n">featureNames</span><span class="p">[</span><span class="mi">9</span><span class="p">:]</span>
+<span class="n">visits</span><span class="p">[:,</span> <span class="n">visitDetailFts</span><span class="p">]</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html" target="_blank"><span class="n">show</span></a><span class="p">(</span><span class="s1">&#39;Visit detail features&#39;</span><span class="p">,</span> <span class="n">maxHeight</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Visit detail features
+12212pt x 9ft
+        &#39;SpecialDay&#39; &#39;Month&#39; &#39;OperatingSystems&#39; &#39;Browser&#39; &#39;Region&#39; &#39;TrafficType&#39; &#39;NewVisitor&#39; &#39;Weekend&#39; &#39;Purchase&#39;
+      ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────
+    0 │    0.000        0            1              1        1           1          False       False     False
+    1 │    0.000        0            2              2        1           2          False       False     False
+    2 │    0.000        0            4              1        9           3          False       False     False
+    │ │      │          │            │              │        │           │            │           │         │
+12209 │    0.000        7            3              2        1           13         False        True     False
+12210 │    0.000        7            2              2        3           11         False       False     False
+12211 │    0.000        7            3              2        1           2           True        True     False
+
+</pre></div></div>
+</div>
+<p>Now that we have a better understanding of our data, let’s see what we can learn from it.</p>
+</section>
+<section id="Exploring-data-through-Nimble’s-calculate-module">
+<h3>Exploring data through Nimble’s calculate module<a class="headerlink" href="#Exploring-data-through-Nimble’s-calculate-module" title="Permalink to this headline">¶</a></h3>
+<p>Reaching product-related pages is important for maximizing the chance that a purchase is made. This site categorizes their pages into three types (“Administrative”, “Informational”, and “ProductRelated”). Let’s calculate the <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.calculate.mean.html"target="_blank"><span class="pre">mean</span></a></code> and <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.fill.median.html"target="_blank"><span class="pre">median</span></a></code> counts for each page type and find out if most visitors are reaching a product-related page.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">for</span> <span class="n">ft</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Administrative&#39;</span><span class="p">,</span> <span class="s1">&#39;Informational&#39;</span><span class="p">,</span> <span class="s1">&#39;ProductRelated&#39;</span><span class="p">]:</span>
+    <span class="n">mean</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.calculate.mean.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">calculate</span><span class="o">.</span><span class="n">mean</span></a><span class="p">(</span><span class="n">visits</span><span class="p">[:,</span> <span class="n">ft</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean&#39;</span><span class="p">,</span> <span class="n">ft</span><span class="p">,</span> <span class="s1">&#39;hits per visit&#39;</span><span class="p">,</span> <span class="n">mean</span><span class="p">)</span>
+    <span class="n">median</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.calculate.median.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">calculate</span><span class="o">.</span><span class="n">median</span></a><span class="p">(</span><span class="n">visits</span><span class="p">[:,</span> <span class="n">ft</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Median&#39;</span><span class="p">,</span> <span class="n">ft</span><span class="p">,</span> <span class="s1">&#39;hits per visit&#39;</span><span class="p">,</span> <span class="n">median</span><span class="p">)</span>
+
+<span class="n">noProduct</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.calculate.proportionZero.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">calculate</span><span class="o">.</span><span class="n">proportionZero</span></a><span class="p">(</span><span class="n">visits</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.features.html" target="_blank"><span class="n">features</span></a><span class="p">[</span><span class="s1">&#39;ProductRelated&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Proportion of visitors that view a product page:&#39;</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">noProduct</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Mean Administrative hits per visit 2.27104487389453
+Median Administrative hits per visit 1.0
+Mean Informational hits per visit 0.4758434326891582
+Median Informational hits per visit 0.0
+Mean ProductRelated hits per visit 30.687684245004913
+Median ProductRelated hits per visit 18.0
+Proportion of visitors that view a product page: 0.9968883065836882
+</pre></div></div>
+</div>
+<p>We see that the mean values are consistently higher than the median values. Since the mean is sensitive to outliers, this indicates that we have some visitors that view a very high number of pages. We are also happy to see that nearly every visitor interacts with at least one product related page during their visit.</p>
+</section>
+<section id="Exploring-data-through-data-object-methods">
+<h3>Exploring data through data object methods<a class="headerlink" href="#Exploring-data-through-data-object-methods" title="Permalink to this headline">¶</a></h3>
+<p>Now that we know visitors are typically viewing product pages, let’s focus on the Purchase feature. Purchase is a boolean feature indicating whether a purchase was made. Let’s find the proportion of visits that result in a purchase.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">purchases</span> <span class="o">=</span> <span class="n">visits</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.count.html" target="_blank"><span class="n">points</span><span class="o">.</span><span class="n">count</span></a><span class="p">(</span><span class="k">lambda</span> <span class="n">pt</span><span class="p">:</span> <span class="n">pt</span><span class="p">[</span><span class="s1">&#39;Purchase&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Proportion of visits with a purchase:&#39;</span><span class="p">,</span> <span class="n">purchases</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">visits</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.points.html" target="_blank"><span class="n">points</span></a><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Proportion of visits with a purchase: 0.15263675073698002
+</pre></div></div>
+</div>
+<p>Now let’s check how Purchase correlates with our other features.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">correlations</span> <span class="o">=</span> <span class="n">visits</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.similarities.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">similarities</span></a><span class="p">(</span><span class="s1">&#39;correlation&#39;</span><span class="p">)</span>
+<span class="n">correlations</span><span class="p">[:,</span> <span class="s1">&#39;Purchase&#39;</span><span class="p">]</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html" target="_blank"><span class="n">show</span></a><span class="p">(</span><span class="s1">&#39;Feature correlations with Purchase&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Feature correlations with Purchase
+18pt x 1ft
+                     &#39;Purchase&#39;
+                   ┌───────────
+  &#39;Administrative&#39; │   0.139
+  &#39;Admin_Duration&#39; │   0.106
+   &#39;Informational&#39; │   0.100
+   &#39;Info_Duration&#39; │   0.089
+  &#39;ProductRelated&#39; │   0.165
+&#39;Product_Duration&#39; │   0.172
+     &#39;BounceRates&#39; │   -0.150
+       &#39;ExitRates&#39; │   -0.206
+      &#39;PageValues&#39; │   0.538
+      &#39;SpecialDay&#39; │   -0.082
+           &#39;Month&#39; │   0.104
+&#39;OperatingSystems&#39; │   -0.017
+         &#39;Browser&#39; │   0.022
+          &#39;Region&#39; │   -0.012
+     &#39;TrafficType&#39; │   -0.006
+      &#39;NewVisitor&#39; │   0.103
+         &#39;Weekend&#39; │   0.030
+        &#39;Purchase&#39; │   1.000
+
+</pre></div></div>
+</div>
+<p>The SpecialDay feature ranges from 0 to 1 indicating proximity to a special day. Most days will have a value of 0 but, for example, a visit three days before Mother’s Day could have a value of 0.4, the day before Mother’s Day would have a (higher) value of 0.8, and visits on Mother’s Day have a value of 1. We might think a special day would increase purchases made on the site, but we see above that SpecialDay has a negative correlation with Purchase. Let’s investigate. First, we will find what
+percent of visits were near a special day.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">special</span> <span class="o">=</span> <span class="n">visits</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.copy.html" target="_blank"><span class="n">points</span><span class="o">.</span><span class="n">copy</span></a><span class="p">(</span><span class="s1">&#39;SpecialDay &gt; 0&#39;</span><span class="p">)</span>
+<span class="n">visitPercent</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">special</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.points.html" target="_blank"><span class="n">points</span></a><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">visits</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.points.html" target="_blank"><span class="n">points</span></a><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">visitPercent</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">% of all visits were near a special day&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+10.19% of all visits were near a special day
+</pre></div></div>
+</div>
+<p>Now, let’s see what percent of purchases occurred near a special day.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">specialPurchases</span> <span class="o">=</span> <span class="n">special</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.count.html" target="_blank"><span class="n">points</span><span class="o">.</span><span class="n">count</span></a><span class="p">(</span><span class="k">lambda</span> <span class="n">pt</span><span class="p">:</span> <span class="n">pt</span><span class="p">[</span><span class="s1">&#39;Purchase&#39;</span><span class="p">])</span>
+<span class="n">purchasePercent</span> <span class="o">=</span> <span class="n">specialPurchases</span> <span class="o">/</span> <span class="n">purchases</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">purchasePercent</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">% of all purchases were near a special day&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+4.08% of all purchases were near a special day
+</pre></div></div>
+</div>
+<p>Visits near a special day represent over 10% of visits, but only about 4% of purchases. It appears that these days attract more visitors to the site, but these visitors are less likely to make a purchase.</p>
+</section>
+<section id="Exploring-data-through-plotting">
+<h3>Exploring data through plotting<a class="headerlink" href="#Exploring-data-through-plotting" title="Permalink to this headline">¶</a></h3>
+<p>We saw above that visits near a special day leads to less purchases, let’s explore the impact of location on purchases. The location of each visit is classified into one of nine regions, let’s see the distribution of visits by region.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">visits</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.plotFeatureDistribution.html" target="_blank"><span class="n">plotFeatureDistribution</span></a><span class="p">(</span><span class="s1">&#39;Region&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_exploring_data_24_0.svg" src="../_images/examples_exploring_data_24_0.svg" /></div>
+</div>
+<p>We see above that region 1 provides the most visits to the website and regions 1 and 3 combine for over 50% of website traffic. Now, let’s check if some regions are more likely to make a purchase. We can use <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.plotFeatureGroupStatistics.html"target="_blank"><span class="pre">plotFeatureGroupStatistics</span></a></code> to do this. Since this function is grouping by the Region feature, the regions on the x-axis will be in order of appearance in the data. To keep them in ascending numeric order, we will first sort our data by Region. Once sorted, <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.plotFeatureGroupStatistics.html"target="_blank"><span class="pre">plotFeatureGroupStatistics</span></a></code>
+will find the <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.calculate.count.html"target="_blank"><span class="pre">count</span></a></code> of values in the purchase column for each Region. Then, it will further subdivide each count bar based on the values in Purchase (True or False). Now we can see if any regions are particularly better or worse at providing visits with a purchase.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">visits</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.sort.html" target="_blank"><span class="n">points</span><span class="o">.</span><span class="n">sort</span></a><span class="p">(</span><span class="s1">&#39;Region&#39;</span><span class="p">)</span>
+<span class="n">visits</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.plotFeatureGroupStatistics.html" target="_blank"><span class="n">plotFeatureGroupStatistics</span></a><span class="p">(</span><a class="nimble-hyperlink" href="../docs/generated/nimble.calculate.count.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">calculate</span><span class="o">.</span><span class="n">count</span></a><span class="p">,</span> <span class="s1">&#39;Purchase&#39;</span><span class="p">,</span> <span class="s1">&#39;Region&#39;</span><span class="p">,</span>
+                                  <span class="n">subgroupFeature</span><span class="o">=</span><span class="s1">&#39;Purchase&#39;</span><span class="p">,</span>
+                                  <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_exploring_data_26_0.svg" src="../_images/examples_exploring_data_26_0.svg" /></div>
+</div>
+<p>It does not appear that any region is making disproportionately more or less purchases than the others. We have learned a lot about our website data through this exploration. Next, see how we can use Nimble to extract more insight from this dataset using machine learning in our <a href="unsupervised_learning.html" target="_blank">Unsupervised Learning example</a>.</p>
+<p><strong>References:</strong></p>
+<p>Sakar, C.O., Polat, S.O., Katircioglu, M. et al. Neural Comput &amp; Applic (2018). [<a class="reference external" href="https://doi.org/10.1007/s00521-018-3523-0">https://doi.org/10.1007/s00521-018-3523-0</a>]</p>
+<p>Dua, D. and Graff, C. (2019). UCI Machine Learning Repository [<a class="reference external" href="http://archive.ics.uci.edu/ml">http://archive.ics.uci.edu/ml</a>]. Irvine, CA: University of California, School of Information and Computer Science.</p>
+<p>Link to original dataset: <a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/Online+Shoppers+Purchasing+Intention+Dataset">https://archive.ics.uci.edu/ml/datasets/Online+Shoppers+Purchasing+Intention+Dataset</a></p>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/examples/exploring_data.ipynb"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

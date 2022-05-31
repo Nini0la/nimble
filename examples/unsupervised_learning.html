@@ -1,0 +1,749 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Unsupervised Learning &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Neural Networks" href="neural_networks.html" />
+    <link rel="prev" title="Exploring Data" href="exploring_data.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="cleaning_data.html">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exploring_data.html">Exploring Data</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="merging_and_tidying_data.html">Merging and Tidying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="additional_functionality.html">Additional Functionality</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="exploring_data.html" title="previous chapter">Exploring Data</a></li>
+      <li>Next: <a href="neural_networks.html" title="next chapter">Neural Networks</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<style>
+    .nbinput .prompt,
+    .nboutput .prompt {
+        display: none;
+    }
+</style><section id="Unsupervised-Learning">
+<h1>Unsupervised Learning<a class="headerlink" href="#Unsupervised-Learning" title="Permalink to this headline">¶</a></h1>
+<section id="Classifying-online-shoppers">
+<h2>Classifying online shoppers<a class="headerlink" href="#Classifying-online-shoppers" title="Permalink to this headline">¶</a></h2>
+<p>In our <a href="exploring_data.html" target="_blank">Exploring Data example</a>, we began exploring visitor behavior data from an ecommerce website. We will use that same data for this example, but a version that has been prepared for machine learning, <code class="docutils literal notranslate"><span class="pre">online_shoppers_intention_clean.csv</span></code>. Our goal will be to use an unsupervised machine learning algorithm to gain a better understanding of visitors that made a purchase during their visit.</p>
+<p>In this example we will learn about:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="#Getting-Started">Normalizing data</a></p></li>
+<li><p><a class="reference external" href="#Train-a-learner">Reducing the dimensionality of our learner</a></p></li>
+<li><p><a class="reference external" href="#Train-a-learner">Applying a clustering algorithm</a></p></li>
+<li><p><a class="reference external" href="#Cluster-Visualization">Plotting data clusters</a></p></li>
+<li><p><a class="reference external" href="#Cluster-Analysis">Plotting data by cluster</a></p></li>
+</ul>
+<div class="line-block">
+<div class="line"><a class="reference external" href="https://colab.research.google.com/drive/10KZjKMnrrahHbOmDQa-dne44FmMMPePS?usp=sharing">Open this example in Google Colab</a></div>
+<div class="line"><a class="reference internal" href="files.html#unsupervised-learning"><span class="std std-ref">Download this example as a script or notebook</span></a></div>
+<div class="line"><a class="reference internal" href="../datasets.html#unsupervised-learning"><span class="std std-ref">Download the dataset for this example</span></a></div>
+</div>
+<section id="Getting-Started">
+<h3>Getting Started<a class="headerlink" href="#Getting-Started" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <a class="nimble-hyperlink" href="../docs/index.html" target="_blank"><span class="nn">nimble</span></a>
+<span class="kn">from</span> <a class="nimble-hyperlink" href="../docs/nimble.calculate.html" target="_blank"><span class="nn">nimble.calculate</span></a> <span class="kn">import</span> <span class="n">meanStandardDeviationNormalize</span>
+
+<span class="n">bucket</span> <span class="o">=</span> <span class="s1">&#39;https://storage.googleapis.com/nimble/datasets/&#39;</span>
+<span class="n">visits</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.data.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">data</span></a><span class="p">(</span><span class="n">bucket</span> <span class="o">+</span> <span class="s1">&#39;online_shoppers_intention_clean.csv&#39;</span><span class="p">,</span>
+                     <span class="n">returnType</span><span class="o">=</span><span class="s2">&quot;Matrix&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We are going to focus on categorizing our visitors that made a purchase. First, we will copy any data points for visits that resulted in a purchase into a new object.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">purchaseOnly</span> <span class="o">=</span> <span class="n">visits</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.copy.html" target="_blank"><span class="n">points</span><span class="o">.</span><span class="n">copy</span></a><span class="p">(</span><span class="k">lambda</span> <span class="n">pt</span><span class="p">:</span> <span class="n">pt</span><span class="p">[</span><span class="s1">&#39;Purchase&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>The Purchase feature in <code class="docutils literal notranslate"><span class="pre">purchaseOnly</span></code> now only contains the value <code class="docutils literal notranslate"><span class="pre">True</span></code>. A feature with only one unique value does not provide any useful information and can cause failures for some machine learning algorithms, so it should be removed. This data also has several one-hot encoded features and some have all zero values in <code class="docutils literal notranslate"><span class="pre">purchaseOnly</span></code>. For example, visits occurred using Browser 9 but no purchases were ever made, so the feature Browser=9 needs to be removed. We can remove all of these at
+once by checking the unique element count in each feature and deleting any with only 1 unique value.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">purchaseOnly</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.delete.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">delete</span></a><span class="p">(</span><span class="k">lambda</span> <span class="n">ft</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">ft</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.countUniqueElements.html" target="_blank"><span class="n">countUniqueElements</span></a><span class="p">())</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">purchaseOnlyFtNames</span> <span class="o">=</span> <span class="n">purchaseOnly</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.getNames.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">getNames</span></a><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>For this example, we will use algorithms from the <a class="reference external" href="https://scikit-learn.org/">Sci-kit Learn</a> package so it must be installed in the current environment. For both the PCA (Principal Component Analysis) and k-means algorithms that we will be using, we want to normalize our data. We will make a copy of our data (we will still need our original data later), and then standardize each feature to have a mean of 0 and standard deviation of 1.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">purchaseNormalized</span> <span class="o">=</span> <span class="n">purchaseOnly</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.copy.html" target="_blank"><span class="n">copy</span></a><span class="p">()</span>
+<span class="n">purchaseNormalized</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.normalize.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">normalize</span></a><span class="p">(</span><span class="n">meanStandardDeviationNormalize</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Train-a-learner">
+<h3>Train a learner<a class="headerlink" href="#Train-a-learner" title="Permalink to this headline">¶</a></h3>
+<p>We will use PCA to reduce the dimensionality of our normalized data from 67 features to 2 features (by finding the first 2 principle components, and then projecting the data onto these two factors). Using data with reduced dimensionality may improve the results of the k-means clustering algorithm, and can help us visualize our clusters.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pca</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.train.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">train</span></a><span class="p">(</span><span class="s1">&#39;skl.PCA&#39;</span><span class="p">,</span> <span class="n">purchaseNormalized</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">purchasePCA</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.interfaces.TrainedLearner.apply.html" target="_blank"><span class="n">apply</span></a><span class="p">(</span><span class="n">purchaseNormalized</span><span class="p">)</span>
+<span class="n">purchasePCA</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.setNames.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">setNames</span></a><span class="p">([</span><span class="s1">&#39;component_1&#39;</span><span class="p">,</span> <span class="s1">&#39;component_2&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>The reduced dimensionality data from PCA is well suited for the k-means clustering algorithm. When doing k-means clustering, a major question is how many clusters to use (i.e., how many groups to automatically divide our data points between). We will repeatedly train k-means on our PCA data, varying the number of clusters from 1 to 10. Each time we will record the number of clusters and the inertia (the sum of squared distances to the closest cluster center). Plotting these values will help us
+determine the best number of clusters to use.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">kmeans</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">withinClusterSumSquares</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+    <span class="n">trainedLearner</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.train.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">train</span></a><span class="p">(</span><span class="s1">&#39;skl.KMeans&#39;</span><span class="p">,</span> <span class="n">purchasePCA</span><span class="p">,</span> <span class="n">n_clusters</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">kmeans</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">trainedLearner</span>
+    <span class="n">inertia</span> <span class="o">=</span> <span class="n">trainedLearner</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.interfaces.TrainedLearner.getAttributes.html" target="_blank"><span class="n">getAttributes</span></a><span class="p">()[</span><span class="s1">&#39;inertia_&#39;</span><span class="p">]</span>
+    <span class="n">withinClusterSumSquares</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">i</span><span class="p">,</span> <span class="n">inertia</span><span class="p">])</span>
+
+<span class="n">wcss</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.data.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">data</span></a><span class="p">(</span><span class="n">withinClusterSumSquares</span><span class="p">,</span> <span class="n">featureNames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;clusters&#39;</span><span class="p">,</span> <span class="s1">&#39;wcss&#39;</span><span class="p">])</span>
+<span class="n">wcss</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.plotFeatureAgainstFeature.html" target="_blank"><span class="n">plotFeatureAgainstFeature</span></a><span class="p">(</span><span class="s1">&#39;clusters&#39;</span><span class="p">,</span> <span class="s1">&#39;wcss&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_unsupervised_learning_13_0.svg" src="../_images/examples_unsupervised_learning_13_0.svg" /></div>
+</div>
+<p>The elbow method suggests that the “elbow” of the plot above provides the best number of clusters to use. If we envision our plot above as an arm, we see our elbow at 3 because there are a steeper negative slopes from 1 to 3 and flatter negative slopes from 3 to 10. So, we will use our <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.interfaces.TrainedLearner.html"target="_blank"><span class="pre">TrainedLearner</span></a></code> that was trained with 3 clusters.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">numClusters</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">kmeans</span> <span class="o">=</span> <span class="n">kmeans</span><span class="p">[</span><span class="n">numClusters</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>Applying k-means clustering to our principal component data, will provide a feature vector storing a cluster number (0, 1, or 2) for each point in the data.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">clusters</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.interfaces.TrainedLearner.apply.html" target="_blank"><span class="n">apply</span></a><span class="p">(</span><span class="n">purchasePCA</span><span class="p">)</span>
+<span class="n">clusters</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.setName.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">setName</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;cluster&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Cluster-Visualization">
+<h3>Cluster Visualization<a class="headerlink" href="#Cluster-Visualization" title="Permalink to this headline">¶</a></h3>
+<p>Now that we have our clusters, we can plot them to help visualize how the k-means learner is clustering our principal component data. First, we will append our <code class="docutils literal notranslate"><span class="pre">clusters</span></code> feature to our principal component data so that we can use the <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.groupByFeature.html"target="_blank"><span class="pre">groupByFeature</span></a></code> parameter to plot our principal component data based on cluster number. In addition to the clusters, we are going to add the cluster centers to our figure (the canvas containing our plots), so we set <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html"target="_blank"><span class="pre">show</span></a></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code> to prevent the figure
+from displaying after the function call. We must also specify a <code class="docutils literal notranslate"><span class="pre">figureID</span></code> so our next plot can be added to this same figure.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">purchasePCA</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.append.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">append</span></a><span class="p">(</span><span class="n">clusters</span><span class="p">)</span>
+<span class="n">purchasePCA</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.plotFeatureAgainstFeature.html" target="_blank"><span class="n">plotFeatureAgainstFeature</span></a><span class="p">(</span>
+    <span class="s1">&#39;component_1&#39;</span><span class="p">,</span> <span class="s1">&#39;component_2&#39;</span><span class="p">,</span> <span class="n">groupByFeature</span><span class="o">=</span><span class="s1">&#39;cluster&#39;</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">figureID</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Each cluster has a center that will help us see how close each data point lies to the center of the cluster in which it was placed. We use the cluster center values from our <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.interfaces.TrainedLearner.html"target="_blank"><span class="pre">TrainedLearner</span></a></code> to create a new object. Each point represents a cluster and contains the principal component centers for that cluster. For this plot, values will be marked with a black “X” so the centers are clearly visible and we will add it to our same ‘clustersWithCenters’ figure. Now that all of our plots have been
+added to our figure, the default <code class="docutils literal notranslate"><span class="pre">show=True</span></code> will display the figure.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">centers</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.data.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">data</span></a><span class="p">(</span><span class="n">kmeans</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.interfaces.TrainedLearner.getAttributes.html" target="_blank"><span class="n">getAttributes</span></a><span class="p">()[</span><span class="s1">&#39;cluster_centers_&#39;</span><span class="p">],</span>
+                      <span class="n">featureNames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;component_1&#39;</span><span class="p">,</span> <span class="s1">&#39;component_2&#39;</span><span class="p">])</span>
+<span class="n">centers</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.setNames.html" target="_blank"><span class="n">points</span><span class="o">.</span><span class="n">setNames</span></a><span class="p">([</span><span class="s1">&#39;cluster&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numClusters</span><span class="p">)])</span>
+
+<span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;k-means clustering of principal components&#39;</span>
+<span class="n">centers</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.plotFeatureAgainstFeature.html" target="_blank"><span class="n">plotFeatureAgainstFeature</span></a><span class="p">(</span><span class="s1">&#39;component_1&#39;</span><span class="p">,</span> <span class="s1">&#39;component_2&#39;</span><span class="p">,</span> <span class="n">figureID</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                  <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_unsupervised_learning_21_0.svg" src="../_images/examples_unsupervised_learning_21_0.svg" /></div>
+</div>
+</section>
+<section id="Cluster-Analysis">
+<h3>Cluster Analysis<a class="headerlink" href="#Cluster-Analysis" title="Permalink to this headline">¶</a></h3>
+<p>We used PCA and k-means clustering to identify cluster numbers for each point in our data. Now we can group our original data, <code class="docutils literal notranslate"><span class="pre">purchaseOnly</span></code>, by cluster number to analyze the data in each cluster. As we iterate through each cluster group, we will analyze how many data points fall into each cluster and calculate the feature means in each cluster for further analysis.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">purchaseOnly</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.append.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">append</span></a><span class="p">(</span><span class="n">clusters</span><span class="p">)</span>
+<span class="c1"># purchaseByCluster is a dictionary mapping cluster number to cluster data</span>
+<span class="n">purchaseByCluster</span> <span class="o">=</span> <span class="n">purchaseOnly</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.groupByFeature.html" target="_blank"><span class="n">groupByFeature</span></a><span class="p">(</span><span class="s1">&#39;cluster&#39;</span><span class="p">)</span>
+
+<span class="n">totalVisits</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">purchaseOnly</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.points.html" target="_blank"><span class="n">points</span></a><span class="p">)</span>
+<span class="n">means</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">meanPtNames</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numClusters</span><span class="p">):</span>
+    <span class="n">cluster</span> <span class="o">=</span> <span class="n">purchaseByCluster</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">clusterVisits</span> <span class="o">=</span>  <span class="nb">len</span><span class="p">(</span><span class="n">cluster</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.points.html" target="_blank"><span class="n">points</span></a><span class="p">)</span>
+    <span class="n">perc</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">clusterVisits</span> <span class="o">/</span> <span class="n">totalVisits</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cluster</span><span class="si">{}</span><span class="s1"> contains </span><span class="si">{}</span><span class="s1"> visits (</span><span class="si">{}</span><span class="s1">%)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">clusterVisits</span><span class="p">,</span> <span class="n">perc</span><span class="p">))</span>
+
+    <span class="n">means</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cluster</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.statistics.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">statistics</span></a><span class="p">(</span><span class="s1">&#39;mean&#39;</span><span class="p">))</span>
+    <span class="n">meanPtNames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;cluster&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+cluster0 contains 381 visits (20.44%)
+cluster1 contains 1078 visits (57.83%)
+cluster2 contains 405 visits (21.73%)
+</pre></div></div>
+</div>
+<p>We see some imbalance in cluster sizes, but each cluster contains at least 20% of our purchaser visits so we feel confident to continue. To analyze the feature means in each cluster, we will make a new Nimble data object. This object has three points (one for each cluster) containing our calculated feature means.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">clusterMeans</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.data.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">data</span></a><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">featureNames</span><span class="o">=</span><span class="n">purchaseOnlyFtNames</span><span class="p">,</span>
+                           <span class="n">pointNames</span><span class="o">=</span><span class="n">meanPtNames</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>For this example, a good visual way to analyze differences in feature means between clusters is to use plots. We examined the mean of all visits by page type in <a class="reference internal" href="exploring_data.html"><span class="doc">Exploring Data</span></a>, so now let’s see how many times our average purchaser <strong>in each cluster</strong> visits the various page types.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pageTypes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Administrative&#39;</span><span class="p">,</span> <span class="s1">&#39;Informational&#39;</span><span class="p">,</span> <span class="s1">&#39;ProductRelated&#39;</span><span class="p">]</span>
+<span class="n">clusterMeans</span><span class="p">[:,</span> <span class="n">pageTypes</span><span class="p">]</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.plot.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">plot</span></a><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_unsupervised_learning_27_0.svg" src="../_images/examples_unsupervised_learning_27_0.svg" /></div>
+</div>
+<p>The plot above shows that the average purchaser in <code class="docutils literal notranslate"><span class="pre">cluster2</span></code> views many more pages than those in <code class="docutils literal notranslate"><span class="pre">cluster0</span></code> and <code class="docutils literal notranslate"><span class="pre">cluster1</span></code>. Product related pages are the most commonly visited on all clusters, but <code class="docutils literal notranslate"><span class="pre">cluster2</span></code> averages about 3 times as many visits as <code class="docutils literal notranslate"><span class="pre">cluster0</span></code> and <code class="docutils literal notranslate"><span class="pre">cluster1</span></code>. Let’s see if this pattern continues for the duration of time spent on these page types.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pageDurations</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Admin_Duration&#39;</span><span class="p">,</span> <span class="s1">&#39;Info_Duration&#39;</span><span class="p">,</span> <span class="s1">&#39;Product_Duration&#39;</span><span class="p">]</span>
+<span class="n">clusterMeans</span><span class="p">[:,</span> <span class="n">pageDurations</span><span class="p">]</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.plot.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">plot</span></a><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_unsupervised_learning_29_0.svg" src="../_images/examples_unsupervised_learning_29_0.svg" /></div>
+</div>
+<p>In the plot above, we see this same pattern between clusters for the average duration of time spent on each page type during a visit. So, <code class="docutils literal notranslate"><span class="pre">cluster2</span></code> appears to enjoy browsing while the other two clusters spend less time on the site before making a purchase. Let’s see if new users in each cluster could be contributing to this difference.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">clusterMeans</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;NewVisitor&#39;</span><span class="p">]]</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.plot.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">plot</span></a><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_unsupervised_learning_31_0.svg" src="../_images/examples_unsupervised_learning_31_0.svg" /></div>
+</div>
+<p>Above, the plot shows that <code class="docutils literal notranslate"><span class="pre">cluster2</span></code> is very unlikely to contain new visitors. This seems to imply that returning visitors are likely to visit more pages and spend a longer time on the website. We also see that <code class="docutils literal notranslate"><span class="pre">cluster0</span></code> contains the highest percentage of new visitors, followed closely by <code class="docutils literal notranslate"><span class="pre">cluster1</span></code>. However, since we know <code class="docutils literal notranslate"><span class="pre">cluster1</span></code> is much larger, it will contain more new visitors overall. Next we will look at the distribution of geographic regions in each cluster.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">region</span> <span class="o">=</span> <span class="p">[</span><span class="n">ft</span> <span class="k">for</span> <span class="n">ft</span> <span class="ow">in</span> <span class="n">purchaseOnlyFtNames</span> <span class="k">if</span> <span class="n">ft</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Region&#39;</span><span class="p">)]</span>
+<span class="n">clusterMeans</span><span class="p">[:,</span> <span class="n">region</span><span class="p">]</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.plot.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">plot</span></a><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_unsupervised_learning_33_0.svg" src="../_images/examples_unsupervised_learning_33_0.svg" /></div>
+</div>
+<p>We see above that the plurality of visitors in each cluster are from region 1. No cluster contains drastically more visitors from a certain region than the other clusters and all regions are represented in each cluster. This is important because it indicates that differences between clusters are not likely to be regional. Let’s see if purchases on weekends or special days differ between clusters.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">clusterMeans</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;Weekend&#39;</span><span class="p">,</span> <span class="s1">&#39;SpecialDay&#39;</span><span class="p">]]</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.plot.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">plot</span></a><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_unsupervised_learning_35_0.svg" src="../_images/examples_unsupervised_learning_35_0.svg" /></div>
+</div>
+<p>The average purchaser in <code class="docutils literal notranslate"><span class="pre">cluster0</span></code> is more likely to visit on a weekend, relative to the other clusters. This is the first time that <code class="docutils literal notranslate"><span class="pre">cluster0</span></code> has been significantly different from <code class="docutils literal notranslate"><span class="pre">cluster1</span></code>, so maybe <code class="docutils literal notranslate"><span class="pre">cluster0</span></code> represents more “Weekend Shoppers”. We also see <code class="docutils literal notranslate"><span class="pre">cluster1</span></code> leads in special day shopping. This could suggest that <code class="docutils literal notranslate"><span class="pre">cluster1</span></code> has more “Holiday Shoppers”. We will keep these ideas in mind, but it is also possible that these differences are due to random chance. We also see
+that <code class="docutils literal notranslate"><span class="pre">cluster2</span></code> rarely makes a special day purchase, so their long durations on the site are not driven by special occasions.</p>
+<p>A <strong>PageValue</strong> defines the estimated dollar amount for a visit to any given page. We know that each visit ended in a purchase, but not how much, so PageValues may provide some insight on each cluster’s spending habits.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">clusterMeans</span><span class="p">[:,</span>  <span class="s1">&#39;PageValues&#39;</span><span class="p">]</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.plot.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">plot</span></a><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_unsupervised_learning_37_0.svg" src="../_images/examples_unsupervised_learning_37_0.svg" /></div>
+</div>
+<p>It is interesting that <code class="docutils literal notranslate"><span class="pre">cluster2</span></code> has the lowest average PageValue. This means that, on average, they are looking at lower cost items on the site. So, despite spending a lot of time on the site, they are less likely to make a high value purchase. Conversely, <code class="docutils literal notranslate"><span class="pre">cluster0</span></code> and <code class="docutils literal notranslate"><span class="pre">cluster1</span></code> view more expensive items on the site, so their purchases are likely to be more costly. Unfortunately, we do not have more information, like purchase quantities, so it is still unclear which cluster generates
+the most revenue.</p>
+<p>We have data for 9 months of purchases, let’s see if our clusters spend consistently each month.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">months</span> <span class="o">=</span> <span class="p">[</span><span class="n">ft</span> <span class="k">for</span> <span class="n">ft</span> <span class="ow">in</span> <span class="n">purchaseOnlyFtNames</span> <span class="k">if</span> <span class="n">ft</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Month&#39;</span><span class="p">)]</span>
+<span class="n">clusterMeans</span><span class="p">[:,</span> <span class="n">months</span><span class="p">]</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.plot.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">plot</span></a><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_unsupervised_learning_39_0.svg" src="../_images/examples_unsupervised_learning_39_0.svg" /></div>
+</div>
+<p>Above, we see an overwhelming majority of <code class="docutils literal notranslate"><span class="pre">cluster2</span></code>’s purchases came in Month 7, as did a good percentage of <code class="docutils literal notranslate"><span class="pre">cluster0</span></code>’s. Since <code class="docutils literal notranslate"><span class="pre">cluster2</span></code> is primarily returning visitors, it is possible some marketing or other event took place in month 7 that led visitors to return and make a purchase at that time. Additionally, <code class="docutils literal notranslate"><span class="pre">cluster2</span></code> rarely buys for special days, so we can assume that the purchases in month 7 were not due to a special occasion. We see <code class="docutils literal notranslate"><span class="pre">cluster1</span></code> purchases more
+consistently, this seems to contradict our previous idea that <code class="docutils literal notranslate"><span class="pre">cluster1</span></code> could contain “Holiday Shoppers”.</p>
+<p>Last, we will look at the operating systems and browsers that visitors are using within the clusters.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">os</span> <span class="o">=</span> <span class="p">[</span><span class="n">ft</span> <span class="k">for</span> <span class="n">ft</span> <span class="ow">in</span> <span class="n">purchaseOnlyFtNames</span>
+      <span class="k">if</span> <span class="n">ft</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;OperatingSystem&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">ft</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Browser&#39;</span><span class="p">)]</span>
+<span class="n">clusterMeans</span><span class="p">[:,</span> <span class="n">os</span><span class="p">]</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.plot.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">plot</span></a><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_unsupervised_learning_41_0.svg" src="../_images/examples_unsupervised_learning_41_0.svg" /></div>
+</div>
+<p>Often operating systems provide a browser, so a high correlation between the features above is not surprising. Let’s focus on browsers since the majority of visitors used browser 1 or 2. Up to this point, <code class="docutils literal notranslate"><span class="pre">cluster0</span></code> and <code class="docutils literal notranslate"><span class="pre">cluster1</span></code> appeared mostly similar, however we see above that visitors use very different browsers between these two clusters. We also see that visitors in <code class="docutils literal notranslate"><span class="pre">cluster1</span></code> and <code class="docutils literal notranslate"><span class="pre">cluster2</span></code> generally use similar browsers. It seems strange that visitors using browser 2 span two
+clusters with very different behaviors, yet visitors on browser 1 mostly fall into the same cluster.</p>
+</section>
+<section id="Cluster-Assumptions">
+<h3>Cluster Assumptions<a class="headerlink" href="#Cluster-Assumptions" title="Permalink to this headline">¶</a></h3>
+<p>We quickly saw that <code class="docutils literal notranslate"><span class="pre">cluster2</span></code> varied quite a bit from <code class="docutils literal notranslate"><span class="pre">cluster0</span></code> and <code class="docutils literal notranslate"><span class="pre">cluster1</span></code>. <code class="docutils literal notranslate"><span class="pre">cluster2</span></code> averages over an hour on the site and 100 individual page visits, but typically on pages with low page values. Visitors are almost always return visitors and 70% of the visits in <code class="docutils literal notranslate"><span class="pre">cluster2</span></code> were in month 7. It is possible that visitors in this cluster may have been motivated, possibly by a sale or coupon, to return to the site and spend time browsing the site’s lower-cost items to find
+something to purchase.</p>
+<p>We found that <code class="docutils literal notranslate"><span class="pre">cluster0</span></code> and <code class="docutils literal notranslate"><span class="pre">cluster1</span></code> are very similar in terms of number of pages visited and duration spent on the site. The average visitor in both of these clusters visited around 30 pages and spent about 20 minutes on the site. They also both have similar average page values that are much higher than <code class="docutils literal notranslate"><span class="pre">cluster2</span></code>, with <code class="docutils literal notranslate"><span class="pre">cluster1</span></code> being slightly higher than <code class="docutils literal notranslate"><span class="pre">cluster0</span></code>. So, these visitors appear to be targeting specific, often more expensive, items when they visit the site, rather
+than browsing the site’s inventory.</p>
+<p>More purchases in <code class="docutils literal notranslate"><span class="pre">cluster0</span></code> were on a weekend but browser differentiated it most from the other clusters. Nearly all purchases that use browser 1 are found in <code class="docutils literal notranslate"><span class="pre">cluster0</span></code>. Most users of other browsers are found in either <code class="docutils literal notranslate"><span class="pre">cluster1</span></code> or <code class="docutils literal notranslate"><span class="pre">cluster2</span></code>. We might expect customer behavior to be mostly consistent across browsers, but purchasers using browser 1 are very rarely spend long durations on the site. The association between browser 1 and shorter durations spent on the site is likely
+something worth investigation.</p>
+<p>We can only speculate, but there are a couple of potential reasons that we might be seeing this inconsistent behavior across browsers. There could be a flaw or poorly optimized aspect of the site on browser 1 that is discouraging visitors from browsing. Or, given we have speculated that the behavior of visitors in <code class="docutils literal notranslate"><span class="pre">cluster2</span></code> could have been driven by marketing, it may be the case that this marketing failed to reach users of browser 1.</p>
+<p><strong>Reference:</strong></p>
+<p>Sakar, C.O., Polat, S.O., Katircioglu, M. et al. Neural Comput &amp; Applic (2018). [<a class="reference external" href="https://doi.org/10.1007/s00521-018-3523-0">https://doi.org/10.1007/s00521-018-3523-0</a>]</p>
+<p>Dua, D. and Graff, C. (2019). UCI Machine Learning Repository [<a class="reference external" href="http://archive.ics.uci.edu/ml">http://archive.ics.uci.edu/ml</a>]. Irvine, CA: University of California, School of Information and Computer Science.</p>
+<p>Link to original dataset: <a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/Online+Shoppers+Purchasing+Intention+Dataset">https://archive.ics.uci.edu/ml/datasets/Online+Shoppers+Purchasing+Intention+Dataset</a></p>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/examples/unsupervised_learning.ipynb"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

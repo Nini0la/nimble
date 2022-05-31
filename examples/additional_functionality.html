@@ -1,0 +1,1003 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Additional Functionality &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installation" href="../install.html" />
+    <link rel="prev" title="Merging and Tidying Data" href="merging_and_tidying_data.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="cleaning_data.html">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exploring_data.html">Exploring Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unsupervised_learning.html">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="merging_and_tidying_data.html">Merging and Tidying Data</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Additional Functionality</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="merging_and_tidying_data.html" title="previous chapter">Merging and Tidying Data</a></li>
+      <li>Next: <a href="../install.html" title="next chapter">Installation</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<style>
+    .nbinput .prompt,
+    .nboutput .prompt {
+        display: none;
+    }
+</style><section id="Additional-Functionality">
+<h1>Additional Functionality<a class="headerlink" href="#Additional-Functionality" title="Permalink to this headline">¶</a></h1>
+<section id="Nimble-functionality-designed-to-support-users.">
+<h2>Nimble functionality designed to support users.<a class="headerlink" href="#Nimble-functionality-designed-to-support-users." title="Permalink to this headline">¶</a></h2>
+<p>Our data in this example will help highlight functionality included in the Nimble library such as logging, randomness, and the design of “custom learners” for making your own machine learning algorithms that are supported by Nimble. Our data contains 2000 points and 8 features. The first 7 features are wifi signal strength values detected by a mobile phone from seven different wifi sources (one feature per source). The final feature identifies which of four rooms the mobile device was in. Our
+goal will be to predict the room that the phone is in based on wifi signal strength data.</p>
+<p>In this example we will learn about:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="#Configuration">Changing Nimble’s configurable settings</a></p></li>
+<li><p><a class="reference external" href="#Logging">Nimble’s logging basics</a></p></li>
+<li><p><a class="reference external" href="#Randomness">Randomness control</a></p></li>
+<li><p><a class="reference external" href="#Custom-Learners">Creating a CustomLearner</a></p></li>
+<li><p><a class="reference external" href="#Cross-Validation-Deep-Logging">Deep Logging for cross-validation</a></p></li>
+<li><p><a class="reference external" href="#Viewing-existing-logs">Viewing existing logs</a></p></li>
+</ul>
+<div class="line-block">
+<div class="line"><a class="reference external" href="https://colab.research.google.com/drive/1CZecbz9Z2xR3auR7lj97cVWGIVTXKZmk?usp=sharing">Open this example in Google Colab</a></div>
+<div class="line"><a class="reference internal" href="files.html#additional-functionality"><span class="std std-ref">Download this example as a script or notebook</span></a></div>
+<div class="line"><a class="reference internal" href="../datasets.html#additional-functionality"><span class="std std-ref">Download the dataset for this example</span></a></div>
+</div>
+<section id="Getting-Started">
+<h3>Getting Started<a class="headerlink" href="#Getting-Started" title="Permalink to this headline">¶</a></h3>
+<p>One highlight of this example is Nimble’s logging. Since the log contents can be affected by prior uses of Nimble, we want to ensure that the behavior of this example is consistent for everyone. To achieve this consistency, we will be storing our log in a temporary directory created by Python’s <code class="docutils literal notranslate"><span class="pre">tempfile</span></code> module. This will ensure that our log queries only return information logged in this example. It also allows us to quickly remove the directory and its contents when we finish.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">tempfile</span>
+
+<span class="kn">import</span> <a class="nimble-hyperlink" href="../docs/index.html" target="_blank"><span class="nn">nimble</span></a>
+<span class="kn">from</span> <a class="nimble-hyperlink" href="../docs/nimble.calculate.html" target="_blank"><span class="nn">nimble.calculate</span></a> <span class="kn">import</span> <span class="n">fractionCorrect</span>
+
+<span class="n">tempDir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">(</span><span class="s1">&#39;nimble-logs&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Configuration">
+<h3>Configuration<a class="headerlink" href="#Configuration" title="Permalink to this headline">¶</a></h3>
+<p>Nimble allows for user configuration of certain aspects of our library through <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.settings.html"target="_blank"><span class="pre">nimble.settings</span></a></code>. The default settings are written to a file and loaded each time Nimble is imported. To see the current configuration settings, we can use <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.configuration.SessionConfiguration.get.html"target="_blank"><span class="pre">nimble.settings.get</span></a></code>. We can also change the default settings using <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.configuration.SessionConfiguration.setDefault.html"target="_blank"><span class="pre">nimble.settings.setDefault</span></a></code> or use <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.configuration.SessionConfiguration.set.html"target="_blank"><span class="pre">nimble.settings.set</span></a></code> to make changes for only the current session.</p>
+<p>Next, we will be exploring Nimble’s logging feature. We want to start with an empty log file and make sure that our logger behavior is the same. Let’s configure our logging settings so we can ensure that your log entries match ours throughout this example.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># a new log file is generated when a new location is set</span>
+<a class="nimble-hyperlink" href="../docs/generated/nimble.core.configuration.SessionConfiguration.set.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">set</span></a><span class="p">(</span><span class="s1">&#39;logger&#39;</span><span class="p">,</span> <span class="s1">&#39;location&#39;</span><span class="p">,</span> <span class="n">tempDir</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="c1"># enable logging unless explicitly overridden by a local setting</span>
+<a class="nimble-hyperlink" href="../docs/generated/nimble.core.configuration.SessionConfiguration.set.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">set</span></a><span class="p">(</span><span class="s1">&#39;logger&#39;</span><span class="p">,</span> <span class="s1">&#39;enabledByDefault&#39;</span><span class="p">,</span> <span class="s1">&#39;True&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Now that we have our new (temporary) logging file established, we can load our data for this example. The <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.fetchFile.html"target="_blank"><span class="pre">nimble.fetchFile</span></a></code> function stores and retrieves data based on a configurable location that defaults to your home directory. Everyone’s fetch location is different so we will not print ours but if you are running this code and would like to see yours, uncomment the line below.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># print(nimble.settings.get(&#39;fetch&#39;, &#39;location&#39;))</span>
+</pre></div>
+</div>
+</div>
+<p>Within that configured directory location, <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.fetchFile.html"target="_blank"><span class="pre">fetchFile</span></a></code> creates a “nimbleData” directory to store downloaded data. <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.fetchFile.html"target="_blank"><span class="pre">fetchFile</span></a></code> returns the path to the requested data, downloading it if it is not already available locally. Usually, <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.fetchFile.html"target="_blank"><span class="pre">fetchFile</span></a></code> requires a url string, but Nimble has a built in shorthand for datasets in the UCI repository that we use to get our dataset for this example.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">path</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.fetchFile.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">fetchFile</span></a><span class="p">(</span><span class="s1">&#39;uci::Wireless Indoor Localization&#39;</span><span class="p">)</span>
+<span class="n">wifi</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.data.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">data</span></a><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;wifiData&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>As a reminder, this data used a mobile phone to collect wifi signal strength values from seven different wifi sources in four different rooms. Imagine you live in an apartment with four rooms (kitchen, living room, bedroom, and bathroom) and your phone picks up 7 wifi signals from your neighbors. As you move your phone from room to room, it will be closer to certain wifi sources and farther from others, changing the signal strength. This dataset is a matrix of integers collected from an
+experiment similar to our hypothetical situation above. Since our data does not contain a header row, it is a good practice to add feature names manually to clarify the contents of each feature.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;source&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">)]</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;room&#39;</span><span class="p">]</span>
+<span class="n">wifi</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.setNames.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">setNames</span></a><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">wifi</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html" target="_blank"><span class="n">show</span></a><span class="p">(</span><span class="s1">&#39;wifi signal strengths&#39;</span><span class="p">,</span> <span class="n">maxHeight</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+wifi signal strengths
+&#34;wifiData&#34; 2000pt x 8ft
+       &#39;source0&#39; &#39;source1&#39; &#39;source2&#39; &#39;source3&#39; &#39;source4&#39; &#39;source5&#39; &#39;source6&#39; &#39;room&#39;
+     ┌─────────────────────────────────────────────────────────────────────────────
+   0 │    -64       -56       -61       -66       -71       -82       -81      1
+   1 │    -68       -57       -61       -65       -71       -85       -85      1
+   2 │    -63       -60       -60       -67       -76       -85       -84      1
+   │ │     │         │         │         │         │         │         │       │
+1997 │    -62       -59       -46       -65       -45       -87       -88      4
+1998 │    -62       -58       -52       -61       -41       -90       -85      4
+1999 │    -59       -50       -45       -60       -45       -88       -87      4
+
+</pre></div></div>
+</div>
+</section>
+<section id="Logging">
+<h3>Logging<a class="headerlink" href="#Logging" title="Permalink to this headline">¶</a></h3>
+<p>One helpful feature of Nimble is the ability to log each session. While running a script or during an interactive session, actions and results are stored and can be queried later. This information is a great resource for reviewing sessions without needing to rerun the code. Depending on the settings, the log can also provide many additional details regarding a machine learning algorithm’s performance. As we go through this example, we will demonstrate how the logger is recording our actions. All
+logged functions and methods have a <code class="docutils literal notranslate"><span class="pre">useLog</span></code> parameter. This parameter provides local control of logging, which can override the global settings. A value of <code class="docutils literal notranslate"><span class="pre">True</span></code> will always add a log entry, <code class="docutils literal notranslate"><span class="pre">False</span></code> will never add a log entry and <code class="docutils literal notranslate"><span class="pre">None</span></code> (the default) will use the global “enabledByDefault” setting . Thus far, our previous calls to <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.data.html"target="_blank"><span class="pre">nimble.data</span></a></code> and <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.setNames.html"target="_blank"><span class="pre">features.setNames</span></a></code> contained <code class="docutils literal notranslate"><span class="pre">useLog</span></code> parameters. Since we set <code class="docutils literal notranslate"><span class="pre">enabledByDefault</span></code> to “True”, these two calls were logged.</p>
+<p>We can also make our own entries into the log using <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.log.html"target="_blank"><span class="pre">nimble.log</span></a></code>. Let’s add an entry to remind ourselves about the details of our data. Then we can use <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.showLog.html"target="_blank"><span class="pre">nimble.showLog</span></a></code> to view our current log.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Wifi signal strength data from 7 sources in 4 possible rooms&#39;</span>
+<a class="nimble-hyperlink" href="../docs/generated/nimble.log.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">log</span></a><span class="p">(</span><span class="s1">&#39;Data Description&#39;</span><span class="p">,</span> <span class="n">description</span><span class="p">)</span>
+<a class="nimble-hyperlink" href="../docs/generated/nimble.showLog.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">showLog</span></a><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+                                  NIMBLE LOGS
+...............................................................................
+.                                  SESSION 0                                  .
+...............................................................................
+Loaded: wifiData                                            2022-05-31 19:38:13
+# of points    2000
+# of features  8
+path           /home/tpburns/nimbleData/archive.ics.uci.edu/ml/machine-
+               learning-databases/00422/wifi_localization.txt
+logID          _NIMBLE_0_
+...............................................................................
+wifiData.features.setNames                                  2022-05-31 19:38:13
+Arguments: assignments=[&#39;source0&#39;, &#39;source1&#39;, &#39;source2&#39;, &#39;source3&#39;, &#39;source4&#39;,
+           &#39;source5&#39;, &#39;source6&#39;, &#39;room&#39;]
+...............................................................................
+User - Data Description                                     2022-05-31 19:38:13
+Wifi signal strength data from 7 sources in 4 possible rooms
+...............................................................................
+</pre></div></div>
+</div>
+<p>We can always override the global logging configuration by setting <code class="docutils literal notranslate"><span class="pre">useLog</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>. Setting <code class="docutils literal notranslate"><span class="pre">useLog</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code> has the advantage of ensuring that everything in the code is logged as desired regardless of the global setting. When “enabledByDefault” is set to “False”, using <code class="docutils literal notranslate"><span class="pre">useLog=True</span></code> is perfect for logging only things we explicitly want to log. We set “enabledByDefault” to “True” earlier, but we still may want to avoid logging certain things. For example,
+below we decide to check the <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.calculate.mean.html"target="_blank"><span class="pre">mean</span></a></code> and <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.fill.median.html"target="_blank"><span class="pre">median</span></a></code> signal strength for each source because large differences would indicate outliers. Remembering that we ran this check is not overly helpful so we can skip logging it, but if we find outliers we will want to log any actions we take.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">sourceData</span> <span class="o">=</span> <span class="n">wifi</span><span class="p">[:,</span> <span class="s1">&#39;source0&#39;</span><span class="p">:</span><span class="s1">&#39;source6&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sourceData</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.calculate.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">calculate</span></a><span class="p">(</span><a class="nimble-hyperlink" href="../docs/generated/nimble.calculate.mean.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">calculate</span><span class="o">.</span><span class="n">mean</span></a><span class="p">,</span> <span class="n">useLog</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sourceData</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.calculate.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">calculate</span></a><span class="p">(</span><a class="nimble-hyperlink" href="../docs/generated/nimble.calculate.median.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">calculate</span><span class="o">.</span><span class="n">median</span></a><span class="p">,</span> <span class="n">useLog</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1pt x 7ft
+    &#39;source0&#39; &#39;source1&#39; &#39;source2&#39; &#39;source3&#39; &#39;source4&#39; &#39;source5&#39; &#39;source6&#39;
+  ┌──────────────────────────────────────────────────────────────────────
+0 │  -52.331   -55.623   -54.964   -53.566   -62.641   -80.985   -81.727
+
+1pt x 7ft
+    &#39;source0&#39; &#39;source1&#39; &#39;source2&#39; &#39;source3&#39; &#39;source4&#39; &#39;source5&#39; &#39;source6&#39;
+  ┌──────────────────────────────────────────────────────────────────────
+0 │  -55.000   -56.000   -55.000   -56.000   -64.000   -82.000   -83.000
+
+</pre></div></div>
+</div>
+<p>It looks like our mean and median values are similar, so our data does not have outliers that we need to worry about. We don’t have to make any modifications to our data, but let’s verify that our calculations were <strong>not</strong> added to the log.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><a class="nimble-hyperlink" href="../docs/generated/nimble.showLog.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">showLog</span></a><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+                                  NIMBLE LOGS
+...............................................................................
+.                                  SESSION 0                                  .
+...............................................................................
+Loaded: wifiData                                            2022-05-31 19:38:13
+# of points    2000
+# of features  8
+path           /home/tpburns/nimbleData/archive.ics.uci.edu/ml/machine-
+               learning-databases/00422/wifi_localization.txt
+logID          _NIMBLE_0_
+...............................................................................
+wifiData.features.setNames                                  2022-05-31 19:38:13
+Arguments: assignments=[&#39;source0&#39;, &#39;source1&#39;, &#39;source2&#39;, &#39;source3&#39;, &#39;source4&#39;,
+           &#39;source5&#39;, &#39;source6&#39;, &#39;room&#39;]
+...............................................................................
+User - Data Description                                     2022-05-31 19:38:13
+Wifi signal strength data from 7 sources in 4 possible rooms
+...............................................................................
+</pre></div></div>
+</div>
+</section>
+<section id="Randomness">
+<h3>Randomness<a class="headerlink" href="#Randomness" title="Permalink to this headline">¶</a></h3>
+<p>If you revisit our data above, we can see that the points appear to be sorted by room. For our machine learning, we will want to randomize the order. When we call <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.permute.html"target="_blank"><span class="pre">points.permute</span></a></code> with no arguments, a random permutation is used to reorder our points. However, Nimble wants each run of a script to produce consistent results, so the random seed is controlled by default. This means that the points in our randomly permuted object shown below are always in the same order every time for everyone
+running this script.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">wifi</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.permute.html" target="_blank"><span class="n">points</span><span class="o">.</span><span class="n">permute</span></a><span class="p">()</span>
+<span class="n">wifi</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html" target="_blank"><span class="n">show</span></a><span class="p">(</span><span class="s1">&#39;randomly permuted&#39;</span><span class="p">,</span> <span class="n">maxHeight</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+randomly permuted
+&#34;wifiData&#34; 2000pt x 8ft
+       &#39;source0&#39; &#39;source1&#39; &#39;source2&#39; &#39;source3&#39; &#39;source4&#39; &#39;source5&#39; &#39;source6&#39; &#39;room&#39;
+     ┌─────────────────────────────────────────────────────────────────────────────
+   0 │    -45       -59       -54       -51       -69       -77       -85      2
+   1 │    -51       -55       -50       -53       -62       -78       -84      3
+   2 │    -62       -52       -56       -63       -64       -78       -81      1
+   │ │     │         │         │         │         │         │         │       │
+1997 │    -68       -57       -64       -68       -77       -88       -85      1
+1998 │    -61       -62       -64       -65       -73       -81       -90      1
+1999 │    -52       -61       -51       -52       -66       -80       -89      3
+
+</pre></div></div>
+</div>
+<p>Nimble uses its <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.random.setSeed.html"target="_blank"><span class="pre">nimble.random.setSeed</span></a></code> function on import to control the random state, but this function is also publicly available to set a new seed or disable Nimble’s randomness control by setting the seed to <code class="docutils literal notranslate"><span class="pre">None</span></code>. We can either change the seed for the remainder of the script, or temporarily using the context manager <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.random.alternateControl.html"target="_blank"><span class="pre">nimble.random.alternateControl</span></a></code>. Even when Nimble is already controlling the randomness, sometimes it can be helpful to reseed it manually so that the current random
+state is known. This could allow us to do something like recreate the same “random” object in another script. Alternatively, we might want to temporarily use an uncontrolled state of randomness to create an object that is different for each run of this script. Below, we view five random points from our data with and without a set seed. The <code class="docutils literal notranslate"><span class="pre">controlled</span></code> object will always be a copy of the same 5 points but <code class="docutils literal notranslate"><span class="pre">uncontrolled</span></code> will copy a random selection of points each time the code is run.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><a class="nimble-hyperlink" href="../docs/generated/nimble.random.setSeed.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">setSeed</span></a><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">controlled</span> <span class="o">=</span> <span class="n">wifi</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.copy.html" target="_blank"><span class="n">points</span><span class="o">.</span><span class="n">copy</span></a><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">randomize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">controlled</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html" target="_blank"><span class="n">show</span></a><span class="p">(</span><span class="s1">&#39;controlled randomness sample&#39;</span><span class="p">)</span>
+
+<span class="k">with</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.random.alternateControl.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">alternateControl</span></a><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">uncontrolled</span> <span class="o">=</span> <span class="n">wifi</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.copy.html" target="_blank"><span class="n">points</span><span class="o">.</span><span class="n">copy</span></a><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">randomize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">uncontrolled</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html" target="_blank"><span class="n">show</span></a><span class="p">(</span><span class="s1">&#39;uncontrolled randomness sample&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+controlled randomness sample
+5pt x 8ft
+    &#39;source0&#39; &#39;source1&#39; &#39;source2&#39; &#39;source3&#39; &#39;source4&#39; &#39;source5&#39; &#39;source6&#39; &#39;room&#39;
+  ┌─────────────────────────────────────────────────────────────────────────────
+0 │    -61       -56       -64       -61       -72       -83       -86      1
+1 │    -49       -57       -52       -51       -60       -89       -83      3
+2 │    -51       -58       -56       -48       -61       -79       -82      3
+3 │    -60       -58       -56       -65       -68       -79       -86      1
+4 │    -55       -56       -48       -60       -55       -84       -84      4
+
+uncontrolled randomness sample
+5pt x 8ft
+    &#39;source0&#39; &#39;source1&#39; &#39;source2&#39; &#39;source3&#39; &#39;source4&#39; &#39;source5&#39; &#39;source6&#39; &#39;room&#39;
+  ┌─────────────────────────────────────────────────────────────────────────────
+0 │    -58       -56       -56       -64       -50       -82       -87      4
+1 │    -63       -58       -54       -69       -43       -91       -92      4
+2 │    -62       -52       -56       -63       -64       -78       -81      1
+3 │    -41       -55       -58       -43       -60       -71       -72      2
+4 │    -65       -58       -70       -66       -71       -85       -83      1
+
+</pre></div></div>
+</div>
+<p>The randomness within our <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.random.alternateControl.html"target="_blank"><span class="pre">alternateControl</span></a></code> context manager was not controlled but once we exited the context manager, we returned to the current controlled random state. This means that all of our results will be consistent for the remainder of this example. Nimble’s <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.random.html"target="_blank"><span class="pre">random</span></a></code> module also contains the <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.random.data.html"target="_blank"><span class="pre">nimble.random.data</span></a></code> function for generating an object filled with random values. We will use this later to test that our custom learner is working as expected.</p>
+</section>
+<section id="Custom-Learners">
+<h3>Custom Learners<a class="headerlink" href="#Custom-Learners" title="Permalink to this headline">¶</a></h3>
+<p>Now it is time to perform our machine learning. For this example, we will first design our own custom machine learning algorithm for use with Nimble rather than using one of Nimble’s built-in <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.CustomLearner.html"target="_blank"><span class="pre">CustomLearner</span></a></code>s or an algorithm from another package supported by Nimble (like <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> or <code class="docutils literal notranslate"><span class="pre">keras</span></code>). One theory is that we could identify the center of each room by calculating the mean signal strengths of all known observations in that room. Once we have identified each room’s center, we can
+measure the distance of any unknown observations to the four room centers. The shortest of the four distances could indicate that the phone is closest to the center of that room so that will be the room that we predict.</p>
+<p>We will be creating a learner named <code class="docutils literal notranslate"><span class="pre">LeastFeatureMeanDistance</span></code> that classifies points by measuring the Euclidean distance to the feature means for each label and selecting the label where the distance is minimized. To create our own custom machine learning algorithm for Nimble, we inherit from <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.CustomLearner.html"target="_blank"><span class="pre">nimble.CustomLearner</span></a></code>. Every <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.CustomLearner.html"target="_blank"><span class="pre">CustomLearner</span></a></code> must minimally define a <code class="docutils literal notranslate"><span class="pre">learnerType</span></code> attribute and <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.CustomLearner.train.html"target="_blank"><span class="pre">train</span></a></code> and <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.CustomLearner.apply.html"target="_blank"><span class="pre">apply</span></a></code> methods. Our <code class="docutils literal notranslate"><span class="pre">learnerType</span></code> is <code class="docutils literal notranslate"><span class="pre">'classification'</span></code> because it assigns
+label predictions based on a predefined set of labels. The <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.CustomLearner.train.html"target="_blank"><span class="pre">train</span></a></code> method uses the <code class="docutils literal notranslate"><span class="pre">trainX</span></code> and <code class="docutils literal notranslate"><span class="pre">trainY</span></code> data to learn a relationship that can be applied to other data. For our learner, the <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.CustomLearner.train.html"target="_blank"><span class="pre">train</span></a></code> method groups our data based on label and calculates the feature means for data with the same label. It uses a dictionary to store the mean of each feature that we “learn” from our training data so that they can be used for <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.CustomLearner.apply.html"target="_blank"><span class="pre">apply</span></a></code>. The <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.CustomLearner.apply.html"target="_blank"><span class="pre">apply</span></a></code> method uses the information learned from
+training to make predictions on new (unseen) data. For <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.CustomLearner.apply.html"target="_blank"><span class="pre">apply</span></a></code> in our learner, we compare the Euclidean distance between a point and each label’s feature means (learned in <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.CustomLearner.train.html"target="_blank"><span class="pre">train</span></a></code>) and predict the label with the shortest distance.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">class</span> <span class="nc">LeastFeatureMeanDistance</span><span class="p">(</span><a class="nimble-hyperlink" href="../docs/generated/nimble.CustomLearner.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">CustomLearner</span></a><span class="p">):</span>
+    <span class="n">learnerType</span> <span class="o">=</span> <span class="s1">&#39;classification&#39;</span>
+
+    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trainX</span><span class="p">,</span> <span class="n">trainY</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate the feature means by label group.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">allData</span> <span class="o">=</span> <span class="n">trainY</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.copy.html" target="_blank"><span class="n">copy</span></a><span class="p">()</span>
+        <span class="n">allData</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.append.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">append</span></a><span class="p">(</span><span class="n">trainX</span><span class="p">,</span> <span class="n">useLog</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">featureMeans</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">byLabel</span> <span class="o">=</span> <span class="n">allData</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.groupByFeature.html" target="_blank"><span class="n">groupByFeature</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">useLog</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">byLabel</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">means</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.statistics.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">statistics</span></a><span class="p">(</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">featureMeans</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">means</span>
+
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">testX</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Predict labels based on least distance from known label means.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">leastDistance</span><span class="p">(</span><span class="n">point</span><span class="p">):</span>
+            <span class="n">least</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">prediction</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">means</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">featureMeans</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">sumSquaredDiffs</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">point</span> <span class="o">-</span> <span class="n">means</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">least</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">sumSquaredDiffs</span> <span class="o">&lt;</span> <span class="n">least</span><span class="p">:</span>
+                    <span class="n">least</span> <span class="o">=</span> <span class="n">sumSquaredDiffs</span>
+                    <span class="n">prediction</span> <span class="o">=</span> <span class="n">label</span>
+            <span class="k">return</span> <span class="n">prediction</span>
+
+        <span class="k">return</span> <span class="n">testX</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.calculate.html" target="_blank"><span class="n">points</span><span class="o">.</span><span class="n">calculate</span></a><span class="p">(</span><span class="n">leastDistance</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Before we apply this learner to our data, let’s make sure it is working as expected. The success of our learner depends on the room centers providing an accurate prediction of the actual room. This depends highly on the configuration of the rooms, which is unknown to us. Below we see two figures describing two possible layouts of four rooms. In Figure 1, our algorithm should be very effective because the walls bisect the room centers, but in Figure 2 closeness to a room center is often not a
+good indication of the correct room.</p>
+<img alt="room figures" src="../_images/roomfigures.png" />
+<p>For testing, let’s generate some random data and label it based on Figure 2. The image below shows the room in Figure 2 on a coordinate plane with each axis ranging from 0 to 100. Since we have defined the actual room locations and centers, we can calculate a good approximation of how accurate our model should be. For our training data, we can use <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.random.data.html"target="_blank"><span class="pre">nimble.random.data</span></a></code> to pick random (x, y) coordinates representing a location on the grid. By setting <code class="docutils literal notranslate"><span class="pre">elementType='int'</span></code> we get random integer
+values from 1 to 99 (inclusive) which will allow our learner to learn a good approximation of the room centers. For each (x, y) coordinate, we can determine the room label and the room center that is closest to the coordinate. We expect our learner’s predictions to be correct when the room label and the closest coordinate are the same.</p>
+<img alt="figure 2" src="../_images/figure2.png" />
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Since this is only for testing purposes, we won&#39;t log this part.</span>
+
+<span class="n">rTrainX</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.random.data.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">data</span></a><span class="p">(</span><span class="n">numPoints</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">numFeatures</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sparsity</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                             <span class="n">elementType</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">,</span> <span class="n">useLog</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">rTrainX</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.setNames.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">setNames</span></a><span class="p">([</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">useLog</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">roomIdentifier</span><span class="p">(</span><span class="n">pt</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return two-tuple (actual room, room center closest to point).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">pt</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
+        <span class="n">actualRoom</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="k">elif</span> <span class="n">pt</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">20</span><span class="p">:</span>
+        <span class="n">actualRoom</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="k">elif</span> <span class="n">pt</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">20</span><span class="p">:</span>
+        <span class="n">actualRoom</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">actualRoom</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="n">knownCenters</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="mi">2</span><span class="p">:</span> <span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="mi">3</span><span class="p">:</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">55</span><span class="p">),</span> <span class="mi">4</span><span class="p">:</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">95</span><span class="p">)}</span>
+    <span class="n">distances</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">room</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">knownCenters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">distances</span><span class="p">[</span><span class="n">room</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="n">pt</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">pt</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
+    <span class="c1"># find the key for the minimum value in distances</span>
+    <span class="n">closestCenter</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">distances</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">distances</span><span class="o">.</span><span class="n">get</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">actualRoom</span><span class="p">,</span> <span class="n">closestCenter</span><span class="p">)</span>
+
+<span class="n">rTrainY</span> <span class="o">=</span> <span class="n">rTrainX</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.calculate.html" target="_blank"><span class="n">points</span><span class="o">.</span><span class="n">calculate</span></a><span class="p">(</span><span class="n">roomIdentifier</span><span class="p">,</span> <span class="n">useLog</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1"># extract 25% of our random data (first 500 points) for testing.</span>
+<span class="n">rTestX</span> <span class="o">=</span> <span class="n">rTrainX</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.extract.html" target="_blank"><span class="n">points</span><span class="o">.</span><span class="n">extract</span></a><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">useLog</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">rTestY</span> <span class="o">=</span> <span class="n">rTrainY</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.extract.html" target="_blank"><span class="n">points</span><span class="o">.</span><span class="n">extract</span></a><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">useLog</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Expected accuracy is the number of points in the test labels where the</span>
+<span class="c1"># actual room (index 0) is the same as the closest center room (index 1)</span>
+<span class="c1"># divided by the total number of test labels.</span>
+<span class="n">expAcc</span> <span class="o">=</span> <span class="n">rTestY</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.count.html" target="_blank"><span class="n">points</span><span class="o">.</span><span class="n">count</span></a><span class="p">(</span><span class="k">lambda</span> <span class="n">pt</span><span class="p">:</span> <span class="n">pt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">pt</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">rTestY</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.points.html" target="_blank"><span class="n">points</span></a><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;LeastFeatureMeanDistance test expected accuracy&#39;</span><span class="p">,</span> <span class="n">expAcc</span><span class="p">)</span>
+
+<span class="n">actAcc</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.trainAndTest.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">trainAndTest</span></a><span class="p">(</span><span class="n">LeastFeatureMeanDistance</span><span class="p">,</span> <span class="n">fractionCorrect</span><span class="p">,</span>
+                             <span class="n">rTrainX</span><span class="p">,</span> <span class="n">rTrainY</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">rTestX</span><span class="p">,</span> <span class="n">rTestY</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+                             <span class="n">useLog</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;LeastFeatureMeanDistance test actual accuracy&#39;</span><span class="p">,</span> <span class="n">actAcc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+LeastFeatureMeanDistance test expected accuracy 0.596
+LeastFeatureMeanDistance test actual accuracy 0.5920000000000001
+</pre></div></div>
+</div>
+<p>Our actual prediction accuracy is very similar to our expected accuracy so we can be confident that our learner is working as expected. The accuracies differ slightly because our learner calculates the room centers from the training data so they won’t perfectly match the known centers. Now, let’s use our <code class="docutils literal notranslate"><span class="pre">LeastFeatureMeanDistance</span></code> learner to see if we can make accurate predictions using our wifi signal strength data.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># randomOrder is False because we used permute earlier to randomize the data</span>
+<span class="n">trainX</span><span class="p">,</span> <span class="n">trainY</span><span class="p">,</span> <span class="n">testX</span><span class="p">,</span> <span class="n">testY</span> <span class="o">=</span> <span class="n">wifi</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.trainAndTestSets.html" target="_blank"><span class="n">trainAndTestSets</span></a><span class="p">(</span><span class="n">testFraction</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+                                                     <span class="n">labels</span><span class="o">=</span><span class="s1">&#39;room&#39;</span><span class="p">,</span>
+                                                     <span class="n">randomOrder</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">performance</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.trainAndTest.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">trainAndTest</span></a><span class="p">(</span><span class="n">LeastFeatureMeanDistance</span><span class="p">,</span> <span class="n">fractionCorrect</span><span class="p">,</span>
+                                  <span class="n">trainX</span><span class="p">,</span> <span class="n">trainY</span><span class="p">,</span> <span class="n">testX</span><span class="p">,</span> <span class="n">testY</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;LeastFeatureMeanDistance accuracy:&#39;</span><span class="p">,</span> <span class="n">performance</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+LeastFeatureMeanDistance accuracy: 0.9716666666666667
+</pre></div></div>
+</div>
+<p>Our simple custom learner worked quite well, predicting the correct room in the test set over 97% of the time. Given our high level of accuracy, we can assume that the walls bisect our room centers. Our error is about 3% and likely occurs when the distance to the closest center is similar between two or more centers. Let’s see if an algorithm like K-Nearest Neighbors can provide better performance because it can compare each unknown observation to multiple known observations.</p>
+</section>
+<section id="Cross-Validation-Deep-Logging">
+<h3>Cross Validation Deep Logging<a class="headerlink" href="#Cross-Validation-Deep-Logging" title="Permalink to this headline">¶</a></h3>
+<p>Nimble also has a few built-in custom learners, which are registered under the package name ‘nimble’. The <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.learners.KNNClassifier.html"target="_blank"><span class="pre">KNNClassifier</span></a></code> learner performs K-Nearest Neighbors classification. Comparing each point to its nearest neighbors makes this algorithm robust against varying room sizes and shapes, which was a major drawback of our <code class="docutils literal notranslate"><span class="pre">LeastFeatureMeanDistance</span></code> learner. It also provides multiple points of comparison which could help improve prediction accuracy for points near other rooms. However, we
+usually do not know the best value for <code class="docutils literal notranslate"><span class="pre">k</span></code> (the number of nearest neighbors) so we will cross validate for three different values of <code class="docutils literal notranslate"><span class="pre">k</span></code>. Logging has another configurable option named “enableDeepLogging”. By default it is set to “False” because logging cross validation can increase the size of the log file much more quickly. However, we can learn a lot of useful information from these cross validation logs so let’s set the value to True for the remainder of this session.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.configuration.SessionConfiguration.set.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">set</span></a><span class="p">(</span><span class="s1">&#39;logger&#39;</span><span class="p">,</span> <span class="s1">&#39;enableDeepLogging&#39;</span><span class="p">,</span> <span class="s1">&#39;True&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Enabling deep logging for cross-validation, will generate log entries for each fold during our k-fold cross-validation. Below, <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.trainAndTest.html"target="_blank"><span class="pre">trainAndTest</span></a></code> with <code class="docutils literal notranslate"><span class="pre">k=nimble.Tune([3,</span> <span class="pre">5,</span> <span class="pre">7])</span></code> will trigger hyperparameter tuning for our three <code class="docutils literal notranslate"><span class="pre">k</span></code> values. The <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.Tuning.html"target="_blank"><span class="pre">Tuning</span></a></code> object defines a method for selecting each argument set and how each argument set will be validated. All three <code class="docutils literal notranslate"><span class="pre">k</span></code> values will be checked with the default “consecutive” method, since we are only tuning a single parameter. The default
+validation is already “cross validation” but we will set it to perform 3-fold cross-validation instead of the default 5-fold. Then, <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.trainAndTest.html"target="_blank"><span class="pre">trainAndTest</span></a></code> will apply the <code class="docutils literal notranslate"><span class="pre">k</span></code> value that performed the best during validation to the test data.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">performance</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.trainAndTest.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">trainAndTest</span></a><span class="p">(</span><span class="s1">&#39;nimble.KNNClassifier&#39;</span><span class="p">,</span> <span class="n">fractionCorrect</span><span class="p">,</span>
+                                  <span class="n">trainX</span><span class="p">,</span> <span class="n">trainY</span><span class="p">,</span> <span class="n">testX</span><span class="p">,</span> <span class="n">testY</span><span class="p">,</span>
+                                  <span class="n">k</span><span class="o">=</span><a class="nimble-hyperlink" href="../docs/generated/nimble.Tune.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">Tune</span></a><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]),</span>
+                                  <span class="n">tuning</span><span class="o">=</span><a class="nimble-hyperlink" href="../docs/generated/nimble.Tuning.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">Tuning</span></a><span class="p">(</span><span class="n">folds</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>With deep logging for cross validation enabled, we just created 11 new log entries. We get 9 cross validation logs (3-fold cross validation for 3 different <code class="docutils literal notranslate"><span class="pre">k</span></code> values). These entries would not be added to the logger without deep logging being enabled and <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.showLog.html"target="_blank"><span class="pre">showLog</span></a></code> filters these entries out unless <code class="docutils literal notranslate"><span class="pre">levelOfDetail</span></code> is set to 3 (the highest level). The 10th entry is a summary of the hyperparameter tuning results and the last entry is the results of our call to <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.trainAndTest.html"target="_blank"><span class="pre">trainAndTest</span></a></code>. The last two
+entries are logged as long as regular logging is enabled and will be displayed if <code class="docutils literal notranslate"><span class="pre">levelOfDetail</span></code> is 2 (the default) or greater. A <code class="docutils literal notranslate"><span class="pre">levelOfDetail</span></code> of 1 (the lowest) filters out all but logs for data loading and data reports. Our 9 cross validation log entries look similar so we will only show the last two cross validation entries, the tuning summary entry and our <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.trainAndTest.html"target="_blank"><span class="pre">trainAndTest</span></a></code> log entry by setting <code class="docutils literal notranslate"><span class="pre">maximumEntries=4</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><a class="nimble-hyperlink" href="../docs/generated/nimble.showLog.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">showLog</span></a><span class="p">(</span><span class="n">levelOfDetail</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">maximumEntries</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+                                  NIMBLE LOGS
+...............................................................................
+.                                  SESSION 0                                  .
+...............................................................................
+KFold(&#34;nimble.KNNClassifier&#34;)                               2022-05-31 19:38:15
+Completed in 0.140 seconds
+
+Data                      # points                  # features
+trainX                    933                       7
+trainY                    933                       1
+testX                     467                       7
+testY                     467                       1
+
+Arguments: k=7
+Random Seed: 2127877500
+Fold: 2/3
+Metrics: fractionCorrect=0.9764453961456103
+...............................................................................
+KFold(&#34;nimble.KNNClassifier&#34;)                               2022-05-31 19:38:15
+Completed in 0.138 seconds
+
+Data                      # points                  # features
+trainX                    934                       7
+trainY                    934                       1
+testX                     466                       7
+testY                     466                       1
+
+Arguments: k=7
+Random Seed: 2127877500
+Fold: 3/3
+Metrics: fractionCorrect=0.9785407725321889
+...............................................................................
+&#34;nimble.KNNClassifier&#34; Hyperparameter Tuning                2022-05-31 19:38:15
+
+Tuned using the &#34;consecutive&#34; method (loops=1) and validated using the &#34;cross
+validation&#34; method (folds=3). The fractionCorrect function was used to
+calculate each result, with max values being optimal.
+Result          Arguments
+0.983           k=3
+0.981           k=5
+0.981           k=7
+...............................................................................
+trainAndTest(&#34;nimble.KNNClassifier&#34;)                        2022-05-31 19:38:16
+Completed in 1.530 seconds
+
+Data                      # points                  # features
+wifiData_trainX           1400                      7
+wifiData_trainY           1400                      1
+wifiData_testX            600                       7
+wifiData_testY            600                       1
+
+Arguments: k=Tune(values=[3, 5, 7])
+Random Seed: 99320166
+Best Arguments: {&#39;k&#39;: 3}
+Metrics: fractionCorrect=0.985
+...............................................................................
+</pre></div></div>
+</div>
+<p>We can see that <code class="docutils literal notranslate"><span class="pre">k=5</span></code> slightly outperformed <code class="docutils literal notranslate"><span class="pre">k=7</span></code> on the last fold and outperformed both <code class="docutils literal notranslate"><span class="pre">k=3</span></code> and <code class="docutils literal notranslate"><span class="pre">k=7</span></code> on average during cross validation. When the learner trained with <code class="docutils literal notranslate"><span class="pre">k=5</span></code> was applied to our test data, it correctly identified the room in 98.5% of the test points. This outperformed our own custom learner, so predicting the room based on other similar observations is a more effective strategy than prediction based on feature means.</p>
+</section>
+<section id="Viewing-existing-logs">
+<h3>Viewing existing logs<a class="headerlink" href="#Viewing-existing-logs" title="Permalink to this headline">¶</a></h3>
+<p>Now that we have completed our machine learning, let’s dive a little deeper into how we can take advantage of the <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.showLog.html"target="_blank"><span class="pre">showLog</span></a></code> to find certain information about our data. Right now our log is small, but as it grows we will not want to look through the entire log. A log file can quickly contain tons of very different textual information from various sessions on varying days. To make the log easy to query, <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.showLog.html"target="_blank"><span class="pre">showLog</span></a></code> has parameters to filter the log by sessions, dates, and text. For now, let’s try
+a text search for our object’s name, ‘wifiData’, and see all log records containing that word.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><a class="nimble-hyperlink" href="../docs/generated/nimble.showLog.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">showLog</span></a><span class="p">(</span><span class="n">searchForText</span><span class="o">=</span><span class="s1">&#39;wifiData&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+                                  NIMBLE LOGS
+...............................................................................
+.                                  SESSION 0                                  .
+...............................................................................
+Loaded: wifiData                                            2022-05-31 19:38:13
+# of points    2000
+# of features  8
+path           /home/tpburns/nimbleData/archive.ics.uci.edu/ml/machine-
+               learning-databases/00422/wifi_localization.txt
+logID          _NIMBLE_0_
+...............................................................................
+wifiData.features.setNames                                  2022-05-31 19:38:13
+Arguments: assignments=[&#39;source0&#39;, &#39;source1&#39;, &#39;source2&#39;, &#39;source3&#39;, &#39;source4&#39;,
+           &#39;source5&#39;, &#39;source6&#39;, &#39;room&#39;]
+...............................................................................
+wifiData.points.permute                                     2022-05-31 19:38:13
+...............................................................................
+wifiData.points.copy                                        2022-05-31 19:38:13
+Arguments: number=5, randomize=True
+Returned: _NIMBLE_1_
+...............................................................................
+wifiData.points.copy                                        2022-05-31 19:38:13
+Arguments: number=5, randomize=True
+Returned: _NIMBLE_2_
+...............................................................................
+wifiData.trainAndTestSets                                   2022-05-31 19:38:14
+Arguments: testFraction=0.3, labels=room, randomOrder=False
+Returned: wifiData_trainX, wifiData_trainY, wifiData_testX, wifiData_testY
+...............................................................................
+wifiData_testX.points.calculate                             2022-05-31 19:38:14
+Arguments: function=leastDistance
+Returned: _NIMBLE_9_
+...............................................................................
+trainAndTest(&#34;custom.LeastFeatureMeanDistance&#34;)             2022-05-31 19:38:14
+Completed in 0.376 seconds
+
+Data                      # points                  # features
+wifiData_trainX           1400                      7
+wifiData_trainY           1400                      1
+wifiData_testX            600                       7
+wifiData_testY            600                       1
+
+Random Seed: 506456970
+Metrics: fractionCorrect=0.9716666666666667
+...............................................................................
+trainAndTest(&#34;nimble.KNNClassifier&#34;)                        2022-05-31 19:38:16
+Completed in 1.530 seconds
+
+Data                      # points                  # features
+wifiData_trainX           1400                      7
+wifiData_trainY           1400                      1
+wifiData_testX            600                       7
+wifiData_testY            600                       1
+
+Arguments: k=Tune(values=[3, 5, 7])
+Random Seed: 99320166
+Best Arguments: {&#39;k&#39;: 3}
+Metrics: fractionCorrect=0.985
+...............................................................................
+</pre></div></div>
+</div>
+<p>While not required for using Nimble, features such as configuration, logging, randomness and custom learners add a lot of helpful functionality. We expect you’ll find yourself using some or all of it to support your data science work. That wraps it up for this example, so now is a good time to clean up the temporary directory containing our log file.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">tempDir</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p><strong>References:</strong></p>
+<p>Rajen Bhatt, ‘Fuzzy-Rough Approaches for Pattern Classification: Hybrid measures, Mathematical analysis, Feature selection algorithms, Decision tree algorithms, Neural learning, and Applications’, Amazon Books</p>
+<p>Jayant G Rohra, Boominathan Perumal, Swathi Jamjala Narayanan, Priya Thakur, and Rajen B Bhatt, ‘User Localization in an Indoor Environment Using Fuzzy Hybrid of Particle Swarm Optimization &amp; Gravitational Search Algorithm with Neural Networks’, in Proceedings of Sixth International Conference on Soft Computing for Problem Solving, 2017, pp. 286-295.</p>
+<p>Dua, D. and Graff, C. (2019). UCI Machine Learning Repository [<a class="reference external" href="http://archive.ics.uci.edu/ml">http://archive.ics.uci.edu/ml</a>]. Irvine, CA: University of California, School of Information and Computer Science.</p>
+<p>Link to dataset: <a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/Wireless+Indoor+Localization">https://archive.ics.uci.edu/ml/datasets/Wireless+Indoor+Localization</a></p>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/examples/additional_functionality.ipynb"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

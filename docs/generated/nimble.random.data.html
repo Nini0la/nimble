@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>nimble.random.data &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Base" href="nimble.core.data.Base.html" />
+    <link rel="prev" title="nimble.identity" href="nimble.identity.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/cleaning_data.html">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/exploring_data.html">Exploring Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/unsupervised_learning.html">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/merging_and_tidying_data.html">Merging and Tidying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/additional_functionality.html">Additional Functionality</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Nimble API Documentation</a><ul>
+      <li>Previous: <a href="nimble.identity.html" title="previous chapter">nimble.identity</a></li>
+      <li>Next: <a href="nimble.core.data.Base.html" title="next chapter">Base</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="nimble-random-data">
+<h1>nimble.random.data<a class="headerlink" href="#nimble-random-data" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="nimble.random.data">
+<code class="sig-prename descclassname"><span class="pre">nimble.random.</span></code><code class="sig-name descname"><span class="pre">data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numPoints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numFeatures</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sparsity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointNames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'automatic'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">featureNames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'automatic'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elementType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'float'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">returnType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomSeed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">useLog</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nimble.random.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a data object with random contents.</p>
+<p>The range of values and the distribution are dependent on the
+elementType. For the default elementType “float”, the data will be a
+normal distribution of values with mean 0 and standard deviation of
+1. If the elementType is “int”, values are sampled from a uniform
+distribution of the range 1 to 100.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>numPoints</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of points in the returned object.</p></li>
+<li><p><strong>numFeatures</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of features in the returned object.</p></li>
+<li><p><strong>sparsity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The likelihood that the value of a (point,feature) pair is zero.</p></li>
+<li><p><strong>elementType</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – If ‘float’ (default) then the value of (point, feature) pairs
+are sampled from a normal distribution (location 0, scale 1). If
+elementType is ‘int’ then value of (point, feature) pairs are
+sampled from uniform integer distribution [1 100]. Zeros are not
+counted in/do not affect the aforementioned sampling
+distribution.</p></li>
+<li><p><strong>pointNames</strong> (<em>'automatic'</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – Names to be associated with the points in the returned object.
+If ‘automatic’, default names will be generated. Otherwise, may
+be specified explictly by a list-like or dict-like object, so
+long as all points in the data are assigned a name and the names
+for each point are unique.</p></li>
+<li><p><strong>featureNames</strong> (<em>'automatic'</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – Names to be associated with the features in the returned object.
+If ‘automatic’, default names will be generated. Otherwise, may
+be specified explictly by a list-like or dict-like object, so
+long as all features in the data are assigned a name and the
+names for each feature are unique.</p></li>
+<li><p><strong>returnType</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – Indicates which Nimble data object to return. Options are the
+<strong>case sensitive</strong> strings “List”, “Matrix”, “Sparse” and
+“DataFrame”. If None, Nimble will detect the most appropriate
+type from the data and/or packages available in the environment.</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – When not None, this value is set as the name attribute of the
+returned object.</p></li>
+<li><p><strong>randomSeed</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Provide a randomSeed for generating the random data. When None,
+the randomness is controlled by Nimble’s random seed.</p></li>
+<li><p><strong>useLog</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – Local control for whether to send object creation to the logger.
+If None (default), use the value as specified in the “logger”
+“enabledByDefault” configuration option. If True, send to the
+logger regardless of the global option. If False, do <strong>NOT</strong>
+send to the logger, regardless of the global option.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>nimble.core.data.Base</em> – Subclass of Base object corresponding with the <code class="docutils literal notranslate"><span class="pre">returnType</span></code>.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="nimble.data.html#nimble.data" title="nimble.data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nimble.data</span></code></a>, <a class="reference internal" href="nimble.ones.html#nimble.ones" title="nimble.ones"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nimble.ones</span></code></a>, <a class="reference internal" href="nimble.zeros.html#nimble.zeros" title="nimble.zeros"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nimble.zeros</span></code></a>, <a class="reference internal" href="nimble.identity.html#nimble.identity" title="nimble.identity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nimble.identity</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<p>Random integers.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nimble</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">setSeed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ptNames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">random</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">pointNames</span><span class="o">=</span><span class="n">ptNames</span><span class="p">,</span>
+<span class="gp">... </span>                            <span class="n">elementType</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">random</span>
+<span class="go">&lt;Matrix 5pt x 5ft</span>
+<span class="go">       0  1  2  3  4</span>
+<span class="go">     ┌───────────────</span>
+<span class="go"> &#39;a&#39; │ 22 54 72 91 21</span>
+<span class="go"> &#39;b&#39; │ 32 19 2  46 49</span>
+<span class="go"> &#39;c&#39; │ 86 1  91 91 69</span>
+<span class="go"> &#39;d&#39; │ 30 44 97 39 63</span>
+<span class="go"> &#39;e&#39; │ 42 92 32 55 65</span>
+<span class="go">&gt;</span>
+</pre></div>
+</div>
+<p>Random floats, high sparsity.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nimble</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">setSeed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sparse</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">.9</span><span class="p">,</span> <span class="n">returnType</span><span class="o">=</span><span class="s2">&quot;Sparse&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sparse</span>
+<span class="go">&lt;Sparse 5pt x 5ft</span>
+<span class="go">       0     1      2     3      4</span>
+<span class="go">   ┌────────────────────────────────</span>
+<span class="go"> 0 │ 0.000 0.000  0.000 0.000  0.000</span>
+<span class="go"> 1 │ 0.000 0.000  0.000 -1.283 0.000</span>
+<span class="go"> 2 │ 0.000 -0.298 0.000 0.000  0.000</span>
+<span class="go"> 3 │ 0.000 0.000  0.000 0.000  0.000</span>
+<span class="go"> 4 │ 0.000 0.000  0.000 0.000  0.000</span>
+<span class="go">&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/docs/generated/nimble.random.data.rst"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

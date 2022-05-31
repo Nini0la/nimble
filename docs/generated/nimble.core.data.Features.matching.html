@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Features.matching &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Features.normalize" href="nimble.core.data.Features.normalize.html" />
+    <link rel="prev" title="Features.mapReduce" href="nimble.core.data.Features.mapReduce.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/cleaning_data.html">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/exploring_data.html">Exploring Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/unsupervised_learning.html">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/merging_and_tidying_data.html">Merging and Tidying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/additional_functionality.html">Additional Functionality</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Nimble API Documentation</a><ul>
+  <li><a href="nimble.core.data.Features.html">Features</a><ul>
+      <li>Previous: <a href="nimble.core.data.Features.mapReduce.html" title="previous chapter">Features.mapReduce</a></li>
+      <li>Next: <a href="nimble.core.data.Features.normalize.html" title="next chapter">Features.normalize</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="features-matching">
+<h1>Features.matching<a class="headerlink" href="#features-matching" title="Permalink to this headline">¶</a></h1>
+<dl class="py method">
+<dt id="nimble.core.data.Features.matching">
+<code class="sig-prename descclassname"><span class="pre">Features.</span></code><code class="sig-name descname"><span class="pre">matching</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">useLog</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nimble.core.data.Features.matching" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identifying features matching the given criteria.</p>
+<p>Return a boolean value object by apply a function returning a
+boolean value for each feature in this object. Common any/all
+matching functions can be found in nimble’s match module. Note
+that the pointName in the returned object will be set to the
+<code class="docutils literal notranslate"><span class="pre">__name__</span></code> attribute of <code class="docutils literal notranslate"><span class="pre">function</span></code> unless it is a <code class="docutils literal notranslate"><span class="pre">lambda</span></code>
+function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>function</strong> (<em>function</em>) – <ul class="simple">
+<li><p>function - in the form of function(featureView) which
+returns True, False, 0 or 1.</p></li>
+<li><p>query - string in the format ‘POINTNAME OPERATOR VALUE’
+(i.e “pt1 &lt; 10”, “id4 == yes”, or “row4 is nonZero”) where
+OPERATOR is separated from the POINTNAME and VALUE by
+whitespace characters. See <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="./nimble.match.QueryString.html"><span class="pre">nimble.match.QueryString</span></a></code>
+for string requirements.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>nimble Base object</em> – A point vector of boolean values.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="nimble.core.data.Features.count.html#nimble.core.data.Features.count" title="nimble.core.data.Features.count"><code class="xref py py-obj docutils literal notranslate"><span class="pre">count</span></code></a>, <a class="reference internal" href="nimble.match.html#module-nimble.match" title="nimble.match"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nimble.match</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nimble</span> <span class="kn">import</span> <span class="n">match</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lst</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">allPositiveFts</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">matching</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">allPositive</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">allPositiveFts</span>
+<span class="go">&lt;Matrix 1pt x 3ft</span>
+<span class="go">                   0     1    2</span>
+<span class="go">               ┌─────────────────</span>
+<span class="go"> &#39;allPositive&#39; │ False False True</span>
+<span class="go">&gt;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nimble</span> <span class="kn">import</span> <span class="n">match</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lst</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;nan&#39;</span><span class="p">),</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ftHasMissing</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">matching</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">anyMissing</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ftHasMissing</span>
+<span class="go">&lt;Matrix 1pt x 3ft</span>
+<span class="go">                  0    1     2</span>
+<span class="go">              ┌─────────────────</span>
+<span class="go"> &#39;anyMissing&#39; │ False True False</span>
+<span class="go">&gt;</span>
+</pre></div>
+</div>
+<p>Keywords: 
+boolean, equivalent, identical, same, matches, equals, compare,
+comparison, same</p>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/docs/generated/nimble.core.data.Features.matching.rst"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

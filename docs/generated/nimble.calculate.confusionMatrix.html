@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>nimble.calculate.confusionMatrix &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="nimble.calculate.covariance" href="nimble.calculate.covariance.html" />
+    <link rel="prev" title="nimble.calculate.cosineSimilarity" href="nimble.calculate.cosineSimilarity.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/cleaning_data.html">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/exploring_data.html">Exploring Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/unsupervised_learning.html">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/merging_and_tidying_data.html">Merging and Tidying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/additional_functionality.html">Additional Functionality</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Nimble API Documentation</a><ul>
+  <li><a href="../nimble.calculate.html">nimble.calculate</a><ul>
+      <li>Previous: <a href="nimble.calculate.cosineSimilarity.html" title="previous chapter">nimble.calculate.cosineSimilarity</a></li>
+      <li>Next: <a href="nimble.calculate.covariance.html" title="next chapter">nimble.calculate.covariance</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="nimble-calculate-confusionmatrix">
+<h1>nimble.calculate.confusionMatrix<a class="headerlink" href="#nimble-calculate-confusionmatrix" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="nimble.calculate.confusionMatrix">
+<code class="sig-prename descclassname"><span class="pre">nimble.calculate.</span></code><code class="sig-name descname"><span class="pre">confusionMatrix</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">knownValues</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictedValues</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convertCountsToFractions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nimble.calculate.confusionMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a confusion matrix for known and predicted label values.</p>
+<p>The confusion matrix contains the counts of observations that
+occurred for each known/predicted pair. Features represent the
+known classes and points represent the predicted classes.
+Optionally, these can be output as fractions instead of counts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>knownValues</strong> (<em>nimble Base object</em>) – The ground truth labels collected for some data.</p></li>
+<li><p><strong>predictedValues</strong> (<em>nimble Base object</em>) – The labels predicted for the same data.</p></li>
+<li><p><strong>labels</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – As a dictionary, a mapping of from the value in <code class="docutils literal notranslate"><span class="pre">knownLabels</span></code>
+to a more specific label. A list may also be used provided the
+values in <code class="docutils literal notranslate"><span class="pre">knownLabels</span></code> represent an index to each value in
+the list. The labels will be used to create the featureNames and
+pointNames with the prefixes <cite>known_</cite> and <cite>predicted_</cite>,
+respectively.  If labels is None, the prefixes will be applied
+directly to the unique values found in <code class="docutils literal notranslate"><span class="pre">knownLabels</span></code>.</p></li>
+<li><p><strong>convertCountsToFractions</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – If False, the default, elements are counts. If True, the counts
+are converted to fractions by dividing by the total number of
+observations.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>Base</em> – A confusion matrix nimble object matching the type of
+<code class="docutils literal notranslate"><span class="pre">knownValues</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Metrics for binary classification based on a confusion matrix,
+like truePositive, recall, precision, etc., can also be found in
+the nimble.calculate module.</p>
+<p class="rubric">Examples</p>
+<p>Confusion matrix with and without alternate labels.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">known</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>         <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>         <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>         <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pred</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">knownObj</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">known</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">predObj</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cm</span> <span class="o">=</span> <span class="n">confusionMatrix</span><span class="p">(</span><span class="n">knownObj</span><span class="p">,</span> <span class="n">predObj</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cm</span>
+<span class="go">&lt;Matrix 3pt x 3ft</span>
+<span class="go">                 &#39;known_0&#39; &#39;known_1&#39; &#39;known_2&#39;</span>
+<span class="go">               ┌──────────────────────────────</span>
+<span class="go"> &#39;predicted_0&#39; │     3         1         0</span>
+<span class="go"> &#39;predicted_1&#39; │     1         3         0</span>
+<span class="go"> &#39;predicted_2&#39; │     0         0         4</span>
+<span class="go">&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;dog&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;fish&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cm</span> <span class="o">=</span> <span class="n">confusionMatrix</span><span class="p">(</span><span class="n">knownObj</span><span class="p">,</span> <span class="n">predObj</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cm</span>
+<span class="go">&lt;Matrix 3pt x 3ft</span>
+<span class="go">                    &#39;known_cat&#39; &#39;known_dog&#39; &#39;known_fish&#39;</span>
+<span class="go">                  ┌─────────────────────────────────────</span>
+<span class="go">  &#39;predicted_cat&#39; │      3           1           0</span>
+<span class="go">  &#39;predicted_dog&#39; │      1           3           0</span>
+<span class="go"> &#39;predicted_fish&#39; │      0           0           4</span>
+<span class="go">&gt;</span>
+</pre></div>
+</div>
+<p>Label objects can have string values and here we output fractions.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">known</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;cat&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;dog&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;fish&#39;</span><span class="p">],</span>
+<span class="gp">... </span>         <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;dog&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;fish&#39;</span><span class="p">],</span>
+<span class="gp">... </span>         <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;dog&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;fish&#39;</span><span class="p">],</span>
+<span class="gp">... </span>         <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;dog&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;fish&#39;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pred</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;cat&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;dog&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;fish&#39;</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;dog&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;fish&#39;</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;dog&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;fish&#39;</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="s1">&#39;dog&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;fish&#39;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">knownObj</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">known</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">predObj</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cm</span> <span class="o">=</span> <span class="n">confusionMatrix</span><span class="p">(</span><span class="n">knownObj</span><span class="p">,</span> <span class="n">predObj</span><span class="p">,</span>
+<span class="gp">... </span>                     <span class="n">convertCountsToFractions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cm</span>
+<span class="go">&lt;DataFrame 3pt x 3ft</span>
+<span class="go">                    &#39;known_cat&#39; &#39;known_dog&#39; &#39;known_fish&#39;</span>
+<span class="go">                  ┌─────────────────────────────────────</span>
+<span class="go">  &#39;predicted_cat&#39; │    0.250       0.083       0.000</span>
+<span class="go">  &#39;predicted_dog&#39; │    0.083       0.250       0.000</span>
+<span class="go"> &#39;predicted_fish&#39; │    0.000       0.000       0.333</span>
+<span class="go">&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/docs/generated/nimble.calculate.confusionMatrix.rst"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

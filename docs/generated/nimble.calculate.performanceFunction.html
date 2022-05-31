@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>nimble.calculate.performanceFunction &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="nimble.calculate.detectBestResult" href="nimble.calculate.detectBestResult.html" />
+    <link rel="prev" title="nimble.calculate.variance" href="nimble.calculate.variance.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/cleaning_data.html">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/exploring_data.html">Exploring Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/unsupervised_learning.html">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/merging_and_tidying_data.html">Merging and Tidying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/additional_functionality.html">Additional Functionality</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Nimble API Documentation</a><ul>
+  <li><a href="../nimble.calculate.html">nimble.calculate</a><ul>
+      <li>Previous: <a href="nimble.calculate.variance.html" title="previous chapter">nimble.calculate.variance</a></li>
+      <li>Next: <a href="nimble.calculate.detectBestResult.html" title="next chapter">nimble.calculate.detectBestResult</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="nimble-calculate-performancefunction">
+<h1>nimble.calculate.performanceFunction<a class="headerlink" href="#nimble-calculate-performancefunction" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="nimble.calculate.performanceFunction">
+<code class="sig-prename descclassname"><span class="pre">nimble.calculate.</span></code><code class="sig-name descname"><span class="pre">performanceFunction</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optimal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">best</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">requires1D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samePtCount</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sameFtCount</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allowEmpty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allowMissing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nimble.calculate.performanceFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator factory for Nimble performance functions.</p>
+<p>A convenient way to make a function compatible with Nimble’s testing
+API. The function that will be decorated must take the form:
+<code class="docutils literal notranslate"><span class="pre">function(knownValues,</span> <span class="pre">predictedValues)</span></code> as these inputs are
+provided by Nimble during testing (including validation testing).
+The <code class="docutils literal notranslate"><span class="pre">optimal</span></code>, <code class="docutils literal notranslate"><span class="pre">best</span></code>, and <code class="docutils literal notranslate"><span class="pre">predict</span></code> become attributes of the
+function that allow Nimble to compare and analyze the performances.
+The remaining parameters control validations of the data input to
+the decorated function. By default, both knownValues and
+predictedValues must be non-empty Nimble data objects with one
+feature, an equal number of points, and no missing values.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">predict</span></code> parameter informs Nimble how to generate the
+predictedValues for the decorated function. Values of None,
+‘bestScore’ and ‘allScores’ utilize <code class="docutils literal notranslate"><span class="pre">TrainedLearner.apply</span></code> with
+<code class="docutils literal notranslate"><span class="pre">predict</span></code> providing the scoreMode argument. More complex cases
+are handled by providing a custom function to <code class="docutils literal notranslate"><span class="pre">predict</span></code> which must
+be in the form: <code class="docutils literal notranslate"><span class="pre">predict(trainedLearner,</span> <span class="pre">knownValues,</span> <span class="pre">arguments)</span></code>.
+With access to the TrainedLearner instance, knownValues, and the
+arguments provided to the testing function it should be possible to
+generate the desired predicted values.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Common performance functions are available in nimble.calculate.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>optimal</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Either ‘max’ or ‘min’ indicating whether higher or lower values
+are better.</p></li>
+<li><p><strong>best</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – The best possible value for the performance function. None
+assumes that the values have no bound in the optimal direction.</p></li>
+<li><p><strong>predict</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>function</em>) – Informs Nimble how to produce the predictedValues. May be None,
+‘bestScore’, or ‘allScores’ to utilize TrainedLearner.apply() or
+a custom function in the form:
+predict(trainedLearner, knownValues, arguments)</p></li>
+<li><p><strong>validate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Whether to perform validation on the function inputs. If False,
+none of the parameters below will apply.</p></li>
+<li><p><strong>requires1D</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Checks that the predictedValues object is one-dimensional.</p></li>
+<li><p><strong>samePtCount</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Checks that the knownValues and predictedValues have the same
+number of points.</p></li>
+<li><p><strong>sameFtCount</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Checks that the knownValues and predictedValues have the same
+number of features.</p></li>
+<li><p><strong>allowEmpty</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Allow the knownValues and predictedValues objects to be empty.</p></li>
+<li><p><strong>allowMissing</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Allow the knownValues and predictedValues to contain missing
+values.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../nimble.calculate.html#module-nimble.calculate" title="nimble.calculate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nimble.calculate</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">correctVoteRatio</span></code> finds the number of times the correct
+label received a vote and divides by the total number of votes. The
+best score is 1, indicating that 100% of the votes were for the
+correct labels. As inputs it expects the knownValues to be a feature
+vector of known labels and the predictedValues to be a matrix of
+vote counts for each label.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@performanceFunction</span><span class="p">(</span><span class="s1">&#39;max&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;allScores&#39;</span><span class="p">,</span> <span class="n">requires1D</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>                     <span class="n">sameFtCount</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">def</span> <span class="nf">correctVoteRatio</span><span class="p">(</span><span class="n">knownValues</span><span class="p">,</span> <span class="n">predictedValues</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">cumulative</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">... </span>    <span class="n">totalVotes</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">true</span><span class="p">,</span> <span class="n">votes</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">knownValues</span><span class="p">,</span> <span class="n">predictedValues</span><span class="o">.</span><span class="n">points</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">cumulative</span> <span class="o">+=</span> <span class="n">votes</span><span class="p">[</span><span class="n">true</span><span class="p">]</span>
+<span class="gp">... </span>        <span class="n">totalVotes</span> <span class="o">+=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">votes</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">cumulative</span> <span class="o">/</span> <span class="n">totalVotes</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trainX</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]]</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trainY</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">testX</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">testY</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">knn</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="s1">&#39;nimble.KNNClassifier&#39;</span><span class="p">,</span> <span class="n">trainX</span><span class="p">,</span> <span class="n">trainY</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Can visualize our predictedValues for this case using apply()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">knn</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">testX</span><span class="p">,</span> <span class="n">scoreMode</span><span class="o">=</span><span class="s1">&#39;allScores&#39;</span><span class="p">)</span> <span class="c1"># 12/15 votes correct</span>
+<span class="go">&lt;Matrix 5pt x 3ft</span>
+<span class="go">     &#39;0&#39; &#39;1&#39; &#39;2&#39;</span>
+<span class="go">   ┌────────────</span>
+<span class="go"> 0 │  3   0   0</span>
+<span class="go"> 1 │  2   1   0</span>
+<span class="go"> 2 │  0   3   0</span>
+<span class="go"> 3 │  2   1   0</span>
+<span class="go"> 4 │  0   0   3</span>
+<span class="go">&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">knn</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">correctVoteRatio</span><span class="p">,</span> <span class="n">testX</span><span class="p">,</span> <span class="n">testY</span><span class="p">)</span>
+<span class="go">0.8</span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">averageDistanceToCenter</span></code> calculates the average distance of
+a point to its center. This function expects the predictedValues to
+be the cluster center for the predicted label of each point in the
+knownValues. The string options for ‘predict’ do not cover this
+case, so it requires the <code class="docutils literal notranslate"><span class="pre">labelsWithCenters</span></code> function.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">labelsWithCenters</span><span class="p">(</span><span class="n">trainedLearner</span><span class="p">,</span> <span class="n">knownValues</span><span class="p">,</span> <span class="n">arguments</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">labels</span> <span class="o">=</span> <span class="n">trainedLearner</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">knownValues</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">centers</span> <span class="o">=</span> <span class="n">trainedLearner</span><span class="o">.</span><span class="n">getAttributes</span><span class="p">()[</span><span class="s1">&#39;cluster_centers_&#39;</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">([</span><span class="n">centers</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">])</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@performanceFunction</span><span class="p">(</span><span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">predict</span><span class="o">=</span><span class="n">labelsWithCenters</span><span class="p">,</span>
+<span class="gp">... </span>                     <span class="n">requires1D</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sameFtCount</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">def</span> <span class="nf">averageDistanceToCenter</span><span class="p">(</span><span class="n">knownValues</span><span class="p">,</span> <span class="n">predictedValues</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">rootSqDiffs</span> <span class="o">=</span> <span class="p">((</span><span class="n">knownValues</span> <span class="o">-</span> <span class="n">predictedValues</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
+<span class="gp">... </span>    <span class="n">distances</span> <span class="o">=</span> <span class="n">rootSqDiffs</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">pt</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">pt</span><span class="p">))</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">distances</span><span class="o">.</span><span class="n">points</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span> <span class="o">*</span> <span class="mi">25</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">+=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">randomSeed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># add noise</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nimble</span><span class="o">.</span><span class="n">trainAndTest</span><span class="p">(</span><span class="s1">&#39;skl.KMeans&#39;</span><span class="p">,</span> <span class="n">averageDistanceToCenter</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span>
+<span class="gp">... </span>                    <span class="n">n_clusters</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">randomSeed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">1.3493987354974297</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/docs/generated/nimble.calculate.performanceFunction.rst"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

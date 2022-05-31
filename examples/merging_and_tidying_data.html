@@ -1,0 +1,754 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Merging and Tidying Data &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Additional Functionality" href="additional_functionality.html" />
+    <link rel="prev" title="Neural Networks" href="neural_networks.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="cleaning_data.html">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exploring_data.html">Exploring Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unsupervised_learning.html">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Merging and Tidying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="additional_functionality.html">Additional Functionality</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="neural_networks.html" title="previous chapter">Neural Networks</a></li>
+      <li>Next: <a href="additional_functionality.html" title="next chapter">Additional Functionality</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<style>
+    .nbinput .prompt,
+    .nboutput .prompt {
+        display: none;
+    }
+</style><section id="Merging-and-Tidying-Data">
+<h1>Merging and Tidying Data<a class="headerlink" href="#Merging-and-Tidying-Data" title="Permalink to this headline">¶</a></h1>
+<section id="Creating-a-tidy-(cleaned-up)-data-object-from-multiple-data-objects.">
+<h2>Creating a tidy (cleaned up) data object from multiple data objects.<a class="headerlink" href="#Creating-a-tidy-(cleaned-up)-data-object-from-multiple-data-objects." title="Permalink to this headline">¶</a></h2>
+<p>In this example, we have temperature data contained in 8 files. Each row in every file records 12 hours of temperatures for each day, but files vary by weather station, time period, and extreme (i.e., the file contains either minimum or maximum temperatures). Each file covers the same date range so we want to create a single object with all of our data. Once combined, we would like to restructure our data using <a class="reference external" href="http://dx.doi.org/10.18637/jss.v059.i10">Hadley Wickham’s Tidy Data</a> principles.
+Wickham defines “data tidying” as “structuring datasets to facilitate analysis” and Nimble provides functions that reorganize points and features to create data that is “tidy”. Our goal is to create one tidy data object containing all of the data from our 8 original files.</p>
+<p>In this example we will learn about:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="#Combining-the-data">Combining data objects together</a></p></li>
+<li><p><a class="reference external" href="#Tidying-the-data">Applying tidy data functions</a></p></li>
+</ul>
+<div class="line-block">
+<div class="line"><a class="reference external" href="https://colab.research.google.com/drive/1v6bayDRsovOnzFnjRDYRaJ-PRSN7DIlE?usp=sharing">Open this example in Google Colab</a></div>
+<div class="line"><a class="reference internal" href="files.html#merging-and-tidying-data"><span class="std std-ref">Download this example as a script or notebook</span></a></div>
+<div class="line"><a class="reference internal" href="../datasets.html#merging-and-tidying-data"><span class="std std-ref">Download the dataset for this example</span></a></div>
+</div>
+<section id="Getting-Started">
+<h3>Getting Started<a class="headerlink" href="#Getting-Started" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <a class="nimble-hyperlink" href="../docs/index.html" target="_blank"><span class="nn">nimble</span></a>
+
+<span class="n">bucket</span> <span class="o">=</span> <span class="s1">&#39;https://storage.googleapis.com/nimble/datasets/tidy/&#39;</span>
+<span class="n">dwtnMinAM</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.data.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">data</span></a><span class="p">(</span><span class="n">bucket</span> <span class="o">+</span> <span class="s1">&#39;downtown_am_min.csv&#39;</span><span class="p">,</span> <span class="n">returnType</span><span class="o">=</span><span class="s2">&quot;Matrix&quot;</span><span class="p">)</span>
+<span class="n">dwtnMaxAM</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.data.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">data</span></a><span class="p">(</span><span class="n">bucket</span> <span class="o">+</span> <span class="s1">&#39;downtown_am_max.csv&#39;</span><span class="p">,</span> <span class="n">returnType</span><span class="o">=</span><span class="s2">&quot;Matrix&quot;</span><span class="p">)</span>
+<span class="n">dwtnMinPM</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.data.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">data</span></a><span class="p">(</span><span class="n">bucket</span> <span class="o">+</span> <span class="s1">&#39;downtown_pm_min.csv&#39;</span><span class="p">,</span> <span class="n">returnType</span><span class="o">=</span><span class="s2">&quot;Matrix&quot;</span><span class="p">)</span>
+<span class="n">dwtnMaxPM</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.data.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">data</span></a><span class="p">(</span><span class="n">bucket</span> <span class="o">+</span> <span class="s1">&#39;downtown_pm_max.csv&#39;</span><span class="p">,</span> <span class="n">returnType</span><span class="o">=</span><span class="s2">&quot;Matrix&quot;</span><span class="p">)</span>
+<span class="n">airptMinAM</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.data.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">data</span></a><span class="p">(</span><span class="n">bucket</span> <span class="o">+</span> <span class="s1">&#39;airport_am_min.csv&#39;</span><span class="p">,</span> <span class="n">returnType</span><span class="o">=</span><span class="s2">&quot;Matrix&quot;</span><span class="p">)</span>
+<span class="n">airptMaxAM</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.data.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">data</span></a><span class="p">(</span><span class="n">bucket</span> <span class="o">+</span> <span class="s1">&#39;airport_am_max.csv&#39;</span><span class="p">,</span> <span class="n">returnType</span><span class="o">=</span><span class="s2">&quot;Matrix&quot;</span><span class="p">)</span>
+<span class="n">airptMinPM</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.data.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">data</span></a><span class="p">(</span><span class="n">bucket</span> <span class="o">+</span> <span class="s1">&#39;airport_pm_min.csv&#39;</span><span class="p">,</span> <span class="n">returnType</span><span class="o">=</span><span class="s2">&quot;Matrix&quot;</span><span class="p">)</span>
+<span class="n">airptMaxPM</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.data.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">data</span></a><span class="p">(</span><span class="n">bucket</span> <span class="o">+</span> <span class="s1">&#39;airport_pm_max.csv&#39;</span><span class="p">,</span> <span class="n">returnType</span><span class="o">=</span><span class="s2">&quot;Matrix&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>To begin, we create 8 objects from 8 different files. The variable names and object names for each object represent the weather station location (downtown or airport), the temperature extreme recorded (Min or Max) and the time of day (AM or PM). All of our files have the same header row and cover the same date range. Let’s look at one of our objects to see these headers and understand the current format of our data.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">dwtnMinAM</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html" target="_blank"><span class="n">show</span></a><span class="p">(</span><span class="s1">&#39;Example of data file structure&#39;</span><span class="p">,</span> <span class="n">maxHeight</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Example of data file structure
+712pt x 13ft
+        &#39;date&#39;   &#39;hr0&#39;  &#39;hr1&#39;  &#39;hr2&#39;  &#39;hr3&#39;  &#39;hr4&#39;  &#39;hr5&#39;  &#39;hr6&#39;  &#39;hr7&#39;  &#39;hr8&#39;  &#39;hr9&#39;  &#39;hr10&#39; &#39;hr11&#39;
+    ┌───────────────────────────────────────────────────────────────────────────────────────────────
+  0 │ 2011-01-01 2.840  2.019         2.839  2.838  2.840  2.020  1.199  2.839  6.119  8.579  7.760
+  1 │ 2011-01-03 2.020  1.200                -0.440 -0.440 -1.260 -1.262 -1.260 -0.442 0.380  1.199
+  2 │ 2011-01-04 -0.440 -0.441 -1.261        -1.262 -2.081 -2.083 -2.080 -1.260 -0.440 -0.442 2.019
+  │ │     │        │      │      │      │      │      │      │      │      │      │      │      │
+709 │ 2012-12-29 2.840  2.840  2.839  2.839  2.840  2.839  3.660  3.658  3.659  3.659  3.660  1.200
+710 │ 2012-12-30 3.659  3.659  3.659  3.660  3.660  3.659  2.840  2.840  2.840  2.840  3.660  3.659
+711 │ 2012-12-31 0.380  0.379  -0.440 -0.441 -1.261 -0.441 -0.440 -0.440 -1.260 0.379  1.199  2.020
+
+</pre></div></div>
+</div>
+</section>
+<section id="Combining-the-data">
+<h3>Combining the data<a class="headerlink" href="#Combining-the-data" title="Permalink to this headline">¶</a></h3>
+<p>First, we can reduce our number of objects to 4 by combining AM and PM temperatures of objects at the same weather station (downtown or airport) and with the same extreme (min or max). The feature names for AM and PM are currently the same, so we will need to modify the feature names in the PM objects so that they denote the hour according to a 24 hour clock.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">ftsPM</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;hr12&#39;</span><span class="p">,</span> <span class="s1">&#39;hr13&#39;</span><span class="p">,</span> <span class="s1">&#39;hr14&#39;</span><span class="p">,</span> <span class="s1">&#39;hr15&#39;</span><span class="p">,</span> <span class="s1">&#39;hr16&#39;</span><span class="p">,</span> <span class="s1">&#39;hr17&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;hr18&#39;</span><span class="p">,</span> <span class="s1">&#39;hr19&#39;</span><span class="p">,</span> <span class="s1">&#39;hr20&#39;</span><span class="p">,</span> <span class="s1">&#39;hr21&#39;</span><span class="p">,</span> <span class="s1">&#39;hr22&#39;</span><span class="p">,</span> <span class="s1">&#39;hr23&#39;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="p">[</span><span class="n">dwtnMinPM</span><span class="p">,</span> <span class="n">dwtnMaxPM</span><span class="p">,</span> <span class="n">airptMinPM</span><span class="p">,</span> <span class="n">airptMaxPM</span><span class="p">]:</span>
+    <span class="n">obj</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.setNames.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">setNames</span></a><span class="p">(</span><span class="n">ftsPM</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Now that we’ve differentiated our features, we can use a <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.merge.html"target="_blank"><span class="pre">merge</span></a></code> operation to combine the data. We want to join these objects on the ‘date’ feature (i.e., we are combining data with the same date) and use <code class="docutils literal notranslate"><span class="pre">point='union'</span></code> (that is, we want all the points from both files) so that we keep all possible dates, even if a date is missing for the AM or PM data.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">dwtnMinAM</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.merge.html" target="_blank"><span class="n">merge</span></a><span class="p">(</span><span class="n">dwtnMinPM</span><span class="p">,</span> <span class="n">onFeature</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">point</span><span class="o">=</span><span class="s1">&#39;union&#39;</span><span class="p">)</span>
+<span class="n">dwtnMaxAM</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.merge.html" target="_blank"><span class="n">merge</span></a><span class="p">(</span><span class="n">dwtnMaxPM</span><span class="p">,</span> <span class="n">onFeature</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">point</span><span class="o">=</span><span class="s1">&#39;union&#39;</span><span class="p">)</span>
+<span class="n">airptMinAM</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.merge.html" target="_blank"><span class="n">merge</span></a><span class="p">(</span><span class="n">airptMinPM</span><span class="p">,</span> <span class="n">onFeature</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">point</span><span class="o">=</span><span class="s1">&#39;union&#39;</span><span class="p">)</span>
+<span class="n">airptMaxAM</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.merge.html" target="_blank"><span class="n">merge</span></a><span class="p">(</span><span class="n">airptMaxPM</span><span class="p">,</span> <span class="n">onFeature</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">point</span><span class="o">=</span><span class="s1">&#39;union&#39;</span><span class="p">)</span>
+
+<span class="n">dwtnMinAM</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html" target="_blank"><span class="n">show</span></a><span class="p">(</span><span class="s1">&#39;Downtown data merged on date&#39;</span><span class="p">,</span> <span class="n">maxHeight</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Downtown data merged on date
+717pt x 25ft
+        &#39;date&#39;   &#39;hr0&#39;  &#39;hr1&#39;  &#39;hr2&#39;  &#39;hr3&#39; &#39;hr4&#39;  &#39;hr5&#39;  &#39;hr6&#39;  &#39;hr7&#39;  ── &#39;hr16&#39; &#39;hr17&#39; &#39;hr18&#39; &#39;hr19&#39; &#39;hr20&#39; &#39;hr21&#39; &#39;hr22&#39; &#39;hr23&#39;
+    ┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  0 │ 2011-01-01 2.840  2.019         2.839 2.838  2.840  2.020  1.199  ── 10.219 11.039 10.219 10.219 9.399  9.399  9.399  11.859
+  1 │ 2011-01-03 2.020  1.200               -0.440 -0.440 -1.260 -1.262 ── 3.660  2.840  2.840  1.199  1.200  0.379  -1.261 0.379
+  2 │ 2011-01-04 -0.440 -0.441 -1.261       -1.262 -2.081 -2.083 -2.080 ── 5.299  4.479  3.658  2.839  2.839  2.020  2.019  1.199
+  │ │     │        │      │      │      │     │      │      │      │    ──   │      │      │      │      │      │      │      │
+714 │ 2012-04-11                                                        ── 11.040 10.219 9.400  9.399  7.759  6.940  6.940  6.940
+715 │ 2012-04-15                                                        ── 22.519 21.699 21.699 21.700 19.240 18.419 20.879 20.060
+716 │ 2012-04-16                                                        ── 25.800 25.798 25.799 24.159 23.339 20.878 20.880 21.699
+
+</pre></div></div>
+</div>
+<p>Next, we can reduce our number of objects from 4 to 2 by combining the objects with different extremes (min vs. max) for the same location. Before combining, we will want to add an “extreme” feature to each object based on whether it contains min vs. max data. Without this step, we would not be able to differentiate between minimum and maximum temperature points in the combined objects. Once our new feature is added, we can <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.append.html"target="_blank"><span class="pre">points.append</span></a></code> our objects from the same weather station.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="p">[</span><span class="n">dwtnMinAM</span><span class="p">,</span> <span class="n">dwtnMaxAM</span><span class="p">,</span> <span class="n">airptMinAM</span><span class="p">,</span> <span class="n">airptMaxAM</span><span class="p">]:</span>
+    <span class="n">extreme</span> <span class="o">=</span> <span class="s1">&#39;min&#39;</span> <span class="k">if</span> <span class="s1">&#39;min&#39;</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.path.html" target="_blank"><span class="n">path</span></a> <span class="k">else</span> <span class="s1">&#39;max&#39;</span>
+    <span class="n">ftData</span> <span class="o">=</span> <span class="p">[[</span><span class="n">extreme</span><span class="p">]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.points.html" target="_blank"><span class="n">points</span></a><span class="p">))]</span>
+    <span class="n">newFt</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.data.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">data</span></a><span class="p">(</span><span class="n">ftData</span><span class="p">,</span> <span class="n">featureNames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;extreme&#39;</span><span class="p">])</span>
+    <span class="c1"># New feature will be added at index position 1 (after &quot;date&quot; feature)</span>
+    <span class="n">obj</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.insert.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">insert</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">newFt</span><span class="p">)</span>
+
+<span class="n">dwtnMinAM</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.append.html" target="_blank"><span class="n">points</span><span class="o">.</span><span class="n">append</span></a><span class="p">(</span><span class="n">dwtnMaxAM</span><span class="p">)</span>
+<span class="n">airptMinAM</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.append.html" target="_blank"><span class="n">points</span><span class="o">.</span><span class="n">append</span></a><span class="p">(</span><span class="n">airptMaxAM</span><span class="p">)</span>
+
+<span class="n">dwtnMinAM</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html" target="_blank"><span class="n">show</span></a><span class="p">(</span><span class="s1">&#39;Downtown combined extreme data&#39;</span><span class="p">,</span> <span class="n">maxHeight</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Downtown combined extreme data
+1430pt x 26ft
+         &#39;date&#39;   &#39;extreme&#39; &#39;hr0&#39;  &#39;hr1&#39;  &#39;hr2&#39;  &#39;hr3&#39; &#39;hr4&#39;  &#39;hr5&#39;  ── &#39;hr16&#39; &#39;hr17&#39; &#39;hr18&#39; &#39;hr19&#39; &#39;hr20&#39; &#39;hr21&#39; &#39;hr22&#39; &#39;hr23&#39;
+     ┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   0 │ 2011-01-01    min    2.840  2.019         2.839 2.838  2.840  ── 10.219 11.039 10.219 10.219 9.399  9.399  9.399  11.859
+   1 │ 2011-01-03    min    2.020  1.200               -0.440 -0.440 ── 3.660  2.840  2.840  1.199  1.200  0.379  -1.261 0.379
+   2 │ 2011-01-04    min    -0.440 -0.441 -1.261       -1.262 -2.081 ── 5.299  4.479  3.658  2.839  2.839  2.020  2.019  1.199
+   │ │     │          │       │      │      │      │     │      │    ──   │      │      │      │      │      │      │      │
+1427 │ 2012-07-26    max                                             ── 31.541 29.900 30.722 29.901 28.261 25.800 25.803 22.522
+1428 │ 2012-07-27    max                                             ── 27.441 28.262 26.620 26.622 24.980 24.980 24.981 24.162
+1429 │ 2012-09-25    max                                             ── 20.061 20.060 19.240 18.422 17.602 17.600 17.600 17.601
+
+</pre></div></div>
+</div>
+<p>Finally, we can combine our two objects into one by combining our two weather stations (downtown vs. airport). Just like in the last step, we need to create a new ‘station’ feature for each object based on which weather station location (downtown vs. airport) recorded the data.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="p">[</span><span class="n">dwtnMinAM</span><span class="p">,</span> <span class="n">airptMinAM</span><span class="p">]:</span>
+    <span class="n">station</span> <span class="o">=</span> <span class="s1">&#39;downtown&#39;</span> <span class="k">if</span> <span class="s1">&#39;downtown&#39;</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.path.html" target="_blank"><span class="n">path</span></a> <span class="k">else</span> <span class="s1">&#39;airport&#39;</span>
+    <span class="n">stationData</span> <span class="o">=</span> <span class="p">[[</span><span class="n">station</span><span class="p">]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.points.html" target="_blank"><span class="n">points</span></a><span class="p">))]</span>
+    <span class="n">newFt</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.data.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">data</span></a><span class="p">(</span><span class="n">stationData</span><span class="p">,</span> <span class="n">featureNames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;station&#39;</span><span class="p">])</span>
+    <span class="n">obj</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.insert.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">insert</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">newFt</span><span class="p">)</span>
+    <span class="n">obj</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.setName.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">setName</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;station&#39;</span><span class="p">)</span>
+
+<span class="n">dwtnMinAM</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.append.html" target="_blank"><span class="n">points</span><span class="o">.</span><span class="n">append</span></a><span class="p">(</span><span class="n">airptMinAM</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Since all of these operations have been in-place, our <code class="docutils literal notranslate"><span class="pre">dwtnMinAM</span></code> object now contains all of our data from the 8 files. This variable name could be confusing so, for clarity, let’s assign this object to a new variable name, <code class="docutils literal notranslate"><span class="pre">tempData</span></code>. Let’s also sort our data by date, so that we can double check that each date has a minimum and maximum temperature recording for each weather station. Taking a look at our data will also help us start exploring how we can begin to tidy it.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">tempData</span> <span class="o">=</span> <span class="n">dwtnMinAM</span>
+<span class="n">tempData</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.name.html" target="_blank"><span class="n">name</span></a> <span class="o">=</span> <span class="s1">&#39;combinedTemperatureData&#39;</span>
+<span class="n">tempData</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.sort.html" target="_blank"><span class="n">points</span><span class="o">.</span><span class="n">sort</span></a><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">)</span>
+
+<span class="n">tempData</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html" target="_blank"><span class="n">show</span></a><span class="p">(</span><span class="s1">&#39;Fully merged (untidy) data&#39;</span><span class="p">,</span> <span class="n">maxHeight</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Fully merged (untidy) data
+&#34;combinedTemperatureData&#34; 2840pt x 27ft
+         &#39;date&#39;   &#39;station&#39; &#39;extreme&#39; &#39;hr0&#39; &#39;hr1&#39; &#39;hr2&#39;  &#39;hr3&#39;  &#39;hr4&#39;  ── &#39;hr16&#39; &#39;hr17&#39; &#39;hr18&#39; &#39;hr19&#39; &#39;hr20&#39; &#39;hr21&#39; &#39;hr22&#39; &#39;hr23&#39;
+     ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   0 │ 2011-01-01  downtown    min    2.840 2.019        2.839  2.838  ── 10.219 11.039 10.219 10.219 9.399  9.399  9.399  11.859
+   1 │ 2011-01-01  downtown    max    2.840 2.021 2.022  2.841  2.842  ── 10.221 11.041 10.221 10.221 9.401  9.401  9.401  11.861
+   2 │ 2011-01-01  airport     min    6.138 5.299 5.300  6.100  6.089  ── 13.578 14.389 13.579 13.579 12.789 12.789 12.769 15.259
+   3 │ 2011-01-01  airport     max    6.142 5.301 5.300  6.100  6.091  ── 13.582 14.391 13.581 13.581 12.791 12.791 12.771 15.261
+   4 │ 2011-01-02  downtown    min                                     ── 6.940  6.938  7.759  6.118  5.300  3.659  2.839  2.020
+   │ │     │          │         │       │     │     │      │      │    ──   │      │      │      │      │      │      │      │
+2835 │ 2012-12-30  airport     max    3.700 3.691 3.721  3.711  3.711  ── 4.530  3.680  2.850  6.971  2.070  1.221  1.220  1.191
+2836 │ 2012-12-31  downtown    min    0.380 0.379 -0.440 -0.441 -1.261 ── 3.659  3.660  3.660  3.659  3.659  3.660  3.660  3.659
+2837 │ 2012-12-31  downtown    max    0.380 0.381 -0.440 -0.439 -1.259 ── 3.661  3.660  3.660  3.661  3.661  3.660  3.660  3.661
+2838 │ 2012-12-31  airport     min    0.389 0.419 -0.401 -0.400 -1.252 ── 3.679  3.679  3.659  3.659  3.678  3.679  3.670  3.649
+2839 │ 2012-12-31  airport     max    0.391 0.421 -0.399 -0.400 -1.248 ── 3.681  3.681  3.661  3.661  3.682  3.681  3.670  3.651
+
+</pre></div></div>
+</div>
+</section>
+<section id="Tidying-the-data">
+<h3>Tidying the data<a class="headerlink" href="#Tidying-the-data" title="Permalink to this headline">¶</a></h3>
+<p>Our dataset is combined but not in the format we want. To structure our data for analysis, we would like each point to be a single observation of the variables in our data. According to <a class="reference external" href="http://dx.doi.org/10.18637/jss.v059.i10">Hadley Wickham’s Tidy Data</a> principles, our dataset is not tidy for two reasons. First, 24 observations are made every day (one each hour). Points should represent observations so each day should be represented by 24 points. Second, our minimum and maximum temperatures
+are variables for the same observation. Variables should be represented as features.</p>
+<p>As an example, our current (truncated) data for <code class="docutils literal notranslate"><span class="pre">2001-01-01</span></code> at the <code class="docutils literal notranslate"><span class="pre">downtown</span></code> station can be seen below. We see it is structured using two points.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>   date    station  extreme  hr0   hr1   hr2   --  hr22   hr23
+
+2011-01-01 downtown   min   2.840 2.019        --  9.399  11.859
+2011-01-01 downtown   max   2.840 2.021 2.022  --  9.401  11.861
+</pre></div>
+</div>
+<p>To tidy that same data, we modify the structure to include one point for each hour and identify the minimum and maximum temperatures in the <code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code> features.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>   date    station   min    max   hour
+
+2011-01-01 downtown 2.840  2.840  hr0
+2011-01-01 downtown 2.019  2.840  hr1
+    |         |       |     |      |
+2011-01-01 downtown 9.399  11.859 hr22
+2011-01-01 downtown 3.649  11.861 hr23
+</pre></div>
+</div>
+<p>Tidying our data will take two steps. First, we need each point to represent a single hour of time. So we will take our 24 hour features (hr0, hr1, …, hr23) and collapse them to represent this same data using 24 points (one point for each feature that is collapsed). The collapsed features become two new features: one named <code class="docutils literal notranslate"><span class="pre">hour</span></code> storing each feature’s name as a value and one named <code class="docutils literal notranslate"><span class="pre">temp</span></code> storing the temperature recorded during that hour.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">hourFts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;hr&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">24</span><span class="p">)]</span>
+<span class="n">tempData</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.splitByCollapsingFeatures.html" target="_blank"><span class="n">points</span><span class="o">.</span><span class="n">splitByCollapsingFeatures</span></a><span class="p">(</span><span class="n">featuresToCollapse</span><span class="o">=</span><span class="n">hourFts</span><span class="p">,</span>
+                                          <span class="n">featureForNames</span><span class="o">=</span><span class="s1">&#39;hour&#39;</span><span class="p">,</span>
+                                          <span class="n">featureForValues</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">)</span>
+<span class="n">tempData</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.sort.html" target="_blank"><span class="n">points</span><span class="o">.</span><span class="n">sort</span></a><span class="p">([</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;hour&#39;</span><span class="p">])</span>
+<span class="n">tempData</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html" target="_blank"><span class="n">show</span></a><span class="p">(</span><span class="s1">&#39;Split points by collapsing the hour features&#39;</span><span class="p">,</span> <span class="n">maxHeight</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Split points by collapsing the hour features
+&#34;combinedTemperatureData&#34; 68160pt x 5ft
+          &#39;date&#39;   &#39;station&#39; &#39;extreme&#39; &#39;hour&#39; &#39;temp&#39;
+      ┌─────────────────────────────────────────────
+    0 │ 2011-01-01  downtown    min     hr0   2.840
+    1 │ 2011-01-01  downtown    max     hr0   2.840
+    2 │ 2011-01-01  airport     min     hr0   6.138
+    3 │ 2011-01-01  airport     max     hr0   6.142
+    4 │ 2011-01-01  downtown    min     hr1   2.019
+    │ │     │          │         │       │      │
+68155 │ 2012-12-31  airport     max     hr8   -1.219
+68156 │ 2012-12-31  downtown    min     hr9   0.379
+68157 │ 2012-12-31  downtown    max     hr9   0.381
+68158 │ 2012-12-31  airport     min     hr9   0.418
+68159 │ 2012-12-31  airport     max     hr9   0.422
+
+</pre></div></div>
+</div>
+<p>This is looking closer now that each point refers to a single hour of time. However, we still have separate points storing our maximum and minimum temperatures. This is not obvious in the output above, let’s make a couple of modifications to see this more clearly. First, we can clean our <code class="docutils literal notranslate"><span class="pre">hour</span></code> feature by transforming the former feature name strings into integers. Then, we will sort our data so that <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html"target="_blank"><span class="pre">show</span></a></code> will clearly display point pairs that need to be combined for our data to be tidy.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">tempData</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.transform.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">transform</span></a><span class="p">(</span><span class="k">lambda</span> <span class="n">ft</span><span class="p">:</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">ft</span><span class="p">],</span>
+                            <span class="n">features</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;hour&#39;</span><span class="p">])</span>
+<span class="n">tempData</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.sort.html" target="_blank"><span class="n">points</span><span class="o">.</span><span class="n">sort</span></a><span class="p">([</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;hour&#39;</span><span class="p">])</span>
+<span class="n">tempData</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html" target="_blank"><span class="n">show</span></a><span class="p">(</span><span class="s1">&#39;Date and hour sorted&#39;</span><span class="p">,</span> <span class="n">maxHeight</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Date and hour sorted
+&#34;combinedTemperatureData&#34; 68160pt x 5ft
+          &#39;date&#39;   &#39;station&#39; &#39;extreme&#39; &#39;hour&#39; &#39;temp&#39;
+      ┌─────────────────────────────────────────────
+    0 │ 2011-01-01  downtown    min      0    2.840
+    1 │ 2011-01-01  downtown    max      0    2.840
+    2 │ 2011-01-01  airport     min      0    6.138
+    3 │ 2011-01-01  airport     max      0    6.142
+    4 │ 2011-01-01  downtown    min      1    2.019
+    │ │     │          │         │       │      │
+68155 │ 2012-12-31  airport     max      22   3.670
+68156 │ 2012-12-31  downtown    min      23   3.659
+68157 │ 2012-12-31  downtown    max      23   3.661
+68158 │ 2012-12-31  airport     min      23   3.649
+68159 │ 2012-12-31  airport     max      23   3.651
+
+</pre></div></div>
+</div>
+<p>We see above that <code class="docutils literal notranslate"><span class="pre">hr0</span></code> on <code class="docutils literal notranslate"><span class="pre">2011-01-01</span></code> for the <code class="docutils literal notranslate"><span class="pre">downtown</span></code> station, for example, is still represented by two points. This is because each point identifies either the minimum or maximum temperature. Our second step is to combine these two point pairs by expanding the features to include features for the minimum and maximum temperatures. Our <code class="docutils literal notranslate"><span class="pre">extreme</span></code> feature contains the values (min and max) that will become our new feature names and the <code class="docutils literal notranslate"><span class="pre">temp</span></code> feature contains the values that fill the
+new <code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code> features.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">tempData</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.combineByExpandingFeatures.html" target="_blank"><span class="n">points</span><span class="o">.</span><span class="n">combineByExpandingFeatures</span></a><span class="p">(</span><span class="n">featureWithFeatureNames</span><span class="o">=</span><span class="s1">&#39;extreme&#39;</span><span class="p">,</span>
+                                           <span class="n">featuresWithValues</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">)</span>
+<span class="n">tempData</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html" target="_blank"><span class="n">show</span></a><span class="p">(</span><span class="s1">&#39;Combined points by expanding extreme feature&#39;</span><span class="p">,</span> <span class="n">maxHeight</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Combined points by expanding extreme feature
+&#34;combinedTemperatureData&#34; 35064pt x 5ft
+          &#39;date&#39;   &#39;station&#39; &#39;min&#39; &#39;max&#39; &#39;hour&#39;
+      ┌────────────────────────────────────────
+    0 │ 2011-01-01  downtown 2.840 2.840   0
+    1 │ 2011-01-01  airport  6.138 6.142   0
+    2 │ 2011-01-01  downtown 2.019 2.021   1
+    3 │ 2011-01-01  airport  5.299 5.301   1
+    4 │ 2011-01-01  downtown       2.022   2
+    │ │     │          │       │     │     │
+35059 │ 2012-12-31  airport  3.679 3.681   21
+35060 │ 2012-12-31  downtown 3.660 3.660   22
+35061 │ 2012-12-31  airport  3.670 3.670   22
+35062 │ 2012-12-31  downtown 3.659 3.661   23
+35063 │ 2012-12-31  airport  3.649 3.651   23
+
+</pre></div></div>
+</div>
+<p>Our object is now organized how we wanted with a tidy structure. There is one more tidying function in Nimble as well. It is designed to separate a feature containing multiple pieces of information into multiple features. We can demonstrate its functionality by applying it to our ‘date’ feature to create <code class="docutils literal notranslate"><span class="pre">year</span></code>, <code class="docutils literal notranslate"><span class="pre">month</span></code> and <code class="docutils literal notranslate"><span class="pre">day</span></code> features.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">tempData</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.splitByParsing.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">splitByParsing</span></a><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="n">val</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">),</span>
+                                 <span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">])</span>
+<span class="n">tempData</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html" target="_blank"><span class="n">show</span></a><span class="p">(</span><span class="s1">&#39;Split features by parsing the date feature&#39;</span><span class="p">,</span> <span class="n">maxHeight</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Split features by parsing the date feature
+&#34;combinedTemperatureData&#34; 35064pt x 7ft
+        &#39;year&#39; &#39;month&#39; &#39;day&#39; &#39;station&#39; &#39;min&#39; &#39;max&#39; &#39;hour&#39;
+      ┌──────────────────────────────────────────────────
+    0 │  2011     01     01   downtown 2.840 2.840   0
+    1 │  2011     01     01   airport  6.138 6.142   0
+    2 │  2011     01     01   downtown 2.019 2.021   1
+    3 │  2011     01     01   airport  5.299 5.301   1
+    4 │  2011     01     01   downtown       2.022   2
+    │ │   │       │      │       │       │     │     │
+35059 │  2012     12     31   airport  3.679 3.681   21
+35060 │  2012     12     31   downtown 3.660 3.660   22
+35061 │  2012     12     31   airport  3.670 3.670   22
+35062 │  2012     12     31   downtown 3.659 3.661   23
+35063 │  2012     12     31   airport  3.649 3.651   23
+
+</pre></div></div>
+</div>
+<p><strong>Reference:</strong></p>
+<p>Wickham, H. (2014). Tidy Data. Journal of Statistical Software, 59(10), 1 - 23. doi:http://dx.doi.org/10.18637/jss.v059.i10</p>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/examples/merging_and_tidying_data.ipynb"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

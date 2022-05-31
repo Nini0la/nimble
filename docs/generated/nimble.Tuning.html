@@ -1,0 +1,297 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Tuning &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Tuning.allArguments" href="nimble.Tuning.allArguments.html" />
+    <link rel="prev" title="Tune" href="nimble.Tune.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/cleaning_data.html">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/exploring_data.html">Exploring Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/unsupervised_learning.html">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/merging_and_tidying_data.html">Merging and Tidying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/additional_functionality.html">Additional Functionality</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Nimble API Documentation</a><ul>
+      <li>Previous: <a href="nimble.Tune.html" title="previous chapter">Tune</a></li>
+      <li>Next: <a href="nimble.Tuning.allArguments.html" title="next chapter">Tuning.allArguments</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="tuning">
+<h1>Tuning<a class="headerlink" href="#tuning" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="nimble.Tuning">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">nimble.</span></code><code class="sig-name descname"><span class="pre">Tuning</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'consecutive'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cross</span> <span class="pre">validation'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">performanceFunction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxIterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learnerArgsFunc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initRandom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomizeAxisFactor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.75</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">foldFeature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validateX</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validateY</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proportion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nimble.Tuning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define the method to identify the best values to train the learner.</p>
+<p>This object is passed to the <code class="docutils literal notranslate"><span class="pre">tuning</span></code> parameter in Nimble’s
+training functions to provide a protocol for evaluating multiple
+arguments to determine the best argument set for the model. To make
+this determination, the training function must know:
+1) the sets of arguments to test (amongst all possible combinations)
+2) how to evaluate the performance of each set
+Multiple arguments are specified by providing <code class="docutils literal notranslate"><span class="pre">Tune</span></code> objects as
+learner arguments for the training function.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">selection</span></code> parameter identifies which argument sets to try
+and accepts the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>“brute force” : Try every possible combination</p></li>
+<li><p>“consecutive” : Optimize one argument at a time, holding the
+others constant. Optionally, multiple <code class="docutils literal notranslate"><span class="pre">loops</span></code> can occur and
+the <code class="docutils literal notranslate"><span class="pre">order</span></code> that the parameters are tuned can be defined.</p></li>
+<li><p>“bayesian” : Apply a bayesian algorithm to the argument space.
+Note: When there is a correlation between an argument value
+and loss, the <code class="docutils literal notranslate"><span class="pre">Tune</span></code> objects provided should provide a
+linear or exponential range of values. This allows all values
+in that space to be sampled, otherwise only the provided
+values will be sampled and assumed to have no correlation with
+loss.</p></li>
+<li><p>“iterative” : Beginning with the middle value of the sorted
+arguments, tries the higher and lower values (holding others
+constant) then applies the best (higher, lower, or same)
+argument on the next iteration. Note: This requires arguments
+to be numeric and assumes there is a correlation between the
+values and the performance.</p></li>
+<li><p>“storm” : Apply a stochastic random mutator to the argument
+space. Randomly selects argument sets to begin, then starts
+to optimize the best performing set, while selecting random
+values at some given probability to avoid local optima.
+Note: For ordered numeric values, this assumes there is a
+correlation between the values and the performance.</p></li>
+</ul>
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">validation</span></code> parameter identifies how the performance will be
+evaluated and accepts the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>Cross Validations:</dt><dd><ul>
+<li><p>“cross validation” : perform k-fold cross-validation with
+the training data. The number of folds can be set using the
+<code class="docutils literal notranslate"><span class="pre">folds</span></code> parameter.</p></li>
+<li><p>“leave one out” : A k-fold cross-validation where the
+number of folds is equal to the number of points in the
+training data.</p></li>
+<li><p>“leave one group out” : The folds are determined by a
+feature in the data. This requires a <code class="docutils literal notranslate"><span class="pre">foldFeature</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Holdout Validations:</dt><dd><ul>
+<li><p>“proportion” : A random proportion of the training data is
+held out. Requires the <code class="docutils literal notranslate"><span class="pre">proportion</span></code> parameter. As a
+shortcut, <code class="docutils literal notranslate"><span class="pre">validation</span></code> can be set directly to a float
+value to trigger this validation.</p></li>
+<li><p>“data” : Provide the data to use for validation. These are
+passed as the <code class="docutils literal notranslate"><span class="pre">validateX</span></code> and <code class="docutils literal notranslate"><span class="pre">validateY</span></code> parameters.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>selection</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – How the next argument set will be chosen. Accepts “brute force”,
+“consecutive”, “bayesian” and “iterative”.</p></li>
+<li><p><strong>validation</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – How each argument set will be validated. Accepts
+“cross validation”, “leave one out”, “leave one group out”,
+“data”, and “proportion” as strings or a float between 0 and 1
+will also trigger “proportion” validation. See above for
+descriptions of each validation.</p></li>
+<li><p><strong>performanceFunction</strong> (<em>function</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – The function that will be used to validate the performance of
+each argument set. If None, the performance function provided to
+the training function will be applied.</p></li>
+<li><p><strong>loops</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Applies when <code class="docutils literal notranslate"><span class="pre">selection</span></code> is “consecutive”. For more than one
+loop, the values for the arguments not being optimized will be
+set to the optimal values from the previous loop.</p></li>
+<li><p><strong>order</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – Applies when <code class="docutils literal notranslate"><span class="pre">selection</span></code> is “consecutive”. A list of argument
+names defining the order to use when tuning.</p></li>
+<li><p><strong>maxIterations</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Applies when <code class="docutils literal notranslate"><span class="pre">selection</span></code> is “bayesian”, “iterative”, or
+“storm”. The maximum number of times iterate through the
+argument selection process. Default is 100.</p></li>
+<li><p><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – Applies when <code class="docutils literal notranslate"><span class="pre">selection</span></code> is “bayesian”, “iterative”, or
+“storm”. The maximum number of seconds to perform the argument
+selection process.</p></li>
+<li><p><strong>threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – Applies when <code class="docutils literal notranslate"><span class="pre">selection</span></code> is “bayesian”, “iterative”, or
+“storm”. Stop the argument selection process if the performance
+is better than or equal to the threshold.</p></li>
+<li><p><strong>learnerArgsFunc</strong> (<em>function</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – Applies when the <code class="docutils literal notranslate"><span class="pre">selection</span></code> is “storm”. A function defining
+how to build the model with variable hyperparameters. Takes the
+form: learnerArgsFunc(hyperparameters) where hyperparameters
+will be a HyperParameters instance from storm_tuner and must
+return a dictionary to use as the arguments parameter for
+nimble.train.</p></li>
+<li><p><strong>initRandom</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Applies when the <code class="docutils literal notranslate"><span class="pre">selection</span></code> is “storm”. The number of initial
+iterations to perform a random search. Recommended value is
+between 3 and 8.</p></li>
+<li><p><strong>randomizeAxisFactor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Applies when the <code class="docutils literal notranslate"><span class="pre">selection</span></code> is “storm”. Controls the tradeoff
+between explorative and exploitative selection. Values closer to
+1 are likely to generate more mutations, while values closer to
+0 are more likely to only perform a single mutation during each
+step.</p></li>
+<li><p><strong>folds</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Applies when <code class="docutils literal notranslate"><span class="pre">validation</span></code> is “cross validation”. Default is 5.</p></li>
+<li><p><strong>foldFeature</strong> (<em>identifier</em>) – Applies when <code class="docutils literal notranslate"><span class="pre">validation</span></code> is “leave one group out”. The folds
+for cross validation will be created by grouping the data by
+this feature.</p></li>
+<li><p><strong>validateX</strong> (<em>nimble data object</em>) – Applies when <code class="docutils literal notranslate"><span class="pre">validation</span></code> is “data”. The validation set to
+use. Can contain the validateY data.</p></li>
+<li><p><strong>validateY</strong> (<em>nimble data object</em><em>, </em><em>identifier</em>) – Applies when <code class="docutils literal notranslate"><span class="pre">validation</span></code> is “data”. Either an object of
+labels for the validation set, or the name or index of the
+labels in <code class="docutils literal notranslate"><span class="pre">validateX</span></code>.</p></li>
+<li><p><strong>proportion</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Applies when <code class="docutils literal notranslate"><span class="pre">validation</span></code> is “proportion”. A value between 0
+and 1 indicating the random proportion of the training data to
+holdout for validation. A float value can also be passed
+directly to <code class="docutils literal notranslate"><span class="pre">validation</span></code> to trigger this same validation.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="nimble.Tune.html#nimble.Tune" title="nimble.Tune"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Tune</span></code></a>, <a class="reference internal" href="nimble.train.html#nimble.train" title="nimble.train"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nimble.train</span></code></a></p>
+</div>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.Tuning.allArguments.html#nimble.Tuning.allArguments" title="nimble.Tuning.allArguments"><code class="xref py py-obj docutils literal notranslate"><span class="pre">allArguments</span></code></a></p></td>
+<td><p>Get the argument set for each validation that has been run.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.Tuning.allResults.html#nimble.Tuning.allResults" title="nimble.Tuning.allResults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">allResults</span></code></a></p></td>
+<td><p>Get the results of each validation that has been run.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.Tuning.bestArguments.html#nimble.Tuning.bestArguments" title="nimble.Tuning.bestArguments"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bestArguments</span></code></a></p></td>
+<td><p>The arguments that provided the best performance.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.Tuning.bestResult.html#nimble.Tuning.bestResult" title="nimble.Tuning.bestResult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bestResult</span></code></a></p></td>
+<td><p>The score of the best performance.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.Tuning.deepResults.html#nimble.Tuning.deepResults" title="nimble.Tuning.deepResults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deepResults</span></code></a></p></td>
+<td><p>If a cross-validation was used, get the fold-by fold results.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.Tuning.copy.html#nimble.Tuning.copy" title="nimble.Tuning.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code></a>()</p></td>
+<td><p>A new Tuner with attributes based on the latest tuning.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.Tuning.tune.html#nimble.Tuning.tune" title="nimble.Tuning.tune"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tune</span></code></a>(learnerName, trainX, trainY, arguments, …)</p></td>
+<td><p>Run validation on each argument set.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/docs/generated/nimble.Tuning.rst"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

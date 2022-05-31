@@ -1,0 +1,487 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Nimble API Documentation &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="nimble.data" href="generated/nimble.data.html" />
+    <link rel="prev" title="Installation" href="../install.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/cleaning_data.html">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/exploring_data.html">Exploring Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/unsupervised_learning.html">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/merging_and_tidying_data.html">Merging and Tidying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/additional_functionality.html">Additional Functionality</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../install.html" title="previous chapter">Installation</a></li>
+      <li>Next: <a href="generated/nimble.data.html" title="next chapter">nimble.data</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="nimble-api-documentation">
+<h1>Nimble API Documentation<a class="headerlink" href="#nimble-api-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Welcome to the Nimble project’s API documentation for users.</p>
+<p>All core functionality of Nimble can be accessed through the functions and
+classes directly callable from <code class="docutils literal notranslate"><span class="pre">nimble</span></code>. Additionally, Nimble defined objects
+that are returned by some of these functions are documented here as well.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#creating-data-objects" id="id4">Creating Data Objects</a></p></li>
+<li><p><a class="reference internal" href="#using-data-objects" id="id5">Using Data Objects</a></p></li>
+<li><p><a class="reference internal" href="#machine-learning-with-interfaces" id="id6">Machine Learning with Interfaces</a></p></li>
+<li><p><a class="reference internal" href="#custom-learner" id="id7">Custom Learner</a></p></li>
+<li><p><a class="reference internal" href="#configuration" id="id8">Configuration</a></p></li>
+<li><p><a class="reference internal" href="#logging" id="id9">Logging</a></p></li>
+<li><p><a class="reference internal" href="#fetching-files" id="id10">Fetching Files</a></p></li>
+<li><p><a class="reference internal" href="#submodules" id="id11">Submodules</a></p></li>
+</ul>
+</div>
+<section id="creating-data-objects">
+<h2><a class="toc-backref" href="#id4">Creating Data Objects</a><a class="headerlink" href="#creating-data-objects" title="Permalink to this headline">¶</a></h2>
+<div class="grid-container docutils container">
+<div class="row docutils container">
+<div class="column-1 docutils container">
+<p>Nimble has 4 data types that share the same API. Each use a different
+backend to optimize the operations based on the type of data in the
+object. <strong>By default, Nimble will assign the type that it detects would
+be best</strong> based on the data and the packages available in the
+environment. The functions also include a parameter to set this
+manually. Selecting the type that best matches the data will make each
+operation as efficient as possible.</p>
+</div>
+<div class="column-2 docutils container">
+<table class="colwidths-auto docutils align-right" id="data-table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Data</p></th>
+<th class="head"><p>Backend</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>List</p></td>
+<td><p>any data</p></td>
+<td><p>Python list</p></td>
+</tr>
+<tr class="row-odd"><td><p>Matrix</p></td>
+<td><p>all the same type</p></td>
+<td><p>NumPy array</p></td>
+</tr>
+<tr class="row-even"><td><p>DataFrame</p></td>
+<td><p>each column has 1 type</p></td>
+<td><p>Pandas DataFrame</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sparse</p></td>
+<td><p>mostly missing or 0</p></td>
+<td><p>SciPy coo_matrix</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>The primary functions for creating data objects are found at the top-level of
+<code class="docutils literal notranslate"><span class="pre">nimble</span></code>. The <a class="reference internal" href="../cheatsheet.html"><span class="doc">cheatsheet</span></a> can also be helpful source of information
+about these functions.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.data.html#nimble.data" title="nimble.data"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.data.html"><span class="pre">nimble.data</span></a></code></a>(source[, pointNames, …])</p></td>
+<td><p>Function to instantiate one of the Nimble data container types.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.ones.html#nimble.ones" title="nimble.ones"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.ones.html"><span class="pre">nimble.ones</span></a></code></a>(numPoints, numFeatures[, …])</p></td>
+<td><p>Return a data object of the given shape containing all 1 values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.zeros.html#nimble.zeros" title="nimble.zeros"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.zeros.html"><span class="pre">nimble.zeros</span></a></code></a>(numPoints, numFeatures[, …])</p></td>
+<td><p>Return a data object of the given shape containing all 0 values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.identity.html#nimble.identity" title="nimble.identity"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.identity.html"><span class="pre">nimble.identity</span></a></code></a>(size[, pointNames, …])</p></td>
+<td><p>Return a data object representing an identity matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.random.data.html#nimble.random.data" title="nimble.random.data"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.random.data.html"><span class="pre">nimble.random.data</span></a></code></a>(numPoints, numFeatures, …)</p></td>
+<td><p>Generate a data object with random contents.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To use Sparse, <a class="reference external" href="https://www.scipy.org/install.html">scipy</a> must be installed.
+To use DataFrame, <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/getting_started/install.html">pandas</a> must be installed.</p>
+</div>
+</section>
+<section id="using-data-objects">
+<h2><a class="toc-backref" href="#id5">Using Data Objects</a><a class="headerlink" href="#using-data-objects" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="../_images/nimbleObject.png" id="floating-img"><img alt="Nimble data object visualization" id="floating-img" src="../_images/nimbleObject.png" style="width: 400px; height: 200px;" /></a>
+<p>A <strong>Nimble data object</strong> acts as the container of all individual elements of
+your data. But for manipulating that data, Nimble defines an API that abstracts
+away from the structure of how it is recorded to emphasize the meaning of how
+elements inter-relate.</p>
+<p>Instead of operating on rows and columns (as with a spreadsheet or matrix),
+Nimble defines methods over <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.points.html"><span class="pre">points</span></a></code> and <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.features.html"><span class="pre">features</span></a></code>. This aligns with the
+goal of machine learning ready data, where each point should be a single
+observation of unique variables and each feature should define a single
+variable that has been recorded across observations. Nimble’s API provides
+tools to tidy data towards that goal while behaving in a way that respects the
+observational meaning of data.</p>
+<a class="reference internal image-reference" href="../_images/nimbleObject.png" id="data-img"><img alt="Nimble data object visualization" id="data-img" src="../_images/nimbleObject.png" style="width: 400px; height: 200px;" /></a>
+<p>The methods of <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.html"><span class="pre">Base</span></a></code> control operations that apply to the entire object or
+each element in the data. The <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.html"><span class="pre">Points</span></a></code> and <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.html"><span class="pre">Features</span></a></code> methods of the object
+have additional methods for operations that apply along that axis of the data
+object. The <a class="reference internal" href="../cheatsheet.html"><span class="doc">cheatsheet</span></a> can also be helpful to find data object
+methods.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.core.data.Base.html#nimble.core.data.Base" title="nimble.core.data.Base"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.html"><span class="pre">Base</span></a></code></a></p></td>
+<td><p>The base class for all nimble data objects.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.core.data.Features.html#nimble.core.data.Features" title="nimble.core.data.Features"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.html"><span class="pre">Features</span></a></code></a></p></td>
+<td><p>Methods that apply to the features axis of a Base object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.core.data.Points.html#nimble.core.data.Points" title="nimble.core.data.Points"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.html"><span class="pre">Points</span></a></code></a></p></td>
+<td><p>Methods that apply to the points axis of a Base object.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="machine-learning-with-interfaces">
+<h2><a class="toc-backref" href="#id6">Machine Learning with Interfaces</a><a class="headerlink" href="#machine-learning-with-interfaces" title="Permalink to this headline">¶</a></h2>
+<p>In Nimble, all algorithms used for machine learning or deep learning are
+referred to as “learners”. Nimble provides interfaces to use learners defined
+in popular machine learning packages, <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.learners.html"><span class="pre">nimble.learners</span></a></code>, and user created
+custom learners. This makes a wide variety of algorithms available under the
+same api. The <a class="reference internal" href="../cheatsheet.html"><span class="doc">cheatsheet</span></a> can also be helpful to understand Nimble’s
+machine learning API.</p>
+<p><strong>Choosing a learner</strong></p>
+<p>These functions help provide more information about the learners available for
+use within Nimble. The functions beginning with “learner” return a Python
+container with the relevant information. Often, a “learner” function has a
+corresponding function beginning with “show” that prints a more readable
+representation of the information to stdout.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.learnerNames.html#nimble.learnerNames" title="nimble.learnerNames"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.learnerNames.html"><span class="pre">nimble.learnerNames</span></a></code></a>([package])</p></td>
+<td><p>Get a list of learners available to nimble or a specific package.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.showLearnerNames.html#nimble.showLearnerNames" title="nimble.showLearnerNames"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.showLearnerNames.html"><span class="pre">nimble.showLearnerNames</span></a></code></a>([package])</p></td>
+<td><p>Print the learners available to nimble or a specific package.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.learnerParameters.html#nimble.learnerParameters" title="nimble.learnerParameters"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.learnerParameters.html"><span class="pre">nimble.learnerParameters</span></a></code></a>(name)</p></td>
+<td><p>Get a list of parameters for the learner.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.showLearnerParameters.html#nimble.showLearnerParameters" title="nimble.showLearnerParameters"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.showLearnerParameters.html"><span class="pre">nimble.showLearnerParameters</span></a></code></a>(name)</p></td>
+<td><p>Print a list of parameters for the learner.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.learnerParameterDefaults.html#nimble.learnerParameterDefaults" title="nimble.learnerParameterDefaults"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.learnerParameterDefaults.html"><span class="pre">nimble.learnerParameterDefaults</span></a></code></a>(name)</p></td>
+<td><p>Get a dictionary mapping parameter names to their default values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.showLearnerParameterDefaults.html#nimble.showLearnerParameterDefaults" title="nimble.showLearnerParameterDefaults"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.showLearnerParameterDefaults.html"><span class="pre">nimble.showLearnerParameterDefaults</span></a></code></a>(name)</p></td>
+<td><p>Get a dictionary mapping parameter names to their default values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.learnerType.html#nimble.learnerType" title="nimble.learnerType"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.learnerType.html"><span class="pre">nimble.learnerType</span></a></code></a>(learnerNames)</p></td>
+<td><p>Attempt to determine learner types.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Using a learner</strong></p>
+<p>The following support the learning process. Functions with a <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.interfaces.TrainedLearner.learnerName.html"><span class="pre">learnerName</span></a></code>
+parameter accept a string in the format “package.learner”. This provides access
+to learners in Nimble without the need to import them manually or remember
+their exact location within the package. For example,
+<code class="docutils literal notranslate"><span class="pre">&quot;nimble.KNNClassifier&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;sklearn.LinearRegression&quot;</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">&quot;keras.Sequential&quot;</span></code> are valid <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.interfaces.TrainedLearner.learnerName.html"><span class="pre">learnerName</span></a></code> strings.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.train.html#nimble.train" title="nimble.train"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.train.html"><span class="pre">nimble.train</span></a></code></a>(learnerName, trainX[, trainY, …])</p></td>
+<td><p>Train a specified learner using the provided data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.core.interfaces.TrainedLearner.html#nimble.core.interfaces.TrainedLearner" title="nimble.core.interfaces.TrainedLearner"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.interfaces.TrainedLearner.html"><span class="pre">TrainedLearner</span></a></code></a></p></td>
+<td><p>Returned by nimble.train to access the learner trained model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.loadTrainedLearner.html#nimble.loadTrainedLearner" title="nimble.loadTrainedLearner"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.loadTrainedLearner.html"><span class="pre">nimble.loadTrainedLearner</span></a></code></a>(source, *[, useLog])</p></td>
+<td><p>Load nimble TrainedLearner object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.trainAndApply.html#nimble.trainAndApply" title="nimble.trainAndApply"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.trainAndApply.html"><span class="pre">nimble.trainAndApply</span></a></code></a>(learnerName, trainX[, …])</p></td>
+<td><p>Train a model and apply it to the test data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.trainAndTest.html#nimble.trainAndTest" title="nimble.trainAndTest"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.trainAndTest.html"><span class="pre">nimble.trainAndTest</span></a></code></a>(learnerName, …[, …])</p></td>
+<td><p>Train a model and get the results of its performance.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.trainAndTestOnTrainingData.html#nimble.trainAndTestOnTrainingData" title="nimble.trainAndTestOnTrainingData"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.trainAndTestOnTrainingData.html"><span class="pre">nimble.trainAndTestOnTrainingData</span></a></code></a>(…[, …])</p></td>
+<td><p>Train a model using the train data and get the performance results.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.normalizeData.html#nimble.normalizeData" title="nimble.normalizeData"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.normalizeData.html"><span class="pre">nimble.normalizeData</span></a></code></a>(learnerName, trainX[, …])</p></td>
+<td><p>Modify data according to a produced model.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.fillMatching.html#nimble.fillMatching" title="nimble.fillMatching"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.fillMatching.html"><span class="pre">nimble.fillMatching</span></a></code></a>(learnerName, …[, …])</p></td>
+<td><p>Fill matching values using imputation learners.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.Tune.html#nimble.Tune" title="nimble.Tune"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.Tune.html"><span class="pre">nimble.Tune</span></a></code></a>([values, start, end, change, …])</p></td>
+<td><p>Triggers hyperparameter optimization to occur during training.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.Tuning.html#nimble.Tuning" title="nimble.Tuning"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.Tuning.html"><span class="pre">nimble.Tuning</span></a></code></a>([selection, validation, …])</p></td>
+<td><p>Define the method to identify the best values to train the learner.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.Init.html#nimble.Init" title="nimble.Init"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.Init.html"><span class="pre">nimble.Init</span></a></code></a>(name, **kwargs)</p></td>
+<td><p>Provide interface-specific objects as learner arguments.</p></td>
+</tr>
+</tbody>
+</table>
+<p>The table below shows the current interfaces built in to Nimble. As an added
+convenience, some interfaces have additional aliases that can be used as the
+package name in the <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.interfaces.TrainedLearner.learnerName.html"><span class="pre">learnerName</span></a></code> string (i.e. <code class="docutils literal notranslate"><span class="pre">&quot;skl.LinearRegression&quot;</span></code>
+instead of <code class="docutils literal notranslate"><span class="pre">&quot;sklearn.LinearRegression&quot;</span></code>).</p>
+<table class="colwidths-auto docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Package</p></th>
+<th class="head"><p>Aliases</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://scikit-learn.org/stable/install.html">sklearn</a></p></td>
+<td><p>skl, scikitlearn, scikit-learn</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://keras.io/getting_started/">keras</a></p></td>
+<td><p>tf.keras, tensorflow.keras</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://autoimpute.readthedocs.io/en/latest/user_guide/getting_started.html">autoimpute</a></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="custom-learner">
+<h2><a class="toc-backref" href="#id7">Custom Learner</a><a class="headerlink" href="#custom-learner" title="Permalink to this headline">¶</a></h2>
+<p>Custom learners can be created by inheriting from <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.CustomLearner.html"><span class="pre">nimble.CustomLearner</span></a></code>.
+These can then be provided as an argument to the functions above to perform
+machine learning.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.CustomLearner.html#nimble.CustomLearner" title="nimble.CustomLearner"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.CustomLearner.html"><span class="pre">nimble.CustomLearner</span></a></code></a></p></td>
+<td><p>Class for creating custom learners for use within the Nimble API.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="configuration">
+<span id="id1"></span><h2><a class="toc-backref" href="#id8">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>Since most packages that support Nimble are optional, <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.showAvailablePackages.html"><span class="pre">showAvailablePackages</span></a></code>
+is provided to display the available packages in the current environment.
+Nimble also has settings that can be configured. The default settings load when
+the package is imported and can be changed during the session. Changes to
+configurable settings are made through <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.settings.html"><span class="pre">nimble.settings</span></a></code>, a
+<code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.configuration.SessionConfiguration.html"><span class="pre">SessionConfiguration</span></a></code> instance that provides methods for getting and setting
+configurable options. Changes to options can apply to the current session or be
+saved as the new default settings. Currently, <a class="reference internal" href="#logging"><span class="std std-ref">Logging</span></a> and
+<a class="reference internal" href="#fetching-files"><span class="std std-ref">Fetching Files</span></a> have sections that can be configured.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.showAvailablePackages.html#nimble.showAvailablePackages" title="nimble.showAvailablePackages"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.showAvailablePackages.html"><span class="pre">nimble.showAvailablePackages</span></a></code></a>()</p></td>
+<td><p>Display the availability of optional dependency packages.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.settings.html#nimble.settings" title="nimble.settings"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.settings.html"><span class="pre">nimble.settings</span></a></code></a></p></td>
+<td><p>User control over configurable options.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.core.configuration.SessionConfiguration.html#nimble.core.configuration.SessionConfiguration" title="nimble.core.configuration.SessionConfiguration"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.configuration.SessionConfiguration.html"><span class="pre">SessionConfiguration</span></a></code></a></p></td>
+<td><p>Returned by nimble.settings to manage configurable settings.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="logging">
+<span id="id2"></span><h2><a class="toc-backref" href="#id9">Logging</a><a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h2>
+<p>By default, Nimble keeps a running log of the actions taken each session. The
+log can be added to and queried using <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.log.html"><span class="pre">nimble.log</span></a></code> and <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.showLog.html"><span class="pre">nimble.showLog</span></a></code>,
+respectively. There are four <a class="reference internal" href="#configuration"><span class="std std-ref">configurable</span></a> options in the
+“logger” section. By default, the “location” is the current directory and the
+file “name” is “log-nimble”. The “enabledByDefault” option is set to “True” and
+“enableDeepLogging” is set to “False”.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.log.html#nimble.log" title="nimble.log"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.log.html"><span class="pre">nimble.log</span></a></code></a>(heading, logInfo)</p></td>
+<td><p>Enter an entry into the active logger’s database file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.showLog.html#nimble.showLog" title="nimble.showLog"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.showLog.html"><span class="pre">nimble.showLog</span></a></code></a>([levelOfDetail, …])</p></td>
+<td><p>Output contents of the logger’s database file.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="fetching-files">
+<span id="id3"></span><h2><a class="toc-backref" href="#id10">Fetching Files</a><a class="headerlink" href="#fetching-files" title="Permalink to this headline">¶</a></h2>
+<p>Nimble’s <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.fetchFile.html"><span class="pre">fetchFile</span></a></code> and <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.fetchFiles.html"><span class="pre">fetchFiles</span></a></code> provide efficient means for accessing
+online datasets. When a new <code class="docutils literal notranslate"><span class="pre">source</span></code> is passed to a fetch function, it
+downloads and stores the files in a directory named “nimbleData” in a
+<a class="reference internal" href="#configuration"><span class="std std-ref">configurable</span></a> local location. When a repeated <code class="docutils literal notranslate"><span class="pre">source</span></code>
+is passed to a fetch function, no downloading occurs because the data can be
+fetched locally. The local storage location is identified by the “location”
+option in the “fetch” section and is set to the home directory by default.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.fetchFile.html#nimble.fetchFile" title="nimble.fetchFile"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.fetchFile.html"><span class="pre">nimble.fetchFile</span></a></code></a>(source[, overwrite])</p></td>
+<td><p>Get a data file from the web or local storage.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.fetchFiles.html#nimble.fetchFiles" title="nimble.fetchFiles"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.fetchFiles.html"><span class="pre">nimble.fetchFiles</span></a></code></a>(source[, overwrite])</p></td>
+<td><p>Get data files from the web or local storage.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="submodules">
+<h2><a class="toc-backref" href="#id11">Submodules</a><a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.calculate.html#module-nimble.calculate" title="nimble.calculate"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/nimble.calculate.html"><span class="pre">nimble.calculate</span></a></code></a></p></td>
+<td><p>Functions that perform calculations on Nimble-defined objects.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.exceptions.html#module-nimble.exceptions" title="nimble.exceptions"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.exceptions.html"><span class="pre">nimble.exceptions</span></a></code></a></p></td>
+<td><p>Module defining exceptions used in Nimble.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.fill.html#module-nimble.fill" title="nimble.fill"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.fill.html"><span class="pre">nimble.fill</span></a></code></a></p></td>
+<td><p>Collection of functions providing methods for filling values in the data with other values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.learners.html#module-nimble.learners" title="nimble.learners"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.learners.html"><span class="pre">nimble.learners</span></a></code></a></p></td>
+<td><p>These out-of-the box learners are all registered during Nimble initialization.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.match.html#module-nimble.match" title="nimble.match"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.match.html"><span class="pre">nimble.match</span></a></code></a></p></td>
+<td><p>Collection of functions determining if a data value or entire data object satisfy a given condition.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.random.html#module-nimble.random" title="nimble.random"><code class="xref py py-obj docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.random.html"><span class="pre">nimble.random</span></a></code></a></p></td>
+<td><p>Module for random operations with Nimble.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/docs/index.rst"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

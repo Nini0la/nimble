@@ -1,0 +1,702 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Cleaning Data &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Supervised Learning" href="supervised_learning.html" />
+    <link rel="prev" title="Welcome to Nimble!" href="../index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exploring_data.html">Exploring Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unsupervised_learning.html">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="merging_and_tidying_data.html">Merging and Tidying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="additional_functionality.html">Additional Functionality</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="previous chapter">Welcome to Nimble!</a></li>
+      <li>Next: <a href="supervised_learning.html" title="next chapter">Supervised Learning</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<style>
+    .nbinput .prompt,
+    .nboutput .prompt {
+        display: none;
+    }
+</style><section id="Cleaning-Data">
+<h1>Cleaning Data<a class="headerlink" href="#Cleaning-Data" title="Permalink to this headline">¶</a></h1>
+<section id="Preparing-interstate-traffic-data-for-machine-learning">
+<h2>Preparing interstate traffic data for machine learning<a class="headerlink" href="#Preparing-interstate-traffic-data-for-machine-learning" title="Permalink to this headline">¶</a></h2>
+<p>The goal here is to address several issues present in the <code class="docutils literal notranslate"><span class="pre">Metro_Interstate_Traffic_Volume.csv</span></code> dataset to make it suitable for supervised machine learning (i.e., predicting one of the columns in the data using other columns). Each data point in this dataset represents a moment in time where 9 features are recorded. The features are variables which may affect the traffic volume on an interstate highway as well as the current traffic volume. A new data point is recorded each time a change
+occurs in one of the weather forecast features.</p>
+<p>In this example we will learn about:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="#Getting-started">Loading and displaying data</a></p></li>
+<li><p><a class="reference external" href="#Cleaning-numeric-data">Cleaning numeric data</a></p></li>
+<li><p><a class="reference external" href="#Cleaning-non-numeric-data">Cleaning non-numeric data</a></p></li>
+<li><p><a class="reference external" href="#Writing-to-a-file">Writing data to a file</a></p></li>
+</ul>
+<div class="line-block">
+<div class="line"><a class="reference external" href="https://colab.research.google.com/drive/1TBeGjU7Jzt2XNzD9X_WFtmos4MvnrOje?usp=sharing">Open this example in Google Colab</a></div>
+<div class="line"><a class="reference internal" href="files.html#cleaning-data"><span class="std std-ref">Download this example as a script or notebook</span></a></div>
+<div class="line"><a class="reference internal" href="../datasets.html#cleaning-data"><span class="std std-ref">Download the dataset for this example</span></a></div>
+</div>
+<section id="Getting-started">
+<h3>Getting started<a class="headerlink" href="#Getting-started" title="Permalink to this headline">¶</a></h3>
+<p>We first use <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.fetchFile.html"target="_blank"><span class="pre">nimble.fetchFile</span></a></code> to retrieve our dataset. This will return the path to our dataset, downloading it from the web if it is not already available locally. Nimble has built in a shorthand for datasets in the <a class="reference external" href="https://archive.ics.uci.edu/ml">UCI repository</a> that we use below. The second argument for <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.data.html"target="_blank"><span class="pre">nimble.data</span></a></code> (<code class="docutils literal notranslate"><span class="pre">source</span></code>) can be a regular python data object, a path to a file, an open file, or URL pointing to the location on a website where the data resides. Here, we use the
+path returned by <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.fetchFile.html"target="_blank"><span class="pre">nimble.fetchFile</span></a></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="kn">import</span> <a class="nimble-hyperlink" href="../docs/index.html" target="_blank"><span class="nn">nimble</span></a>
+
+<span class="n">path</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.fetchFile.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">fetchFile</span></a><span class="p">(</span><span class="s1">&#39;uci::Metro Interstate Traffic Volume&#39;</span><span class="p">)</span>
+<span class="n">traffic</span> <span class="o">=</span> <a class="nimble-hyperlink" href="../docs/generated/nimble.data.html" target="_blank"><span class="n">nimble</span><span class="o">.</span><span class="n">data</span></a><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Metro Interstate Traffic Volume&#39;</span><span class="p">,</span>
+                      <span class="n">returnType</span><span class="o">=</span><span class="s2">&quot;Matrix&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html"target="_blank"><span class="pre">show</span></a></code> method provides more flexibility for the printed output than using <code class="docutils literal notranslate"><span class="pre">print</span></code> or <code class="docutils literal notranslate"><span class="pre">repr</span></code>. It prints a description, the <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.name.html"target="_blank"><span class="pre">name</span></a></code> and <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.shape.html"target="_blank"><span class="pre">shape</span></a></code> of the object and the object data (truncating if necessary) given the parameters. The <code class="docutils literal notranslate"><span class="pre">maxWidth</span></code> and <code class="docutils literal notranslate"><span class="pre">maxHeight</span></code> parameters control the number of characters printed horizontally and vertically, respectively. By default these are set dynamically based on the terminal size, but more or less of the data can be displayed by setting them
+manually. To preview our data, we will limit the output to 16 lines.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">traffic</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html" target="_blank"><span class="n">show</span></a><span class="p">(</span><span class="s2">&quot;Raw traffic data&quot;</span><span class="p">,</span> <span class="n">maxHeight</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Raw traffic data
+&#34;Metro Interstate Traffic Volume&#34; 48204pt x 9ft
+        &#39;holiday&#39;  &#39;temp&#39; &#39;rain_1h&#39; &#39;snow_1h&#39; &#39;clouds_all&#39; &#39;weather_main&#39; &#39;weather_descri...&#39;     &#39;date_time&#39;     &#39;traffic_volume&#39;
+      ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+    0 │           288.280   0.000     0.000        40          Clouds       scattered clouds  2012-10-02 09:00:00       5545
+    1 │           289.360   0.000     0.000        75          Clouds        broken clouds    2012-10-02 10:00:00       4516
+    2 │           289.580   0.000     0.000        90          Clouds       overcast clouds   2012-10-02 11:00:00       4767
+    3 │           290.130   0.000     0.000        90          Clouds       overcast clouds   2012-10-02 12:00:00       5026
+    4 │           291.140   0.000     0.000        75          Clouds        broken clouds    2012-10-02 13:00:00       4918
+    │ │     │        │        │         │          │             │                 │                   │                 │
+48199 │           283.450   0.000     0.000        75          Clouds        broken clouds    2018-09-30 19:00:00       3543
+48200 │           282.760   0.000     0.000        90          Clouds       overcast clouds   2018-09-30 20:00:00       2781
+48201 │           282.730   0.000     0.000        90       Thunderstorm  proximity thunde... 2018-09-30 21:00:00       2159
+48202 │           282.090   0.000     0.000        90          Clouds       overcast clouds   2018-09-30 22:00:00       1450
+48203 │           282.120   0.000     0.000        90          Clouds       overcast clouds   2018-09-30 23:00:00       954
+
+</pre></div></div>
+</div>
+<p>The machine learning algorithms we plan to use require numeric data and can be sensitive to outliers. Our data contains 48,204 points and 9 features, but some points and features will require cleaning before these machine learning algorithms can be applied to the data. The default <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.report.html"target="_blank"><span class="pre">features.report</span></a></code> contains 10 statistics, but we will limit it to the following four to help identify non-numeric data, missing data and outliers.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">stats</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;mode&#39;</span><span class="p">,</span> <span class="s1">&#39;minimum&#39;</span><span class="p">,</span> <span class="s1">&#39;maximum&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">]</span>
+<span class="n">report</span> <span class="o">=</span> <span class="n">traffic</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.report.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">report</span></a><span class="p">(</span><span class="n">stats</span><span class="p">)</span>
+<span class="n">report</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html" target="_blank"><span class="n">show</span></a><span class="p">(</span><span class="s2">&quot;Feature statistics&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Feature statistics
+9pt x 5ft
+                      &#39;index&#39;        &#39;mode&#39;       &#39;minimum&#39; &#39;maximum&#39; &#39;count&#39;
+                    ┌────────────────────────────────────────────────────────
+          &#39;holiday&#39; │    0         Labor Day                             61
+             &#39;temp&#39; │    1          274.150         0.000    310.070   48204
+          &#39;rain_1h&#39; │    2           0.000          0.000    9831.300  48204
+          &#39;snow_1h&#39; │    3           0.000          0.000     0.510    48204
+       &#39;clouds_all&#39; │    4             90           0.000    100.000   48204
+     &#39;weather_main&#39; │    5           Clouds                            48204
+&#39;weather_descri...&#39; │    6        sky is clear                         48204
+        &#39;date_time&#39; │    7    2013-04-18 22:00:00                      48204
+   &#39;traffic_volume&#39; │    8            353           0.000    7280.000  48204
+
+</pre></div></div>
+</div>
+<p>Statistics could not be calculated for all features, indicating some are non-numeric. 0 Kelvin in <code class="docutils literal notranslate"><span class="pre">temp</span></code> and 9831.3 mm in <code class="docutils literal notranslate"><span class="pre">rain_1h</span></code> are also possible recording errors so we will also perform cleaning on some numeric features.</p>
+</section>
+<section id="Cleaning-numeric-data">
+<h3>Cleaning numeric data<a class="headerlink" href="#Cleaning-numeric-data" title="Permalink to this headline">¶</a></h3>
+<p>Let’s extract (i.e., separate from the rest of the data) any rows with the value 0 in <code class="docutils literal notranslate"><span class="pre">temp</span></code> or 9831.3 in <code class="docutils literal notranslate"><span class="pre">rain_1h</span></code> since they seem very unlikely to be accurate, then we can reevaluate the statistics without those values.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">badPointIdentifier</span><span class="p">(</span><span class="n">pt</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">pt</span><span class="p">[</span><span class="s1">&#39;temp&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">pt</span><span class="p">[</span><span class="s1">&#39;rain_1h&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mf">9831.3</span>
+
+<span class="n">extracted</span> <span class="o">=</span> <span class="n">traffic</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.extract.html" target="_blank"><span class="n">points</span><span class="o">.</span><span class="n">extract</span></a><span class="p">(</span><span class="n">badPointIdentifier</span><span class="p">)</span>
+
+<span class="n">fixedReport</span> <span class="o">=</span> <span class="n">traffic</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.report.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">report</span></a><span class="p">(</span><span class="n">stats</span><span class="p">)</span>
+<span class="n">fixedReport</span><span class="p">[[</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span> <span class="s1">&#39;rain_1h&#39;</span><span class="p">],</span> <span class="p">:]</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html" target="_blank"><span class="n">show</span></a><span class="p">(</span><span class="s2">&quot;Modified feature report&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of points with errors:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">extracted</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.points.html" target="_blank"><span class="n">points</span></a><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Modified feature report
+2pt x 5ft
+            &#39;index&#39;  &#39;mode&#39; &#39;minimum&#39; &#39;maximum&#39; &#39;count&#39;
+          ┌────────────────────────────────────────────
+   &#39;temp&#39; │    1    274.150  243.390   310.070   48193
+&#39;rain_1h&#39; │    2     0.000    0.000     55.630   48193
+
+Number of points with errors: 11
+</pre></div></div>
+</div>
+<p>After extracting those values, our <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.report.html"target="_blank"><span class="pre">features.report</span></a></code> statistics look much more reasonable for those features. Since the values for those “bad” data points were implausible, we can assume that the 11 extracted points contain recording errors so we will ignore <code class="docutils literal notranslate"><span class="pre">extracted</span></code> and continue with the 48,193 points still remaining in <code class="docutils literal notranslate"><span class="pre">traffic</span></code>.</p>
+</section>
+<section id="Cleaning-non-numeric-data">
+<h3>Cleaning non-numeric data<a class="headerlink" href="#Cleaning-non-numeric-data" title="Permalink to this headline">¶</a></h3>
+<p>The values in the <code class="docutils literal notranslate"><span class="pre">date_time</span></code> feature are strings, so we will parse each string to generate five new numeric features (‘year’, ‘month’, ‘day’, ‘hour’, ‘weekday’) to replace this feature.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">dateTimeSplitter</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">dt</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">dt</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">dt</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="n">dt</span><span class="o">.</span><span class="n">weekday</span><span class="p">()]</span>
+
+<span class="n">traffic</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.splitByParsing.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">splitByParsing</span></a><span class="p">(</span><span class="s1">&#39;date_time&#39;</span><span class="p">,</span> <span class="n">dateTimeSplitter</span><span class="p">,</span>
+                                <span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;hour&#39;</span><span class="p">,</span> <span class="s1">&#39;weekday&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>Now let’s take a look at our data again after splitting a single feature of text into 5 numeric features.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">traffic</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html" target="_blank"><span class="n">show</span></a><span class="p">(</span><span class="s1">&#39;New parsed features in traffic data&#39;</span><span class="p">,</span> <span class="n">maxHeight</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+New parsed features in traffic data
+&#34;Metro Interstate Traffic Volume&#34; 48193pt x 13ft
+        &#39;holiday&#39;  &#39;temp&#39; &#39;rain_1h&#39; &#39;snow_1h&#39; &#39;clouds_all&#39; &#39;weather_main&#39; ── &#39;year&#39; &#39;month&#39; &#39;day&#39; &#39;hour&#39; &#39;weekday&#39; &#39;traffic_volume&#39;
+      ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+    0 │           288.280   0.000     0.000        40          Clouds     ──  2012     10     2     9        1           5545
+    1 │           289.360   0.000     0.000        75          Clouds     ──  2012     10     2     10       1           4516
+    2 │           289.580   0.000     0.000        90          Clouds     ──  2012     10     2     11       1           4767
+    3 │           290.130   0.000     0.000        90          Clouds     ──  2012     10     2     12       1           5026
+    4 │           291.140   0.000     0.000        75          Clouds     ──  2012     10     2     13       1           4918
+    │ │     │        │        │         │          │             │        ──   │       │      │     │        │            │
+48188 │           283.450   0.000     0.000        75          Clouds     ──  2018     9      30    19       6           3543
+48189 │           282.760   0.000     0.000        90          Clouds     ──  2018     9      30    20       6           2781
+48190 │           282.730   0.000     0.000        90       Thunderstorm  ──  2018     9      30    21       6           2159
+48191 │           282.090   0.000     0.000        90          Clouds     ──  2018     9      30    22       6           1450
+48192 │           282.120   0.000     0.000        90          Clouds     ──  2018     9      30    23       6           954
+
+</pre></div></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">holiday</span></code> feature is extremely idiosyncratic, so it will require a complex function to transform. Since this case this unique to this dataset, we won’t dig into the details but Nimble can definitely handle complex cases like this one. The purpose of the function is to create a binary feature that identifies the points in the data that occur on a holiday.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">holidayIndex</span> <span class="o">=</span> <span class="n">traffic</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.getIndex.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">getIndex</span></a><span class="p">(</span><span class="s1">&#39;holiday&#39;</span><span class="p">)</span>
+<span class="n">currentHoliday</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
+<span class="k">def</span> <span class="nf">holidayToBinary</span><span class="p">(</span><span class="n">point</span><span class="p">):</span>
+    <span class="n">newPt</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+    <span class="n">dateTuple</span> <span class="o">=</span> <span class="p">(</span><span class="n">point</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">point</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">],</span> <span class="n">point</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">point</span><span class="p">[</span><span class="s1">&#39;holiday&#39;</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">currentHoliday</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dateTuple</span>
+    <span class="k">if</span> <span class="n">currentHoliday</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">dateTuple</span><span class="p">:</span>
+        <span class="n">newPt</span><span class="p">[</span><span class="n">holidayIndex</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">newPt</span><span class="p">[</span><span class="n">holidayIndex</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="n">newPt</span>
+
+<span class="n">pointsWithHoliday</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">1368</span><span class="p">,</span> <span class="mi">1372</span><span class="p">)</span>
+<span class="n">dateInfoFeatures</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;holiday&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;hour&#39;</span><span class="p">]</span>
+<span class="n">traffic</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Points.transform.html" target="_blank"><span class="n">points</span><span class="o">.</span><span class="n">transform</span></a><span class="p">(</span><span class="n">holidayToBinary</span><span class="p">)</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="n">traffic</span><span class="p">[</span><span class="n">pointsWithHoliday</span><span class="p">,</span> <span class="n">dateInfoFeatures</span><span class="p">]</span>
+<span class="n">sample</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html" target="_blank"><span class="n">show</span></a><span class="p">(</span><span class="s1">&#39;Data sample with converted holiday feature&#39;</span><span class="p">,</span> <span class="n">maxHeight</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Data sample with converted holiday feature
+5pt x 5ft
+    &#39;holiday&#39; &#39;year&#39; &#39;month&#39; &#39;day&#39; &#39;hour&#39;
+  ┌──────────────────────────────────────
+0 │   False    2012     11     21    22
+1 │   False    2012     11     21    23
+2 │    True    2012     11     22    0
+3 │    True    2012     11     22    1
+4 │    True    2012     11     22    2
+
+</pre></div></div>
+</div>
+<p>We have two features related to categorizing the weather conditions. We saw in our first look at the data that the <code class="docutils literal notranslate"><span class="pre">weather_description</span></code> feature is more detailed than the <code class="docutils literal notranslate"><span class="pre">weather_main</span></code> feature. “Clouds” in the <code class="docutils literal notranslate"><span class="pre">weather_main</span></code> feature could be “scattered clouds”, “broken clouds” or “overcast clouds” in <code class="docutils literal notranslate"><span class="pre">weather_description</span></code>. Since these features are very similar, we will use only one of them. The <code class="docutils literal notranslate"><span class="pre">weather_main</span></code> feature provides a good general idea of the current weather so let’s delete
+<code class="docutils literal notranslate"><span class="pre">weather_description</span></code> from our data.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">traffic</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Features.delete.html" target="_blank"><span class="n">features</span><span class="o">.</span><span class="n">delete</span></a><span class="p">(</span><span class="s1">&#39;weather_description&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>To make the string values in <code class="docutils literal notranslate"><span class="pre">weather_main</span></code> suitable for machine learning, we will represent each of the 11 unique values contained in this column as 11 new binary features.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">newCols</span> <span class="o">=</span> <span class="n">traffic</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.replaceFeatureWithBinaryFeatures.html" target="_blank"><span class="n">replaceFeatureWithBinaryFeatures</span></a><span class="p">(</span><span class="s1">&#39;weather_main&#39;</span><span class="p">)</span>
+<span class="n">sampleFts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;weather_main=Clouds&#39;</span><span class="p">,</span> <span class="s1">&#39;weather_main=Clear&#39;</span><span class="p">,</span> <span class="s1">&#39;weather_main=Mist&#39;</span><span class="p">]</span>
+<span class="n">traffic</span><span class="p">[</span><span class="n">pointsWithHoliday</span><span class="p">,</span> <span class="n">sampleFts</span><span class="p">]</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html" target="_blank"><span class="n">show</span></a><span class="p">(</span><span class="s1">&#39;Sample of binary weather features&#39;</span><span class="p">,</span>
+                                           <span class="n">maxHeight</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Sample of binary weather features
+5pt x 3ft
+    &#39;weather_main=C...&#39; &#39;weather_main=C...&#39; &#39;weather_main=Mist&#39;
+  ┌────────────────────────────────────────────────────────────
+0 │        1.000               0.000               0.000
+1 │        1.000               0.000               0.000
+2 │        0.000               0.000               1.000
+3 │        0.000               0.000               1.000
+4 │        0.000               1.000               0.000
+
+</pre></div></div>
+</div>
+<p>Now that we have removed any bad points and transformed all of our data to numeric values, our dataset is ready for machine learning. We will be using this data to predict the <code class="docutils literal notranslate"><span class="pre">traffic_volume</span></code> feature from the other features.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">traffic</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.show.html" target="_blank"><span class="n">show</span></a><span class="p">(</span><span class="s1">&#39;Cleaned traffic data&#39;</span><span class="p">,</span> <span class="n">maxHeight</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Cleaned traffic data
+&#34;Metro Interstate Traffic Volume&#34; 48193pt x 22ft
+        &#39;holiday&#39;  &#39;temp&#39; &#39;rain_1h&#39; &#39;snow_1h&#39; &#39;clouds_all&#39; &#39;weather_main=C...&#39; ── &#39;month&#39; &#39;day&#39; &#39;hour&#39; &#39;weekday&#39; &#39;traffic_volume&#39;
+      ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+    0 │   False   288.280   0.000     0.000        40             1.000        ──    10     2     9        1           5545
+    1 │   False   289.360   0.000     0.000        75             1.000        ──    10     2     10       1           4516
+    2 │   False   289.580   0.000     0.000        90             1.000        ──    10     2     11       1           4767
+    3 │   False   290.130   0.000     0.000        90             1.000        ──    10     2     12       1           5026
+    4 │   False   291.140   0.000     0.000        75             1.000        ──    10     2     13       1           4918
+    │ │     │        │        │         │          │                │          ──    │      │     │        │            │
+48188 │   False   283.450   0.000     0.000        75             1.000        ──    9      30    19       6           3543
+48189 │   False   282.760   0.000     0.000        90             1.000        ──    9      30    20       6           2781
+48190 │   False   282.730   0.000     0.000        90             0.000        ──    9      30    21       6           2159
+48191 │   False   282.090   0.000     0.000        90             1.000        ──    9      30    22       6           1450
+48192 │   False   282.120   0.000     0.000        90             1.000        ──    9      30    23       6           954
+
+</pre></div></div>
+</div>
+</section>
+<section id="Writing-to-a-file">
+<h3>Writing to a file<a class="headerlink" href="#Writing-to-a-file" title="Permalink to this headline">¶</a></h3>
+<p>We’d like to be able to load the cleaned data for our <a href="supervised_learning.html" target="_blank">Supervised Learning example</a> any time we want, so we will write it to a new csv file.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">traffic</span><span class="o">.</span><a class="nimble-hyperlink" href="../docs/generated/nimble.core.data.Base.save.html" target="_blank"><span class="n">save</span></a><span class="p">(</span><span class="s1">&#39;Metro_Interstate_Traffic_Volume_Cleaned.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p><strong>References:</strong></p>
+<p>Dua, D. and Graff, C. (2019). UCI Machine Learning Repository [<a class="reference external" href="http://archive.ics.uci.edu/ml">http://archive.ics.uci.edu/ml</a>]. Irvine, CA: University of California, School of Information and Computer Science.</p>
+<p>Link: <a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/Metro+Interstate+Traffic+Volume">https://archive.ics.uci.edu/ml/datasets/Metro+Interstate+Traffic+Volume</a></p>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/examples/cleaning_data.ipynb"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

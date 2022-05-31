@@ -1,0 +1,326 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>nimble.data &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="nimble.ones" href="nimble.ones.html" />
+    <link rel="prev" title="Nimble API Documentation" href="../index.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/cleaning_data.html">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/exploring_data.html">Exploring Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/unsupervised_learning.html">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/merging_and_tidying_data.html">Merging and Tidying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/additional_functionality.html">Additional Functionality</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Nimble API Documentation</a><ul>
+      <li>Previous: <a href="../index.html" title="previous chapter">Nimble API Documentation</a></li>
+      <li>Next: <a href="nimble.ones.html" title="next chapter">nimble.ones</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="nimble-data">
+<h1>nimble.data<a class="headerlink" href="#nimble-data" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="nimble.data">
+<code class="sig-prename descclassname"><span class="pre">nimble.</span></code><code class="sig-name descname"><span class="pre">data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointNames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'automatic'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">featureNames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'automatic'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">returnType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convertToType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keepPoints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keepFeatures</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">treatAsMissing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(float('nan'),</span> <span class="pre">numpy.nan,</span> <span class="pre">None,</span> <span class="pre">'',</span> <span class="pre">'None',</span> <span class="pre">'nan',</span> <span class="pre">'NULL',</span> <span class="pre">'NA')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replaceMissingWith</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">numpy.nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rowsArePoints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignoreNonNumericalFeatures</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputSeparator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'automatic'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copyData</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">useLog</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nimble.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to instantiate one of the Nimble data container types.</p>
+<p>All Nimble data objects offer the same methods but offer unique
+implementations based on how each stores data on the backend. This
+creates consistency regardless of <code class="docutils literal notranslate"><span class="pre">returnType</span></code>, but efficiencies
+can be gained by choosing the best <code class="docutils literal notranslate"><span class="pre">returnType</span></code> for the <code class="docutils literal notranslate"><span class="pre">source</span></code>
+data. For example, highly sparse data would benefit most from
+choosing <code class="docutils literal notranslate"><span class="pre">returnType='Sparse'</span></code>. Nimble data objects are also
+consistent in that they all allow for point and feature names.
+Additional parameters allow some data preprocessing to be performed
+during object creation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><em>object</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – <p>The source of the data to be loaded into the returned object.</p>
+<ul>
+<li><p>in-python data object - list, dictionary, numpy array or
+matrix, scipy sparse matrix, pandas dataframe or series.</p></li>
+<li><p>open file-like object</p></li>
+<li><p>str - A path or url to the data file.</p></li>
+</ul>
+</p></li>
+<li><p><strong>pointNames</strong> (<em>'automatic'</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – <p>Specifies the source for point names in the returned object.</p>
+<ul>
+<li><p>’automatic’ - the default, indicates that this function should
+attempt to detect the presence of pointNames in the data which
+will only be attempted when loading from a file. If no names
+are found, or data isn’t being loaded from a file, then
+default names are assigned.</p></li>
+<li><p>bool - True indicates that point names are embedded in the
+data within the first column. A value of False indicates that
+names are not embedded and that default names should be used.</p></li>
+<li><p>list, dict - all points in the data must be assigned a name
+and the names for each point must be unique. As a list, the
+index of the name will define the point index. As a dict,
+the value mapped to each name will define the point index.</p></li>
+</ul>
+</p></li>
+<li><p><strong>featureNames</strong> (<em>'automatic'</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – <p>Specifies the source for feature names in the returned object.</p>
+<ul>
+<li><p>’automatic’ - the default, indicates that this function should
+attempt to detect the presence of featureNames in the data
+which will only be attempted when loading from a file. If no
+names are found, or data isn’t being loaded from a file, then
+default names are assigned.</p></li>
+<li><p>bool - True indicates that feature names are embedded in the
+data within the first row. A value of False indicates that
+names are not embedded and that default names should be used.</p></li>
+<li><p>list, dict - all features in the data must be assigned a name
+and the names for each feature must be unique. As a list, the
+index of the name will define the feature index. As a dict,
+the value mapped to each name will define the feature index.</p></li>
+</ul>
+</p></li>
+<li><p><strong>returnType</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – Indicates which Nimble data object to return. Options are the
+<strong>case sensitive</strong> strings “List”, “Matrix”, “Sparse” and
+“DataFrame”. If None, Nimble will detect the most appropriate
+type from the data and/or packages available in the environment.</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – A string describing the data that will display when printing or
+logging the returned object. This value is also set as the name
+attribute of the returned object.</p></li>
+<li><p><strong>convertToType</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.10)"><em>type</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – A one-time conversion of features to the provided type or types.
+By default, object types within <code class="docutils literal notranslate"><span class="pre">source</span></code> are not modified,
+except for features detected to be numeric in a data file.
+Setting this parameter to a single type will convert all of the
+data to that type. For feature-by-feature type setting, a dict
+or list can be used. Dicts map feature identifiers (names and
+indexes) to conversion types. Any feature not included in the
+dict will remain as-is. A list must provide a type or None for
+each feature. Note: The setting of types only applies during the
+creation process, object methods will modify types if necessary.</p></li>
+<li><p><strong>keepPoints</strong> (<em>'all'</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – Allows the user to select which points will be kept in the
+returned object, those not selected will be discarded. By
+default, the value ‘all’ indicates that all possible points in
+the data will be kept. Alternatively, the user may provide a
+list containing either names or indices (or a mix) of those
+points they want to be kept from the data. The order of this
+list will determine the order of points in the resultant object.
+In the case of reading data from a file, the selection will be
+done at read time, thus limiting the amount of data read into
+memory.</p></li>
+<li><p><strong>keepFeatures</strong> (<em>'all'</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – Allows the user to select which features will be kept in the
+returned object, those not selected will be discarded. By
+default, the value ‘all’ indicates that all possible features in
+the data will be kept. Alternatively, the user may provide a
+list containing either names or indices (or a mix) of those
+features they want to be kept from the data. The order of this
+list will determine the order of features in the resultant
+object. In the case of reading data from a file, the selection
+will be done at read time, thus limiting the amount of data read
+into memory. Additionally, <code class="docutils literal notranslate"><span class="pre">ignoreNonNumericalFeatures</span></code> takes
+precedent and, when set to True, will remove features included
+in this selection if they contain non-numeric values.</p></li>
+<li><p><strong>treatAsMissing</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – Values that will be treated as missing values in the data. These
+values will be replaced with value from <code class="docutils literal notranslate"><span class="pre">replaceMissingWith</span></code>
+By default this list is [float(‘nan’), np.nan, None, ‘’,
+‘None’, ‘nan’]. Set to None or [] to disable replacing missing
+values.</p></li>
+<li><p><strong>replaceMissingWith</strong> – A single value with which to replace any value in
+<code class="docutils literal notranslate"><span class="pre">treatAsMissing</span></code>. By default this value is np.nan.</p></li>
+<li><p><strong>rowsArePoints</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – For <code class="docutils literal notranslate"><span class="pre">source</span></code> objects with a <code class="docutils literal notranslate"><span class="pre">shape</span></code> attribute, shape[0] indicates
+the rows. Otherwise, rows are defined as the objects returned when
+iterating through <code class="docutils literal notranslate"><span class="pre">source</span></code>. For one-dimensional rows, each row in
+is processed as a point if True, otherwise rows are processed as
+features. Two-dimensional rows will also be treated as one-dimensional
+if this parameter is False and the row has a feature vector shape (e.g.
+a list of 5 x 1 numpy arrays). This parameter must be True for any
+higher dimension rows.</p></li>
+<li><p><strong>ignoreNonNumericalFeatures</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – <strong>This only applies when ``source`` is a file.</strong>
+Indicate whether features containing non-numeric data should not
+be loaded into the final object. If there is point or feature
+selection occurring, then only those values within selected
+points and features are considered when determining whether to
+apply this operation.</p></li>
+<li><p><strong>inputSeparator</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – <strong>This only applies when ``source`` is a delimited file.</strong>
+The character that is used to separate fields in the input file,
+if necessary. By default, a value of ‘automatic’ will attempt to
+determine the appropriate separator. Otherwise, a single
+character string of the separator in the file can be passed.</p></li>
+<li><p><strong>copyData</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – <strong>This only applies when ``source`` is an in-python data type.</strong>
+When True (the default) the backend data container is guaranteed
+to be a different object than <code class="docutils literal notranslate"><span class="pre">source</span></code> because a copy is made
+before processing the data. When False, the initial copy is not
+performed so it is possible (NOT guaranteed) that the <code class="docutils literal notranslate"><span class="pre">source</span></code>
+data object is used as the backend data container for the
+returned object. In that case, any modifications to either
+object would affect the other object.</p></li>
+<li><p><strong>useLog</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – Local control for whether to send object creation to the logger.
+If None (default), use the value as specified in the “logger”
+“enabledByDefault” configuration option. If True, send to the
+logger regardless of the global option. If False, do <strong>NOT</strong>
+send to the logger, regardless of the global option.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>nimble.core.data.Base</em> – Subclass of Base object corresponding with the <code class="docutils literal notranslate"><span class="pre">returnType</span></code>.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="nimble.ones.html#nimble.ones" title="nimble.ones"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ones</span></code></a>, <a class="reference internal" href="nimble.zeros.html#nimble.zeros" title="nimble.zeros"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zeros</span></code></a>, <a class="reference internal" href="nimble.identity.html#nimble.identity" title="nimble.identity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">identity</span></code></a>, <a class="reference internal" href="nimble.random.data.html#nimble.random.data" title="nimble.random.data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nimble.random.data</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">asList</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">returnType</span><span class="o">=</span><span class="s2">&quot;List&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;simple&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">asList</span>
+<span class="go">&lt;List &quot;simple&quot; 2pt x 3ft</span>
+<span class="go">     0 1 2</span>
+<span class="go">   ┌──────</span>
+<span class="go"> 0 │ 1 2 3</span>
+<span class="go"> 1 │ 4 5 6</span>
+<span class="go">&gt;</span>
+</pre></div>
+</div>
+<p>Loading data from a file.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;simpleData.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">cd</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">out</span> <span class="o">=</span> <span class="n">cd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;1,2,3</span><span class="se">\n</span><span class="s1">4,5,6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fromFile</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="s1">&#39;simpleData.csv&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fromFile</span> 
+<span class="go">&lt;Matrix 2pt x 3ft</span>
+<span class="go">     0 1 2</span>
+<span class="go">   ┌──────</span>
+<span class="go"> 0 │ 1 2 3</span>
+<span class="go"> 1 │ 4 5 6</span>
+<span class="go"> path=...simpleData.csv&gt;</span>
+</pre></div>
+</div>
+<p>Adding point and feature names.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">asSparse</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pointNames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                       <span class="n">featureNames</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">returnType</span><span class="o">=</span><span class="s2">&quot;Sparse&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">asSparse</span>
+<span class="go">&lt;Sparse 2pt x 3ft</span>
+<span class="go">       &#39;a&#39; &#39;b&#39; &#39;c&#39;</span>
+<span class="go">     ┌────────────</span>
+<span class="go"> &#39;1&#39; │  0   0   1</span>
+<span class="go"> &#39;2&#39; │  1   0   0</span>
+<span class="go">&gt;</span>
+</pre></div>
+</div>
+<p>Replacing missing values.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Missing&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;Missing&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ftNames</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">asDataFrame</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">featureNames</span><span class="o">=</span><span class="n">ftNames</span><span class="p">,</span>
+<span class="gp">... </span>                          <span class="n">returnType</span><span class="o">=</span><span class="s2">&quot;DataFrame&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                          <span class="n">treatAsMissing</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Missing&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+<span class="gp">... </span>                          <span class="n">replaceMissingWith</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">asDataFrame</span>
+<span class="go">&lt;DataFrame 2pt x 3ft</span>
+<span class="go">     &#39;a&#39; &#39;b&#39; &#39;c&#39;</span>
+<span class="go">   ┌────────────</span>
+<span class="go"> 0 │  1   -1  -1</span>
+<span class="go"> 1 │  4   -1  6</span>
+<span class="go">&gt;</span>
+</pre></div>
+</div>
+<p>Keywords: 
+create, make, construct, new, matrix, read, load, open, file,
+in-python data object, list, dictionary, numpy array, pandas
+dataframe, scipy sparse, csv, mtx, hdf5, h5, url, pickle</p>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/docs/generated/nimble.data.rst"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

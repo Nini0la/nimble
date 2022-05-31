@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>nimble.normalizeData &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="nimble.fillMatching" href="nimble.fillMatching.html" />
+    <link rel="prev" title="nimble.trainAndTestOnTrainingData" href="nimble.trainAndTestOnTrainingData.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/cleaning_data.html">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/exploring_data.html">Exploring Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/unsupervised_learning.html">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/merging_and_tidying_data.html">Merging and Tidying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/additional_functionality.html">Additional Functionality</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Nimble API Documentation</a><ul>
+      <li>Previous: <a href="nimble.trainAndTestOnTrainingData.html" title="previous chapter">nimble.trainAndTestOnTrainingData</a></li>
+      <li>Next: <a href="nimble.fillMatching.html" title="next chapter">nimble.fillMatching</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="nimble-normalizedata">
+<h1>nimble.normalizeData<a class="headerlink" href="#nimble-normalizedata" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="nimble.normalizeData">
+<code class="sig-prename descclassname"><span class="pre">nimble.</span></code><code class="sig-name descname"><span class="pre">normalizeData</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">learnerName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trainX</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trainY</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">testX</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arguments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomSeed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">useLog</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwarguments</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nimble.normalizeData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modify data according to a produced model.</p>
+<p>Calls on the functionality of a package to train on some data and
+then return the modified <code class="docutils literal notranslate"><span class="pre">trainX</span></code> and <code class="docutils literal notranslate"><span class="pre">testX</span></code> (if provided)
+according to the results of the trained model. If only <code class="docutils literal notranslate"><span class="pre">trainX</span></code> is
+provided, the normalized <code class="docutils literal notranslate"><span class="pre">trainX</span></code> is returned. If <code class="docutils literal notranslate"><span class="pre">testX</span></code> is
+also provided a tuple (normalizedTrain, normalizedTest) is returned.
+The name of the learner will be added to each normalized object’s
+<code class="docutils literal notranslate"><span class="pre">name</span></code> attribute to indicate the normalization that has been
+applied. Point and feature names are preserved when possible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>learnerName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The learner to be called. This can be a string in the form
+‘package.learner’ or the learner class object.</p></li>
+<li><p><strong>trainX</strong> (<em>nimble Base object</em>) – Data to be used for training.</p></li>
+<li><p><strong>trainY</strong> (<em>identifier</em><em>, </em><em>nimble Base object</em>) – A name or index of the feature in <code class="docutils literal notranslate"><span class="pre">trainX</span></code> containing the
+labels or another nimble Base object containing the labels that
+correspond to <code class="docutils literal notranslate"><span class="pre">trainX</span></code>.</p></li>
+<li><p><strong>testX</strong> (<em>nimble Base object</em>) – Data to be used for testing.</p></li>
+<li><p><strong>arguments</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – Mapping argument names (strings) to their values, to be used
+during training and application (e.g., {‘dimensions’:5, ‘k’:5}).
+To provide an argument that is an object from the same package
+as the learner, use a <code class="docutils literal notranslate"><span class="pre">nimble.Init</span></code> object with the object
+name and its instantiation arguments (e.g.,
+{‘optimizer’: nimble.Init(‘SGD’, learning_rate=0.01}).
+Note: learner arguments can also be passed as <code class="docutils literal notranslate"><span class="pre">kwarguments</span></code> so
+this dictionary will be merged with any keyword arguments.</p></li>
+<li><p><strong>randomSeed</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Set a random seed for the operation. When None, the randomness is
+controlled by Nimble’s random seed. Ignored if learner does not
+depend on randomness.</p></li>
+<li><p><strong>useLog</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – Local control for whether to send object creation to the logger.
+If None (default), use the value as specified in the “logger”
+“enabledByDefault” configuration option. If True, send to the
+logger regardless of the global option. If False, do <strong>NOT</strong>
+send to the logger, regardless of the global option.</p></li>
+<li><p><strong>kwarguments</strong> – Keyword arguments specified variables that are passed to the
+learner. These are combined with the <code class="docutils literal notranslate"><span class="pre">arguments</span></code> parameter.
+To provide an argument that is an object from the same package
+as the learner, use a <code class="docutils literal notranslate"><span class="pre">nimble.Init</span></code> object with the object
+name and its instantiation arguments (e.g.,
+optimizer=nimble.Init(‘SGD’, learning_rate=0.01)).</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="nimble.train.html#nimble.train" title="nimble.train"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code></a>, <a class="reference internal" href="nimble.Init.html#nimble.Init" title="nimble.Init"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Init</span></code></a>, <a class="reference internal" href="nimble.core.data.Features.normalize.html#nimble.core.data.Features.normalize" title="nimble.core.data.Features.normalize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nimble.core.data.Features.normalize</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<p>Normalize a single data set.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lst</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">20</span><span class="p">,</span> <span class="mf">1.97</span><span class="p">,</span> <span class="mi">89</span><span class="p">],</span> <span class="p">[</span><span class="mi">28</span><span class="p">,</span> <span class="mf">1.87</span><span class="p">,</span> <span class="mi">75</span><span class="p">],</span> <span class="p">[</span><span class="mi">24</span><span class="p">,</span> <span class="mf">1.91</span><span class="p">,</span> <span class="mi">81</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trainX</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">pointNames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                     <span class="n">featureNames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                     <span class="n">returnType</span><span class="o">=</span><span class="s2">&quot;Matrix&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">normTrainX</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">normalizeData</span><span class="p">(</span><span class="s1">&#39;scikitlearn.StandardScaler&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">trainX</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">normTrainX</span>
+<span class="go">&lt;Matrix 3pt x 3ft</span>
+<span class="go">       &#39;age&#39;  &#39;height&#39; &#39;weight&#39;</span>
+<span class="go">     ┌─────────────────────────</span>
+<span class="go"> &#39;a&#39; │ -1.225  1.298    1.279</span>
+<span class="go"> &#39;b&#39; │ 1.225   -1.136   -1.162</span>
+<span class="go"> &#39;c&#39; │ 0.000   -0.162   -0.116</span>
+<span class="go">&gt;</span>
+</pre></div>
+</div>
+<p>Normalize training and testing data.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lst1</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trainX</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">lst1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lst2</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">testX</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">lst2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pcaTrain</span><span class="p">,</span> <span class="n">pcaTest</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">normalizeData</span><span class="p">(</span><span class="s1">&#39;scikitlearn.PCA&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                                         <span class="n">trainX</span><span class="p">,</span> <span class="n">testX</span><span class="o">=</span><span class="n">testX</span><span class="p">,</span>
+<span class="gp">... </span>                                         <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pcaTrain</span>
+<span class="go">&lt;Matrix 3pt x 2ft</span>
+<span class="go">       0      1</span>
+<span class="go">   ┌──────────────</span>
+<span class="go"> 0 │ -0.216 0.713</span>
+<span class="go"> 1 │ -1.005 -0.461</span>
+<span class="go"> 2 │ 1.221  -0.253</span>
+<span class="go">&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pcaTest</span>
+<span class="go">&lt;Matrix 1pt x 2ft</span>
+<span class="go">       0      1</span>
+<span class="go">   ┌─────────────</span>
+<span class="go"> 0 │ -1.739 2.588</span>
+<span class="go">&gt;</span>
+</pre></div>
+</div>
+<p>Keywords: 
+modify, apply, standardize, scale, rescale, encode, center, mean,
+standard deviation, z-scores, z scores</p>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/docs/generated/nimble.normalizeData.rst"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

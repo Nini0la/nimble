@@ -1,0 +1,402 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>nimble.calculate &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="nimble.calculate.balancedAccuracy" href="generated/nimble.calculate.balancedAccuracy.html" />
+    <link rel="prev" title="nimble.random.setSeed" href="generated/nimble.random.setSeed.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/cleaning_data.html">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/exploring_data.html">Exploring Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/unsupervised_learning.html">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/merging_and_tidying_data.html">Merging and Tidying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/additional_functionality.html">Additional Functionality</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Nimble API Documentation</a><ul>
+      <li>Previous: <a href="generated/nimble.random.setSeed.html" title="previous chapter">nimble.random.setSeed</a></li>
+      <li>Next: <a href="generated/nimble.calculate.balancedAccuracy.html" title="next chapter">nimble.calculate.balancedAccuracy</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-nimble.calculate">
+<span id="nimble-calculate"></span><h1>nimble.calculate<a class="headerlink" href="#module-nimble.calculate" title="Permalink to this headline">¶</a></h1>
+<p>Functions that perform calculations on Nimble-defined objects.</p>
+<p>This includes functions that can be used as performance functions in the
+Nimble testing and cross-validation API. Some similar functionality may
+be available as methods off of data objects; the versions here are
+functions, and take any inputs as arguments.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#module-nimble.calculate.binary" id="id1">Binary</a></p></li>
+<li><p><a class="reference internal" href="#module-nimble.calculate.confidence" id="id2">Confidence</a></p></li>
+<li><p><a class="reference internal" href="#module-nimble.calculate.linalg" id="id3">Linear Algebra</a></p></li>
+<li><p><a class="reference internal" href="#module-nimble.calculate.loss" id="id4">Loss</a></p></li>
+<li><p><a class="reference internal" href="#module-nimble.calculate.matrix" id="id5">Matrix</a></p></li>
+<li><p><a class="reference internal" href="#module-nimble.calculate.normalize" id="id6">Normalize</a></p></li>
+<li><p><a class="reference internal" href="#module-nimble.calculate.similarity" id="id7">Similarity</a></p></li>
+<li><p><a class="reference internal" href="#module-nimble.calculate.statistic" id="id8">Statistic</a></p></li>
+<li><p><a class="reference internal" href="#module-nimble.calculate.utility" id="id9">Utility</a></p></li>
+</ul>
+</div>
+<section id="module-nimble.calculate.binary">
+<span id="binary"></span><h2><a class="toc-backref" href="#id1">Binary</a><a class="headerlink" href="#module-nimble.calculate.binary" title="Permalink to this headline">¶</a></h2>
+<p>Metrics available for binary classification.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.balancedAccuracy.html#nimble.calculate.balancedAccuracy" title="nimble.calculate.balancedAccuracy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">balancedAccuracy</span></code></a>(knownValues, predictedValues)</p></td>
+<td><p>Accurracy measure accounting for imbalances in the label counts.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.calculate.f1Score.html#nimble.calculate.f1Score" title="nimble.calculate.f1Score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f1Score</span></code></a>(knownValues, predictedValues)</p></td>
+<td><p>The harmonic mean of precision and recall.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.falseNegative.html#nimble.calculate.falseNegative" title="nimble.calculate.falseNegative"><code class="xref py py-obj docutils literal notranslate"><span class="pre">falseNegative</span></code></a>(knownValues, predictedValues)</p></td>
+<td><p>Number of predicted negative values that were known to be positive.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.calculate.falsePositive.html#nimble.calculate.falsePositive" title="nimble.calculate.falsePositive"><code class="xref py py-obj docutils literal notranslate"><span class="pre">falsePositive</span></code></a>(knownValues, predictedValues)</p></td>
+<td><p>Number of predicted positive values that were known to be negative.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.precision.html#nimble.calculate.precision" title="nimble.calculate.precision"><code class="xref py py-obj docutils literal notranslate"><span class="pre">precision</span></code></a>(knownValues, predictedValues)</p></td>
+<td><p>The ratio of true positive values to predicted positive values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.calculate.recall.html#nimble.calculate.recall" title="nimble.calculate.recall"><code class="xref py py-obj docutils literal notranslate"><span class="pre">recall</span></code></a>(knownValues, predictedValues)</p></td>
+<td><p>The ratio of true positive values to known positive values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.specificity.html#nimble.calculate.specificity" title="nimble.calculate.specificity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">specificity</span></code></a>(knownValues, predictedValues)</p></td>
+<td><p>The ratio of true negative values to known negative values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.calculate.truePositive.html#nimble.calculate.truePositive" title="nimble.calculate.truePositive"><code class="xref py py-obj docutils literal notranslate"><span class="pre">truePositive</span></code></a>(knownValues, predictedValues)</p></td>
+<td><p>Number of predicted positive values that were known to be positive.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.trueNegative.html#nimble.calculate.trueNegative" title="nimble.calculate.trueNegative"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trueNegative</span></code></a>(knownValues, predictedValues)</p></td>
+<td><p>Number of predicted negative values that were known to be negative.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-nimble.calculate.confidence">
+<span id="confidence"></span><h2><a class="toc-backref" href="#id2">Confidence</a><a class="headerlink" href="#module-nimble.calculate.confidence" title="Permalink to this headline">¶</a></h2>
+<p>Confidence Intervals for error metrics.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.rootMeanSquareErrorConfidenceInterval.html#nimble.calculate.rootMeanSquareErrorConfidenceInterval" title="nimble.calculate.rootMeanSquareErrorConfidenceInterval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rootMeanSquareErrorConfidenceInterval</span></code></a>(known, …)</p></td>
+<td><p>Estimate a confidence interval for the root mean square error.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.calculate.meanAbsoluteErrorConfidenceInterval.html#nimble.calculate.meanAbsoluteErrorConfidenceInterval" title="nimble.calculate.meanAbsoluteErrorConfidenceInterval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meanAbsoluteErrorConfidenceInterval</span></code></a>(known, …)</p></td>
+<td><p>Estimate a confidence interval for the mean absolute error.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.fractionIncorrectConfidenceInterval.html#nimble.calculate.fractionIncorrectConfidenceInterval" title="nimble.calculate.fractionIncorrectConfidenceInterval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fractionIncorrectConfidenceInterval</span></code></a>(known, …)</p></td>
+<td><p>Estimate a confidence interval for the fraction incorrect.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-nimble.calculate.linalg">
+<span id="linear-algebra"></span><h2><a class="toc-backref" href="#id3">Linear Algebra</a><a class="headerlink" href="#module-nimble.calculate.linalg" title="Permalink to this headline">¶</a></h2>
+<p>Linear algebra functions that can be used with nimble base objects.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.leastSquaresSolution.html#nimble.calculate.leastSquaresSolution" title="nimble.calculate.leastSquaresSolution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">leastSquaresSolution</span></code></a>(aObj, bObj)</p></td>
+<td><p>Compute least-squares solution to equation A x = b.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.calculate.inverse.html#nimble.calculate.inverse" title="nimble.calculate.inverse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inverse</span></code></a>(aObj)</p></td>
+<td><p>Compute the (multiplicative) inverse of a nimble Base object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.pseudoInverse.html#nimble.calculate.pseudoInverse" title="nimble.calculate.pseudoInverse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pseudoInverse</span></code></a>(aObj[, method])</p></td>
+<td><p>Compute the (Moore-Penrose) pseudo-inverse of a nimble Base object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.calculate.solve.html#nimble.calculate.solve" title="nimble.calculate.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve</span></code></a>(aObj, bObj)</p></td>
+<td><p>Solves the linear equation set A x = b for the unknown vector x.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-nimble.calculate.loss">
+<span id="loss"></span><h2><a class="toc-backref" href="#id4">Loss</a><a class="headerlink" href="#module-nimble.calculate.loss" title="Permalink to this headline">¶</a></h2>
+<p>Definitions for functions that can be used as performance functions by
+nimble. Specifically, this only contains those functions that measure
+loss; or in other words, those where smaller values indicate a higher
+level of correctness in the predicted values.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.fractionIncorrect.html#nimble.calculate.fractionIncorrect" title="nimble.calculate.fractionIncorrect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fractionIncorrect</span></code></a>(knownValues, predictedValues)</p></td>
+<td><p>Compute the proportion of incorrect predictions within a set of instances.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.calculate.meanAbsoluteError.html#nimble.calculate.meanAbsoluteError" title="nimble.calculate.meanAbsoluteError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meanAbsoluteError</span></code></a>(knownValues, predictedValues)</p></td>
+<td><p>Compute mean absolute error.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.meanFeaturewiseRootMeanSquareError.html#nimble.calculate.meanFeaturewiseRootMeanSquareError" title="nimble.calculate.meanFeaturewiseRootMeanSquareError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meanFeaturewiseRootMeanSquareError</span></code></a>(…)</p></td>
+<td><p>For 2d prediction data, compute the RMSE of each feature, then average the results.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.calculate.rootMeanSquareError.html#nimble.calculate.rootMeanSquareError" title="nimble.calculate.rootMeanSquareError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rootMeanSquareError</span></code></a>(knownValues, predictedValues)</p></td>
+<td><p>Compute the root mean square error.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.varianceFractionRemaining.html#nimble.calculate.varianceFractionRemaining" title="nimble.calculate.varianceFractionRemaining"><code class="xref py py-obj docutils literal notranslate"><span class="pre">varianceFractionRemaining</span></code></a>(knownValues, …)</p></td>
+<td><p>Calculate the how much variance has not been correctly predicted in the predicted values.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-nimble.calculate.matrix">
+<span id="matrix"></span><h2><a class="toc-backref" href="#id5">Matrix</a><a class="headerlink" href="#module-nimble.calculate.matrix" title="Permalink to this headline">¶</a></h2>
+<p>Matrix calculations.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.elementwiseMultiply.html#nimble.calculate.elementwiseMultiply" title="nimble.calculate.elementwiseMultiply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">elementwiseMultiply</span></code></a>(left, right)</p></td>
+<td><p>Perform element wise multiplication of two provided nimble Base objects with the result being returned in a separate nimble Base object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.calculate.elementwisePower.html#nimble.calculate.elementwisePower" title="nimble.calculate.elementwisePower"><code class="xref py py-obj docutils literal notranslate"><span class="pre">elementwisePower</span></code></a>(left, right)</p></td>
+<td><p>Perform an element-wise power operation, with the values in the left object as the bases and the values in the right object as exponents.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-nimble.calculate.normalize">
+<span id="normalize"></span><h2><a class="toc-backref" href="#id6">Normalize</a><a class="headerlink" href="#module-nimble.calculate.normalize" title="Permalink to this headline">¶</a></h2>
+<p>Normalize</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.meanNormalize.html#nimble.calculate.meanNormalize" title="nimble.calculate.meanNormalize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meanNormalize</span></code></a>(values1[, values2])</p></td>
+<td><p>Subtract the vector mean from each element.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.calculate.meanStandardDeviationNormalize.html#nimble.calculate.meanStandardDeviationNormalize" title="nimble.calculate.meanStandardDeviationNormalize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meanStandardDeviationNormalize</span></code></a>(values1[, …])</p></td>
+<td><p>Subtract the mean and divide by standard deviation for each element.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.range0to1Normalize.html#nimble.calculate.range0to1Normalize" title="nimble.calculate.range0to1Normalize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">range0to1Normalize</span></code></a>(values1[, values2])</p></td>
+<td><p>Convert values to range of 0 to 1.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.calculate.percentileNormalize.html#nimble.calculate.percentileNormalize" title="nimble.calculate.percentileNormalize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">percentileNormalize</span></code></a>(values1[, values2])</p></td>
+<td><p>Convert elements to a percentile.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-nimble.calculate.similarity">
+<span id="similarity"></span><h2><a class="toc-backref" href="#id7">Similarity</a><a class="headerlink" href="#module-nimble.calculate.similarity" title="Permalink to this headline">¶</a></h2>
+<p>Similarity calculations.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.correlation.html#nimble.calculate.correlation" title="nimble.calculate.correlation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">correlation</span></code></a>(X[, X_T])</p></td>
+<td><p>Calculate the Pearson correlation coefficients between points in X.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.calculate.cosineSimilarity.html#nimble.calculate.cosineSimilarity" title="nimble.calculate.cosineSimilarity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cosineSimilarity</span></code></a>(knownValues, predictedValues)</p></td>
+<td><p>Calculate the cosine similarity between known and predicted values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.confusionMatrix.html#nimble.calculate.confusionMatrix" title="nimble.calculate.confusionMatrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">confusionMatrix</span></code></a>(knownValues, predictedValues)</p></td>
+<td><p>Generate a confusion matrix for known and predicted label values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.calculate.covariance.html#nimble.calculate.covariance" title="nimble.calculate.covariance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">covariance</span></code></a>(X[, X_T, sample])</p></td>
+<td><p>Calculate the covariance between points in X.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.fractionCorrect.html#nimble.calculate.fractionCorrect" title="nimble.calculate.fractionCorrect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fractionCorrect</span></code></a>(knownValues, predictedValues)</p></td>
+<td><p>Calculate how many values in predictedValues are equal to the values in the corresponding positions in knownValues.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.calculate.rSquared.html#nimble.calculate.rSquared" title="nimble.calculate.rSquared"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rSquared</span></code></a>(knownValues, predictedValues)</p></td>
+<td><p>Calculate the r-squared (or coefficient of determination) of the predictedValues given the knownValues.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-nimble.calculate.statistic">
+<span id="statistic"></span><h2><a class="toc-backref" href="#id8">Statistic</a><a class="headerlink" href="#module-nimble.calculate.statistic" title="Permalink to this headline">¶</a></h2>
+<p>Statistics calculations.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.count.html#nimble.calculate.count" title="nimble.calculate.count"><code class="xref py py-obj docutils literal notranslate"><span class="pre">count</span></code></a>(values)</p></td>
+<td><p>The number of values in the vector.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.calculate.maximum.html#nimble.calculate.maximum" title="nimble.calculate.maximum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum</span></code></a>(values)</p></td>
+<td><p>The maximum value in a vector.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.mean.html#nimble.calculate.mean" title="nimble.calculate.mean"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mean</span></code></a>(values)</p></td>
+<td><p>The mean of the values in a vector.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.calculate.median.html#nimble.calculate.median" title="nimble.calculate.median"><code class="xref py py-obj docutils literal notranslate"><span class="pre">median</span></code></a>(values)</p></td>
+<td><p>The median of the values in a vector.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.medianAbsoluteDeviation.html#nimble.calculate.medianAbsoluteDeviation" title="nimble.calculate.medianAbsoluteDeviation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">medianAbsoluteDeviation</span></code></a>(values)</p></td>
+<td><p>The median absolute deviation of the values in a vector.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.calculate.minimum.html#nimble.calculate.minimum" title="nimble.calculate.minimum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">minimum</span></code></a>(values)</p></td>
+<td><p>The minimum value in a vector.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.mode.html#nimble.calculate.mode" title="nimble.calculate.mode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mode</span></code></a>(values)</p></td>
+<td><p>The mode of the values in a vector.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.calculate.proportionMissing.html#nimble.calculate.proportionMissing" title="nimble.calculate.proportionMissing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">proportionMissing</span></code></a>(values)</p></td>
+<td><p>The proportion of values in the vector that are missing.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.proportionZero.html#nimble.calculate.proportionZero" title="nimble.calculate.proportionZero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">proportionZero</span></code></a>(values)</p></td>
+<td><p>The proportion of values in the vector that are equal to zero.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.calculate.quartiles.html#nimble.calculate.quartiles" title="nimble.calculate.quartiles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quartiles</span></code></a>(values)</p></td>
+<td><p>A vector’s lower quartile, the median, and the upper quartile.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.residuals.html#nimble.calculate.residuals" title="nimble.calculate.residuals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">residuals</span></code></a>(toPredict, controlVars)</p></td>
+<td><p>Calculate the residuals by a linear regression model.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.calculate.standardDeviation.html#nimble.calculate.standardDeviation" title="nimble.calculate.standardDeviation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">standardDeviation</span></code></a>(values[, sample])</p></td>
+<td><p>The standard deviation of the values in a vector.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.sum.html#nimble.calculate.sum" title="nimble.calculate.sum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sum</span></code></a>(values)</p></td>
+<td><p>The sum of the values in the vector.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.calculate.uniqueCount.html#nimble.calculate.uniqueCount" title="nimble.calculate.uniqueCount"><code class="xref py py-obj docutils literal notranslate"><span class="pre">uniqueCount</span></code></a>(values)</p></td>
+<td><p>The number of unique values in the vector.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.variance.html#nimble.calculate.variance" title="nimble.calculate.variance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">variance</span></code></a>(values[, sample])</p></td>
+<td><p>The variance of the values in a vector.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-nimble.calculate.utility">
+<span id="utility"></span><h2><a class="toc-backref" href="#id9">Utility</a><a class="headerlink" href="#module-nimble.calculate.utility" title="Permalink to this headline">¶</a></h2>
+<p>Functions (and their helpers) used to analyze arbitrary performance
+functions.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/nimble.calculate.performanceFunction.html#nimble.calculate.performanceFunction" title="nimble.calculate.performanceFunction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">performanceFunction</span></code></a>(optimal[, best, …])</p></td>
+<td><p>Decorator factory for Nimble performance functions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/nimble.calculate.detectBestResult.html#nimble.calculate.detectBestResult" title="nimble.calculate.detectBestResult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">detectBestResult</span></code></a>(functionToCheck)</p></td>
+<td><p>Determine if higher or lower values are optimal for the function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/docs/nimble.calculate.rst"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,342 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Installation &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Nimble API Documentation" href="docs/index.html" />
+    <link rel="prev" title="Additional Functionality" href="examples/additional_functionality.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/cleaning_data.html">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/exploring_data.html">Exploring Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/unsupervised_learning.html">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/merging_and_tidying_data.html">Merging and Tidying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/additional_functionality.html">Additional Functionality</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="examples/additional_functionality.html" title="previous chapter">Additional Functionality</a></li>
+      <li>Next: <a href="docs/index.html" title="next chapter">Nimble API Documentation</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>Nimble can be installed in a variety of ways and strives for flexibility
+during the install process. To avoid requiring packages that may never be used,
+Nimble only has only two required dependencies, <a class="reference external" href="https://numpy.org/">Numpy</a> and <a class="reference external" href="https://packaging.pypa.io/">packaging</a>.
+<cite>NumPy</cite>, provides access to a limited portion of the API and additional
+functionality is accessed by installing third-party <a class="reference internal" href="#optional-packages"><span class="std std-ref">Optional Packages</span></a>.
+The <cite>packaging</cite> dependency is used to validate the installed versions of any
+optional packages. For convenience, installing optional packages can also be
+triggered while installing Nimble. We recommend the <a class="reference internal" href="#quickstart-install"><span class="std std-ref">Nimble Install Quickstart</span></a>
+to make much of Nimble’s functionality available with a single install.</p>
+<section id="install-methods">
+<h2>Install Methods<a class="headerlink" href="#install-methods" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#quickstart-install"><span class="std std-ref">Nimble Install Quickstart</span></a> (recommended)</p></li>
+<li><p><a class="reference internal" href="#specific-install"><span class="std std-ref">Install with Specific Packages</span></a></p></li>
+<li><p><a class="reference internal" href="#basic-install"><span class="std std-ref">Basic Installation</span></a></p></li>
+</ul>
+</section>
+<section id="optional-packages">
+<span id="id1"></span><h2>Optional Packages<a class="headerlink" href="#optional-packages" title="Permalink to this headline">¶</a></h2>
+<p>Many components of Nimble rely on the following third-party packages.
+Most packages are <code class="docutils literal notranslate"><span class="pre">pip</span></code> and <code class="docutils literal notranslate"><span class="pre">conda</span></code> installable, but install
+recommendations vary and some offer further optimizations. <strong>Reading the
+linked installation instructions for each package is highly recommended.</strong></p>
+<section id="operational-support">
+<span id="id2"></span><h3>Operational Support<a class="headerlink" href="#operational-support" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Package</p></th>
+<th class="head"><p>Supports</p></th>
+<th class="head"><p>pip</p></th>
+<th class="head"><p>conda</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://www.scipy.org/install.html">scipy</a></p></td>
+<td><p>Nimble’s <code class="docutils literal notranslate"><span class="pre">Sparse</span></code> object and various
+scientific calculations.</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/getting_started/install.html">pandas</a></p></td>
+<td><p>Nimble’s <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> object.</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://matplotlib.org/users/installing.html">matplotlib</a></p></td>
+<td><p>Plotting.</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://requests.readthedocs.io/en/master/user/install/">requests</a></p></td>
+<td><p>Retrieving data from the web.</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/cloudpipe/cloudpickle">cloudpickle</a></p></td>
+<td><p>Saving Nimble data objects.</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://dateutil.readthedocs.io/en/stable/">dateutil</a></p></td>
+<td><p>Parsing strings to <a class="reference external" href="https://docs.python.org/3/library/datetime.html">datetime</a> objects.</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://docs.h5py.org/en/stable/build.html">h5py</a></p></td>
+<td><p>Loading hdf5 files.</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://hyperopt.github.io/hyperopt/">hyperopt</a></p></td>
+<td><p>Bayesian method for hyperparameter tuning.</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/ben-arnao/StoRM">storm_tuner</a></p></td>
+<td><p>StochasticRandomMutator for hyperparameter
+tuning.</p></td>
+<td><p>✓</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="machine-learning-interfaces">
+<span id="ml-interfaces"></span><h3>Machine-Learning Interfaces<a class="headerlink" href="#machine-learning-interfaces" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Package</p></th>
+<th class="head"><p>Provides</p></th>
+<th class="head"><p>pip</p></th>
+<th class="head"><p>conda</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://scikit-learn.org/stable/install.html">sklearn</a></p></td>
+<td><p>Machine Learning.</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://www.tensorflow.org/install">tensorflow</a>/
+<a class="reference external" href="https://keras.io/getting_started/">keras</a></p></td>
+<td><p>Neural Networks.
+See <a class="reference internal" href="#tensorflow-note"><span class="std std-ref">install note</span></a> below.</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://autoimpute.readthedocs.io/en/latest/user_guide/getting_started.html">autoimpute</a></p></td>
+<td><p>Imputation. Machine Learning with missing data.</p></td>
+<td><p>✓</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note" id="tensorflow-note">
+<p class="admonition-title">Note</p>
+<p>Tensorflow recommends building from source, but some third parties provide prebuilt
+<code class="docutils literal notranslate"><span class="pre">tensorflow</span></code> binaries available for various architectures.</p>
+<ul class="simple">
+<li><p>Unix: <a class="reference external" href="https://github.com/lakshayg/tensorflow-build">https://github.com/lakshayg/tensorflow-build</a></p></li>
+<li><p>Windows: <a class="reference external" href="https://github.com/fo40225/tensorflow-windows-wheel">https://github.com/fo40225/tensorflow-windows-wheel</a></p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="nimble-install-quickstart">
+<span id="quickstart-install"></span><h2>Nimble Install Quickstart<a class="headerlink" href="#nimble-install-quickstart" title="Permalink to this headline">¶</a></h2>
+<p>To install a selection of <a class="reference internal" href="#optional-packages"><span class="std std-ref">Optional Packages</span></a> while installing Nimble,
+both <code class="docutils literal notranslate"><span class="pre">pip</span></code> and <code class="docutils literal notranslate"><span class="pre">conda</span></code> installs offer a quickstart option. Quickstart
+installs all <a class="reference internal" href="#operational-support"><span class="std std-ref">Operational Support</span></a> packages and SciKit-Learn from the
+<a class="reference internal" href="#ml-interfaces"><span class="std std-ref">Machine-Learning Interfaces</span></a>. These packages were chosen because they are reliably
+installable through <code class="docutils literal notranslate"><span class="pre">pip</span></code> and <code class="docutils literal notranslate"><span class="pre">conda</span></code> and provide access to the majority
+of Nimble’s functionality.</p>
+<p><strong>With pip:</strong></p>
+<p>Nimble uses extras to provide the <code class="docutils literal notranslate"><span class="pre">quickstart</span></code> shortcut</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">nimble</span><span class="p">[</span><span class="n">quickstart</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The brackets may need to be escaped in some shells.</p>
+</div>
+<p><strong>With conda:</strong></p>
+<p>The nimble-data channel provides an alternative package, <code class="docutils literal notranslate"><span class="pre">nimble-quickstart</span></code>.
+Once installed, import still occurs with <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">nimble</span></code>, the name
+<code class="docutils literal notranslate"><span class="pre">nimble-quickstart</span></code> serves to install nimble and the other included
+packages.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">nimble</span><span class="o">-</span><span class="n">data</span> <span class="n">nimble</span><span class="o">-</span><span class="n">quickstart</span>
+</pre></div>
+</div>
+</section>
+<section id="install-with-specific-packages">
+<span id="specific-install"></span><h2>Install with Specific Packages<a class="headerlink" href="#install-with-specific-packages" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="#optional-packages"><span class="std std-ref">Optional Packages</span></a> can always be installed separately with <code class="docutils literal notranslate"><span class="pre">pip</span></code> or
+<code class="docutils literal notranslate"><span class="pre">conda</span></code>, for example: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">scipy</span></code> or <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">scipy</span></code>.
+However, both package managers offer ways to install optional packages while
+installing Nimble.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Installs will fail if any package fails to install.</p>
+</div>
+<p><strong>With pip:</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span></code> supports the use of extras included in brackets after the package name.
+Nimble provides each optional package as an extra and extras that are shortcuts
+to installing multiple packages. The <code class="docutils literal notranslate"><span class="pre">[quickstart]</span></code> shortcut was outlined in
+<a class="reference internal" href="#quickstart-install"><span class="std std-ref">Nimble Install Quickstart</span></a>, but the <code class="docutils literal notranslate"><span class="pre">[data]</span></code> shortcut can also be used to
+install both <code class="docutils literal notranslate"><span class="pre">scipy</span></code> and <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, which will make all Nimble data object
+types immediately available. Multiple extras can be included during the same
+install.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">nimble</span><span class="p">[</span><span class="n">dateutil</span><span class="p">]</span>                    <span class="c1"># single extra</span>
+  <span class="ow">or</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">nimble</span><span class="p">[</span><span class="n">requests</span><span class="p">,</span><span class="n">matplotlib</span><span class="p">,</span><span class="n">sklearn</span><span class="p">]</span> <span class="c1"># multiple extras</span>
+  <span class="ow">or</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">nimble</span><span class="p">[</span><span class="n">data</span><span class="p">]</span>                        <span class="c1"># shortcut (scipy and pandas)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>The names of the extras match the names displayed in the “Package” columns
+in <a class="reference internal" href="#optional-packages"><span class="std std-ref">Optional Packages</span></a>.</p></li>
+<li><p>The brackets may need to be escaped in some shells.</p></li>
+</ul>
+</div>
+<p><strong>With conda:</strong></p>
+<p>For <code class="docutils literal notranslate"><span class="pre">conda</span></code>, <a class="reference internal" href="#optional-packages"><span class="std std-ref">Optional Packages</span></a> must be installed manually. However,
+<code class="docutils literal notranslate"><span class="pre">conda</span></code> allows for multiple packages to be installed at the same time so
+they can be listed alongside <code class="docutils literal notranslate"><span class="pre">nimble</span></code>, provided they are available in the
+available channels.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">nimble</span><span class="o">-</span><span class="n">data</span> <span class="n">nimble</span> <span class="n">matplotlib</span> <span class="n">scikit</span><span class="o">-</span><span class="n">learn</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>The package names used for the installation do not always match the
+names displayed in the “Package” columns in <a class="reference internal" href="#optional-packages"><span class="std std-ref">Optional Packages</span></a>,
+for example, “scikit-learn” is used to install the <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> package and
+“python-dateutil” is used to install the <code class="docutils literal notranslate"><span class="pre">dateutil</span></code> package.</p></li>
+</ul>
+</div>
+</section>
+<section id="basic-installation">
+<span id="basic-install"></span><h2>Basic Installation<a class="headerlink" href="#basic-installation" title="Permalink to this headline">¶</a></h2>
+<p>This will install Nimble and its NumPy dependency only. Accessing much
+of Nimble’s functionality will require manually installing the
+<a class="reference internal" href="#optional-packages"><span class="std std-ref">Optional Packages</span></a>. Nimble will raise its <code class="docutils literal notranslate"><span class="pre">PackageException</span></code> for
+operations requiring an optional package that is not installed.</p>
+<p><strong>with pip</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">nimble</span>
+</pre></div>
+</div>
+<p><strong>with conda</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">nimble</span><span class="o">-</span><span class="n">data</span> <span class="n">nimble</span>
+</pre></div>
+</div>
+<p><strong>with setup.py (not recommended)</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># from nimble directory</span>
+<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/install.rst"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

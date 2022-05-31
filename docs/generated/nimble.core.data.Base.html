@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Base &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Base.T" href="nimble.core.data.Base.T.html" />
+    <link rel="prev" title="nimble.random.data" href="nimble.random.data.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/cleaning_data.html">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/exploring_data.html">Exploring Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/unsupervised_learning.html">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/merging_and_tidying_data.html">Merging and Tidying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/additional_functionality.html">Additional Functionality</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Nimble API Documentation</a><ul>
+      <li>Previous: <a href="nimble.random.data.html" title="previous chapter">nimble.random.data</a></li>
+      <li>Next: <a href="nimble.core.data.Base.T.html" title="next chapter">Base.T</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="base">
+<h1>Base<a class="headerlink" href="#base" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="nimble.core.data.Base">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">nimble.core.data.</span></code><code class="sig-name descname"><span class="pre">Base</span></code><a class="headerlink" href="#nimble.core.data.Base" title="Permalink to this definition">¶</a></dt>
+<dd><p>The base class for all nimble data objects.</p>
+<p>All data types inherit their functionality from this object, then
+apply their own implementations of its methods (when necessary).
+Methods in this object apply to the entire object or its elements
+and its <code class="docutils literal notranslate"><span class="pre">points</span></code> and <code class="docutils literal notranslate"><span class="pre">features</span></code> attributes provide addtional
+methods that apply point-by-point and feature-by-feature,
+respectively.</p>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.T.html#nimble.core.data.Base.T" title="nimble.core.data.Base.T"><code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code></a></p></td>
+<td><p>Invert the feature and point indices of the data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.data.Base.absolutePath.html#nimble.core.data.Base.absolutePath" title="nimble.core.data.Base.absolutePath"><code class="xref py py-obj docutils literal notranslate"><span class="pre">absolutePath</span></code></a></p></td>
+<td><p>The path to the file this data originated from in absolute form.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.dimensions.html#nimble.core.data.Base.dimensions" title="nimble.core.data.Base.dimensions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dimensions</span></code></a></p></td>
+<td><p>The true dimensions of this object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.data.Base.features.html#nimble.core.data.Base.features" title="nimble.core.data.Base.features"><code class="xref py py-obj docutils literal notranslate"><span class="pre">features</span></code></a></p></td>
+<td><p>An object handling functions manipulating data by features.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.logID.html#nimble.core.data.Base.logID" title="nimble.core.data.Base.logID"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logID</span></code></a></p></td>
+<td><p>Identifier for this object within the log.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.data.Base.name.html#nimble.core.data.Base.name" title="nimble.core.data.Base.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></p></td>
+<td><p>A name to be displayed when printing or logging this object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.path.html#nimble.core.data.Base.path" title="nimble.core.data.Base.path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">path</span></code></a></p></td>
+<td><p>The path to the file this data originated from.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.data.Base.points.html#nimble.core.data.Base.points" title="nimble.core.data.Base.points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">points</span></code></a></p></td>
+<td><p>An object handling functions manipulating data by points.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.relativePath.html#nimble.core.data.Base.relativePath" title="nimble.core.data.Base.relativePath"><code class="xref py py-obj docutils literal notranslate"><span class="pre">relativePath</span></code></a></p></td>
+<td><p>The path to the file this data originated from in relative form.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.data.Base.shape.html#nimble.core.data.Base.shape" title="nimble.core.data.Base.shape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shape</span></code></a></p></td>
+<td><p>The number of points and features in the object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.stretch.html#nimble.core.data.Base.stretch" title="nimble.core.data.Base.stretch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stretch</span></code></a></p></td>
+<td><p>Extend along a one-dimensional axis to fit another object.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.calculateOnElements.html#nimble.core.data.Base.calculateOnElements" title="nimble.core.data.Base.calculateOnElements"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculateOnElements</span></code></a>(toCalculate[, points, …])</p></td>
+<td><p>Apply a calculation to each element.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.data.Base.checkInvariants.html#nimble.core.data.Base.checkInvariants" title="nimble.core.data.Base.checkInvariants"><code class="xref py py-obj docutils literal notranslate"><span class="pre">checkInvariants</span></code></a>([level])</p></td>
+<td><p>Check the integrity of the data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.containsZero.html#nimble.core.data.Base.containsZero" title="nimble.core.data.Base.containsZero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">containsZero</span></code></a>()</p></td>
+<td><p>Evaluate if the object contains one or more zero values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.data.Base.copy.html#nimble.core.data.Base.copy" title="nimble.core.data.Base.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code></a>([to, rowsArePoints, outputAs1D])</p></td>
+<td><p>Duplicate an object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.countElements.html#nimble.core.data.Base.countElements" title="nimble.core.data.Base.countElements"><code class="xref py py-obj docutils literal notranslate"><span class="pre">countElements</span></code></a>(condition)</p></td>
+<td><p>The number of values which satisfy the condition.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.data.Base.countUniqueElements.html#nimble.core.data.Base.countUniqueElements" title="nimble.core.data.Base.countUniqueElements"><code class="xref py py-obj docutils literal notranslate"><span class="pre">countUniqueElements</span></code></a>([points, features])</p></td>
+<td><p>Count of each unique value in the data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.featureView.html#nimble.core.data.Base.featureView" title="nimble.core.data.Base.featureView"><code class="xref py py-obj docutils literal notranslate"><span class="pre">featureView</span></code></a>(identifier)</p></td>
+<td><p>A read-only view of a single feature.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.data.Base.flatten.html#nimble.core.data.Base.flatten" title="nimble.core.data.Base.flatten"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flatten</span></code></a>([order, useLog])</p></td>
+<td><p>Modify this object so that its values are in a single point.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.getTypeString.html#nimble.core.data.Base.getTypeString" title="nimble.core.data.Base.getTypeString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getTypeString</span></code></a>()</p></td>
+<td><p>The nimble Type of this object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.data.Base.groupByFeature.html#nimble.core.data.Base.groupByFeature" title="nimble.core.data.Base.groupByFeature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">groupByFeature</span></code></a>(by[, countUniqueValueOnly, …])</p></td>
+<td><p>Group data object by one or more features.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.hashCode.html#nimble.core.data.Base.hashCode" title="nimble.core.data.Base.hashCode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hashCode</span></code></a>()</p></td>
+<td><p>Returns a hash for this matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.data.Base.inverse.html#nimble.core.data.Base.inverse" title="nimble.core.data.Base.inverse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inverse</span></code></a>([pseudoInverse])</p></td>
+<td><p>Compute the inverse or pseudo-inverse of an object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.isApproximatelyEqual.html#nimble.core.data.Base.isApproximatelyEqual" title="nimble.core.data.Base.isApproximatelyEqual"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isApproximatelyEqual</span></code></a>(other)</p></td>
+<td><p>Determine if the data in both objects is likely the same.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.data.Base.isIdentical.html#nimble.core.data.Base.isIdentical" title="nimble.core.data.Base.isIdentical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isIdentical</span></code></a>(other)</p></td>
+<td><p>Check for equality between two objects.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.iterateElements.html#nimble.core.data.Base.iterateElements" title="nimble.core.data.Base.iterateElements"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iterateElements</span></code></a>([order, only])</p></td>
+<td><p>Iterate over each element in this object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.data.Base.matchingElements.html#nimble.core.data.Base.matchingElements" title="nimble.core.data.Base.matchingElements"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matchingElements</span></code></a>(toMatch[, points, …])</p></td>
+<td><p>Identify values meeting the provided criteria.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.matrixMultiply.html#nimble.core.data.Base.matrixMultiply" title="nimble.core.data.Base.matrixMultiply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matrixMultiply</span></code></a>(other)</p></td>
+<td><p>Perform matrix multiplication.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.data.Base.matrixPower.html#nimble.core.data.Base.matrixPower" title="nimble.core.data.Base.matrixPower"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matrixPower</span></code></a>(power)</p></td>
+<td><p>Perform matrix power operations on a square matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.merge.html#nimble.core.data.Base.merge" title="nimble.core.data.Base.merge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge</span></code></a>(other[, point, feature, onFeature, …])</p></td>
+<td><p>Combine data from another object with this object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.data.Base.plotFeatureAgainstFeature.html#nimble.core.data.Base.plotFeatureAgainstFeature" title="nimble.core.data.Base.plotFeatureAgainstFeature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotFeatureAgainstFeature</span></code></a>(x, y[, …])</p></td>
+<td><p>A plot of the pairwise combination of feature values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.plotFeatureAgainstFeatureRollingAverage.html#nimble.core.data.Base.plotFeatureAgainstFeatureRollingAverage" title="nimble.core.data.Base.plotFeatureAgainstFeatureRollingAverage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotFeatureAgainstFeatureRollingAverage</span></code></a>(x, y)</p></td>
+<td><p>A rolling average of the pairwise combination of feature values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.data.Base.plotFeatureDistribution.html#nimble.core.data.Base.plotFeatureDistribution" title="nimble.core.data.Base.plotFeatureDistribution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotFeatureDistribution</span></code></a>(feature[, outPath, …])</p></td>
+<td><p>Plot a histogram of the distribution of values in a feature.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.plotFeatureGroupMeans.html#nimble.core.data.Base.plotFeatureGroupMeans" title="nimble.core.data.Base.plotFeatureGroupMeans"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotFeatureGroupMeans</span></code></a>(feature, groupFeature)</p></td>
+<td><p>Plot the means of a feature grouped by another feature.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.data.Base.plotFeatureGroupStatistics.html#nimble.core.data.Base.plotFeatureGroupStatistics" title="nimble.core.data.Base.plotFeatureGroupStatistics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotFeatureGroupStatistics</span></code></a>(statistic, …[, …])</p></td>
+<td><p>Plot an aggregate statistic for each group of a feature.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.plotHeatMap.html#nimble.core.data.Base.plotHeatMap" title="nimble.core.data.Base.plotHeatMap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotHeatMap</span></code></a>([includeColorbar, outPath, …])</p></td>
+<td><p>Display a plot of the data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.data.Base.pointView.html#nimble.core.data.Base.pointView" title="nimble.core.data.Base.pointView"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pointView</span></code></a>(identifier)</p></td>
+<td><p>A read-only view of a single point.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.replaceFeatureWithBinaryFeatures.html#nimble.core.data.Base.replaceFeatureWithBinaryFeatures" title="nimble.core.data.Base.replaceFeatureWithBinaryFeatures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">replaceFeatureWithBinaryFeatures</span></code></a>(…[, useLog])</p></td>
+<td><p>Create binary features for each unique value in a feature.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.data.Base.replaceRectangle.html#nimble.core.data.Base.replaceRectangle" title="nimble.core.data.Base.replaceRectangle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">replaceRectangle</span></code></a>(replaceWith, pointStart, …)</p></td>
+<td><p>Replace values in the data with other values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.report.html#nimble.core.data.Base.report" title="nimble.core.data.Base.report"><code class="xref py py-obj docutils literal notranslate"><span class="pre">report</span></code></a>(*[, useLog])</p></td>
+<td><p>Report containing information regarding the data in this object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.data.Base.save.html#nimble.core.data.Base.save" title="nimble.core.data.Base.save"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save</span></code></a>(outPath[, fileFormat, includeNames])</p></td>
+<td><p>Write the data in this object to a file in the specified format.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.show.html#nimble.core.data.Base.show" title="nimble.core.data.Base.show"><code class="xref py py-obj docutils literal notranslate"><span class="pre">show</span></code></a>([description, includeObjectName, …])</p></td>
+<td><p>A printed representation of the data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.data.Base.solveLinearSystem.html#nimble.core.data.Base.solveLinearSystem" title="nimble.core.data.Base.solveLinearSystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">solveLinearSystem</span></code></a>(b[, solveFunction])</p></td>
+<td><p>Solves the linear equation A * x = b for unknown x.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.toString.html#nimble.core.data.Base.toString" title="nimble.core.data.Base.toString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">toString</span></code></a>([maxWidth, maxHeight, sigDigits, …])</p></td>
+<td><p>A string representation of this object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.data.Base.trainAndTestSets.html#nimble.core.data.Base.trainAndTestSets" title="nimble.core.data.Base.trainAndTestSets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trainAndTestSets</span></code></a>(testFraction[, labels, …])</p></td>
+<td><p>Divide the data into training and testing sets.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.transformElements.html#nimble.core.data.Base.transformElements" title="nimble.core.data.Base.transformElements"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transformElements</span></code></a>(toTransform[, points, …])</p></td>
+<td><p>Modify each element using a function or mapping.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.data.Base.transformFeatureToIntegers.html#nimble.core.data.Base.transformFeatureToIntegers" title="nimble.core.data.Base.transformFeatureToIntegers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transformFeatureToIntegers</span></code></a>(featureToConvert, *)</p></td>
+<td><p>Represent each unique value in a feature with a unique integer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.transpose.html#nimble.core.data.Base.transpose" title="nimble.core.data.Base.transpose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transpose</span></code></a>(*[, useLog])</p></td>
+<td><p>Invert the feature and point indices of the data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="nimble.core.data.Base.unflatten.html#nimble.core.data.Base.unflatten" title="nimble.core.data.Base.unflatten"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unflatten</span></code></a>(dataDimensions[, order, useLog])</p></td>
+<td><p>Adjust a single point or feature to contain multiple points.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="nimble.core.data.Base.view.html#nimble.core.data.Base.view" title="nimble.core.data.Base.view"><code class="xref py py-obj docutils literal notranslate"><span class="pre">view</span></code></a>([pointStart, pointEnd, featureStart, …])</p></td>
+<td><p>Read-only access into the object data.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/docs/generated/nimble.core.data.Base.rst"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

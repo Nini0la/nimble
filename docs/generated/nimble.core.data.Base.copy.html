@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Base.copy &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Base.countElements" href="nimble.core.data.Base.countElements.html" />
+    <link rel="prev" title="Base.containsZero" href="nimble.core.data.Base.containsZero.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/cleaning_data.html">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/exploring_data.html">Exploring Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/unsupervised_learning.html">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/merging_and_tidying_data.html">Merging and Tidying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/additional_functionality.html">Additional Functionality</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Nimble API Documentation</a><ul>
+  <li><a href="nimble.core.data.Base.html">Base</a><ul>
+      <li>Previous: <a href="nimble.core.data.Base.containsZero.html" title="previous chapter">Base.containsZero</a></li>
+      <li>Next: <a href="nimble.core.data.Base.countElements.html" title="next chapter">Base.countElements</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="base-copy">
+<h1>Base.copy<a class="headerlink" href="#base-copy" title="Permalink to this headline">¶</a></h1>
+<dl class="py method">
+<dt id="nimble.core.data.Base.copy">
+<code class="sig-prename descclassname"><span class="pre">Base.</span></code><code class="sig-name descname"><span class="pre">copy</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">to</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rowsArePoints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputAs1D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nimble.core.data.Base.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicate an object. Optionally to another nimble or raw format.</p>
+<p>Return a new object containing the same data as this object.
+When copying to a nimble format, the pointNames and featureNames
+will also be copied, as well as any name and path metadata.
+A deep copy is made in all cases, no references are shared
+between this object and the copy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>to</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – If None, will return a copy of this object. To return a
+different type of nimble Base object, specify to: ‘List’,
+‘Matrix’, ‘Sparse’ or ‘DataFrame’. To specify a raw return
+type (which will not include point or feature names),
+specify to: ‘python list’, ‘numpy array’, ‘numpy matrix’,
+‘scipy csr’, ‘scipy csc’, ‘scipy coo’, ‘pandas dataframe’,
+‘list of dict’ or ‘dict of list’.</p></li>
+<li><p><strong>rowsArePoints</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Define whether the rows of the output object correspond to
+the points in this object. Default is True, if False the
+returned copy will transpose the data filling each row with
+feature data.</p></li>
+<li><p><strong>outputAs1D</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Return a one-dimensional object. Default is False, True is
+only a valid input for ‘python list’ and ‘numpy array’, all
+other formats must be two-dimensional.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>object</em> – A copy of this object.  If <code class="docutils literal notranslate"><span class="pre">to</span></code> is not None, the copy will
+be in the specified format.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="nimble.core.data.Points.copy.html#nimble.core.data.Points.copy" title="nimble.core.data.Points.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Points.copy</span></code></a>, <a class="reference internal" href="nimble.core.data.Features.copy.html#nimble.core.data.Features.copy" title="nimble.core.data.Features.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Features.copy</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<p>Copy this object in the same format.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lst</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ptNames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;odd&#39;</span><span class="p">,</span> <span class="s1">&#39;even&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">pointNames</span><span class="o">=</span><span class="n">ptNames</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;odd&amp;even&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span>
+<span class="go">&lt;Matrix &quot;odd&amp;even&quot; 2pt x 3ft</span>
+<span class="go">          0 1 2</span>
+<span class="go">        ┌──────</span>
+<span class="go">  &#39;odd&#39; │ 1 3 5</span>
+<span class="go"> &#39;even&#39; │ 2 4 6</span>
+<span class="go">&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XCopy</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">XCopy</span>
+<span class="go">&lt;Matrix &quot;odd&amp;even&quot; 2pt x 3ft</span>
+<span class="go">          0 1 2</span>
+<span class="go">        ┌──────</span>
+<span class="go">  &#39;odd&#39; │ 1 3 5</span>
+<span class="go"> &#39;even&#39; │ 2 4 6</span>
+<span class="go">&gt;</span>
+</pre></div>
+</div>
+<p>Copy to other formats.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ptNames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ftNames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">pointNames</span><span class="o">=</span><span class="n">ptNames</span><span class="p">,</span>
+<span class="gp">... </span>                    <span class="n">featureNames</span><span class="o">=</span><span class="n">ftNames</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">asDataFrame</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">to</span><span class="o">=</span><span class="s1">&#39;DataFrame&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">asDataFrame</span>
+<span class="go">&lt;DataFrame 2pt x 2ft</span>
+<span class="go">       &#39;a&#39; &#39;b&#39;</span>
+<span class="go">     ┌────────</span>
+<span class="go"> &#39;0&#39; │  1   0</span>
+<span class="go"> &#39;1&#39; │  0   1</span>
+<span class="go">&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">asNumpyArray</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">to</span><span class="o">=</span><span class="s1">&#39;numpy array&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">asNumpyArray</span>
+<span class="go">array([[1, 0],</span>
+<span class="go">       [0, 1]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">asListOfDict</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">to</span><span class="o">=</span><span class="s1">&#39;list of dict&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">asListOfDict</span>
+<span class="go">[{&#39;a&#39;: 1, &#39;b&#39;: 0}, {&#39;a&#39;: 0, &#39;b&#39;: 1}]</span>
+</pre></div>
+</div>
+<p>Keywords: 
+duplicate, raw, replicate, convert, change, clone</p>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/docs/generated/nimble.core.data.Base.copy.rst"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

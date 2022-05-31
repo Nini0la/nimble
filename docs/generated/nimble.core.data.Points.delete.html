@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Points.delete &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Points.extract" href="nimble.core.data.Points.extract.html" />
+    <link rel="prev" title="Points.count" href="nimble.core.data.Points.count.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/cleaning_data.html">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/exploring_data.html">Exploring Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/unsupervised_learning.html">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/merging_and_tidying_data.html">Merging and Tidying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/additional_functionality.html">Additional Functionality</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Nimble API Documentation</a><ul>
+  <li><a href="nimble.core.data.Points.html">Points</a><ul>
+      <li>Previous: <a href="nimble.core.data.Points.count.html" title="previous chapter">Points.count</a></li>
+      <li>Next: <a href="nimble.core.data.Points.extract.html" title="next chapter">Points.extract</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="points-delete">
+<h1>Points.delete<a class="headerlink" href="#points-delete" title="Permalink to this headline">¶</a></h1>
+<dl class="py method">
+<dt id="nimble.core.data.Points.delete">
+<code class="sig-prename descclassname"><span class="pre">Points.</span></code><code class="sig-name descname"><span class="pre">delete</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">toDelete</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">useLog</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nimble.core.data.Points.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove certain points from this object.</p>
+<p>A variety of methods for specifying points to delete based on
+the provided parameters. If <code class="docutils literal notranslate"><span class="pre">toDelete</span></code> is not None, <code class="docutils literal notranslate"><span class="pre">start</span></code>
+and <code class="docutils literal notranslate"><span class="pre">end</span></code> must be None. If <code class="docutils literal notranslate"><span class="pre">start</span></code> or <code class="docutils literal notranslate"><span class="pre">end</span></code> is not None,
+<code class="docutils literal notranslate"><span class="pre">toDelete</span></code> must be None.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">nimble.match</span></code> module contains many helpful functions that
+could be used for <code class="docutils literal notranslate"><span class="pre">toDelete</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>toDelete</strong> (<em>identifier</em><em>, </em><em>list of identifiers</em><em>, </em><em>function</em><em>, </em><em>query</em>) – <ul>
+<li><p>identifier - a name or index</p></li>
+<li><p>list of identifiers - an iterable container of identifiers</p></li>
+<li><p>function - accepts a point as its only argument and
+returns a boolean value to indicate if the point should
+be deleted. See <code class="docutils literal notranslate"><span class="pre">nimble.match</span></code> for common functions.</p></li>
+<li><p>query - string in the format ‘FEATURENAME OPERATOR VALUE’
+(i.e “ft1 &lt; 10”, “id4 == yes”, or “col4 is nonZero”) where
+OPERATOR is separated from the FEATURENAME and VALUE by
+whitespace characters. See <code class="docutils literal notranslate"><a class="nimble-hyperlink" href="./nimble.match.QueryString.html"><span class="pre">nimble.match.QueryString</span></a></code>
+for string requirements.</p></li>
+</ul>
+</p></li>
+<li><p><strong>start</strong> (<em>identifier</em>) – Parameters indicating range based deletion. Begin the
+deletion at the location of <code class="docutils literal notranslate"><span class="pre">start</span></code>. Finish deleting at
+the inclusive <code class="docutils literal notranslate"><span class="pre">end</span></code> location. If only one of start and
+end are non-None, the other default to 0 and the number of
+values in each point, respectively.</p></li>
+<li><p><strong>end</strong> (<em>identifier</em>) – Parameters indicating range based deletion. Begin the
+deletion at the location of <code class="docutils literal notranslate"><span class="pre">start</span></code>. Finish deleting at
+the inclusive <code class="docutils literal notranslate"><span class="pre">end</span></code> location. If only one of start and
+end are non-None, the other default to 0 and the number of
+values in each point, respectively.</p></li>
+<li><p><strong>number</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The quantity of points that are to be deleted, the
+default None means unrestricted deletion. This can be
+provided on its own (toDelete, start and end are None) to
+the first <code class="docutils literal notranslate"><span class="pre">number</span></code> of points, or in conjuction with
+toDelete or  start and end, to limit their output.</p></li>
+<li><p><strong>randomize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Indicates whether random sampling is to be used in
+conjunction with the number parameter. If randomize is
+False, the chosen points are determined by point order,
+otherwise it is uniform random across the space of possible
+points.</p></li>
+<li><p><strong>features</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a><em>, </em><em>identifier</em><em>, </em><em>list of identifiers</em>) – Only apply the target function to a selection of features in
+each point. May be a single feature name or index, an
+iterable, container of feature names and/or indices. None
+indicates application to all features.</p></li>
+<li><p><strong>useLog</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – Local control for whether to send object creation to the
+logger. If None (default), use the value as specified in the
+“logger” “enabledByDefault” configuration option. If True,
+send to the logger regardless of the global option. If
+False, do <strong>NOT</strong> send to the logger, regardless of the
+global option.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="nimble.core.data.Points.extract.html#nimble.core.data.Points.extract" title="nimble.core.data.Points.extract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extract</span></code></a>, <a class="reference internal" href="nimble.core.data.Points.retain.html#nimble.core.data.Points.retain" title="nimble.core.data.Points.retain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">retain</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<p>Delete a single point.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">setNames</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span>
+<span class="go">&lt;Matrix 2pt x 3ft</span>
+<span class="go">       0 1 2</span>
+<span class="go">     ┌──────</span>
+<span class="go"> &#39;b&#39; │ 0 1 0</span>
+<span class="go"> &#39;c&#39; │ 0 0 1</span>
+<span class="go">&gt;</span>
+</pre></div>
+</div>
+<p>Delete multiple points.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">setNames</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">delete</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span>
+<span class="go">&lt;Matrix 1pt x 3ft</span>
+<span class="go">       0 1 2</span>
+<span class="go">     ┌──────</span>
+<span class="go"> &#39;b&#39; │ 0 1 0</span>
+<span class="go">&gt;</span>
+</pre></div>
+</div>
+<p>Delete point when the function returns True.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">setNames</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">nimble</span><span class="o">.</span><span class="n">match</span><span class="o">.</span><span class="n">allNegative</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span>
+<span class="go">&lt;Matrix 2pt x 3ft</span>
+<span class="go">       0 1 2</span>
+<span class="go">     ┌──────</span>
+<span class="go"> &#39;a&#39; │ 1 2 3</span>
+<span class="go"> &#39;b&#39; │ 4 5 6</span>
+<span class="go">&gt;</span>
+</pre></div>
+</div>
+<p>Delete point when the query string returns True.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">pointNames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="n">featureNames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;f1&#39;</span><span class="p">,</span> <span class="s1">&#39;f2&#39;</span><span class="p">,</span> <span class="s1">&#39;f3&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s2">&quot;f2 != 0&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span>
+<span class="go">&lt;Matrix 2pt x 3ft</span>
+<span class="go">       &#39;f1&#39; &#39;f2&#39; &#39;f3&#39;</span>
+<span class="go">     ┌───────────────</span>
+<span class="go"> &#39;a&#39; │  1    0    0</span>
+<span class="go"> &#39;c&#39; │  0    0    1</span>
+<span class="go">&gt;</span>
+</pre></div>
+</div>
+<p>Delete points from the inclusive start to the inclusive end.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">setNames</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span>
+<span class="go">&lt;Matrix 1pt x 3ft</span>
+<span class="go">       0 1 2</span>
+<span class="go">     ┌──────</span>
+<span class="go"> &#39;a&#39; │ 1 0 0</span>
+<span class="go">&gt;</span>
+</pre></div>
+</div>
+<p>Select a set number to delete, starting from the first point.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">setNames</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span>
+<span class="go">&lt;Matrix 1pt x 3ft</span>
+<span class="go">       0 1 2</span>
+<span class="go">     ┌──────</span>
+<span class="go"> &#39;c&#39; │ 0 0 1</span>
+<span class="go">&gt;</span>
+</pre></div>
+</div>
+<p>Select a set number to delete, choosing points at random.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nimble</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">setSeed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">setNames</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">randomize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span>
+<span class="go">&lt;Matrix 1pt x 3ft</span>
+<span class="go">       0 1 2</span>
+<span class="go">     ┌──────</span>
+<span class="go"> &#39;b&#39; │ 0 1 0</span>
+<span class="go">&gt;</span>
+</pre></div>
+</div>
+<p>Keywords: 
+remove, drop, exclude, eliminate, destroy, cut</p>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/docs/generated/nimble.core.data.Points.delete.rst"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

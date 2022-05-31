@@ -1,0 +1,353 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Base.merge &#8212; Nimble Alpha documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Base.plotFeatureAgainstFeature" href="nimble.core.data.Base.plotFeatureAgainstFeature.html" />
+    <link rel="prev" title="Base.matrixPower" href="nimble.core.data.Base.matrixPower.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Nimble</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/cleaning_data.html">Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/supervised_learning.html">Supervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/exploring_data.html">Exploring Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/unsupervised_learning.html">Unsupervised Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/neural_networks.html">Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/merging_and_tidying_data.html">Merging and Tidying Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/additional_functionality.html">Additional Functionality</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../datasets.html">Example Datasets</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Nimble API Documentation</a><ul>
+  <li><a href="nimble.core.data.Base.html">Base</a><ul>
+      <li>Previous: <a href="nimble.core.data.Base.matrixPower.html" title="previous chapter">Base.matrixPower</a></li>
+      <li>Next: <a href="nimble.core.data.Base.plotFeatureAgainstFeature.html" title="next chapter">Base.plotFeatureAgainstFeature</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="base-merge">
+<h1>Base.merge<a class="headerlink" href="#base-merge" title="Permalink to this headline">¶</a></h1>
+<dl class="py method">
+<dt id="nimble.core.data.Base.merge">
+<code class="sig-prename descclassname"><span class="pre">Base.</span></code><code class="sig-name descname"><span class="pre">merge</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">point</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'strict'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'union'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">onFeature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">useLog</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nimble.core.data.Base.merge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combine data from another object with this object.</p>
+<p>Merge can be based on point names or a common feature between
+the objects. How the data will be merged is based upon the
+string arguments provided to <code class="docutils literal notranslate"><span class="pre">point</span></code> and <code class="docutils literal notranslate"><span class="pre">feature</span></code>. If
+<code class="docutils literal notranslate"><span class="pre">onFeature</span></code> is None, the objects will be merged on the point
+names. Otherwise, <code class="docutils literal notranslate"><span class="pre">onFeature</span></code> must contain only unique values
+in one or both objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>other</strong> (<a class="reference internal" href="nimble.core.data.Base.html#nimble.core.data.Base" title="nimble.core.data.Base"><em>Base</em></a>) – The nimble data object containing the data to merge.</p></li>
+<li><p><strong>point</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – <p>The allowed strings for the point and feature arguments are
+as follows:</p>
+<ul>
+<li><p>’strict’ - The points/features in the callee exactly match
+the points/features in the caller, however, they may be in
+a different order. If <code class="docutils literal notranslate"><span class="pre">onFeature</span></code> is None and no names
+are provided, it will be assumed the order is the same.</p></li>
+<li><p>’union’ - Return all points/features from the caller and
+callee. If <code class="docutils literal notranslate"><span class="pre">onFeature</span></code> is None, unnamed points/features
+will be assumed to be unique. Any missing data from the
+caller and callee will be filled with np.NaN.</p></li>
+<li><p>’intersection’: Return only points/features shared between
+the caller  and callee. If <code class="docutils literal notranslate"><span class="pre">onFeature</span></code> is None,
+point / feature names are required.</p></li>
+<li><p>’left’: Return only the points/features from the caller.
+Any missing data from the callee will be filled with
+np.NaN.</p></li>
+</ul>
+</p></li>
+<li><p><strong>feature</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – <p>The allowed strings for the point and feature arguments are
+as follows:</p>
+<ul>
+<li><p>’strict’ - The points/features in the callee exactly match
+the points/features in the caller, however, they may be in
+a different order. If <code class="docutils literal notranslate"><span class="pre">onFeature</span></code> is None and no names
+are provided, it will be assumed the order is the same.</p></li>
+<li><p>’union’ - Return all points/features from the caller and
+callee. If <code class="docutils literal notranslate"><span class="pre">onFeature</span></code> is None, unnamed points/features
+will be assumed to be unique. Any missing data from the
+caller and callee will be filled with np.NaN.</p></li>
+<li><p>’intersection’: Return only points/features shared between
+the caller  and callee. If <code class="docutils literal notranslate"><span class="pre">onFeature</span></code> is None,
+point / feature names are required.</p></li>
+<li><p>’left’: Return only the points/features from the caller.
+Any missing data from the callee will be filled with
+np.NaN.</p></li>
+</ul>
+</p></li>
+<li><p><strong>onFeature</strong> (<em>identifier</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – The name or index of the feature present in both objects to
+merge on.  If None, the merge will be based on point names.</p></li>
+<li><p><strong>force</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – When True, the <code class="docutils literal notranslate"><span class="pre">point</span></code> or <code class="docutils literal notranslate"><span class="pre">feature</span></code> parameter set to
+‘strict’ does not require names along that axis. The merge
+is forced to continue as True acknowledges that each index
+along that axis is equal between the two objects. Has no
+effect if neither parameter is set to ‘strict’.</p></li>
+<li><p><strong>useLog</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – Local control for whether to send object creation to the
+logger. If None (default), use the value as specified in the
+“logger” “enabledByDefault” configuration option. If True,
+send to the logger regardless of the global option. If
+False, do <strong>NOT</strong> send to the logger, regardless of the
+global option.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="nimble.core.data.Points.append.html#nimble.core.data.Points.append" title="nimble.core.data.Points.append"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Points.append</span></code></a>, <a class="reference internal" href="nimble.core.data.Features.append.html#nimble.core.data.Features.append" title="nimble.core.data.Features.append"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Features.append</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<p>A strict case. In this case we will merge using the point names,
+so <code class="docutils literal notranslate"><span class="pre">point='strict'</span></code> requires that the each object has the same
+point names (or one or both have default names) In this example,
+there is one shared feature between objects. If
+<code class="docutils literal notranslate"><span class="pre">feature='union'</span></code>, all features (“f1”-“f5”) will be included,
+if <code class="docutils literal notranslate"><span class="pre">feature='intersection'</span></code>, only the shared feature (“f3”)
+will be included, <code class="docutils literal notranslate"><span class="pre">feature='left'</span></code> will only use the features
+from the left object (not shown, in strict cases ‘left’ will not
+modify the left object at all).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lstL</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fNamesL</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;f1&quot;</span><span class="p">,</span> <span class="s2">&quot;f2&quot;</span><span class="p">,</span> <span class="s2">&quot;f3&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pNamesL</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;p1&quot;</span><span class="p">,</span> <span class="s2">&quot;p2&quot;</span><span class="p">,</span> <span class="s2">&quot;p3&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">lstL</span><span class="p">,</span> <span class="n">pointNames</span><span class="o">=</span><span class="n">pNamesL</span><span class="p">,</span>
+<span class="gp">... </span>                   <span class="n">featureNames</span><span class="o">=</span><span class="n">fNamesL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lstR</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fNamesR</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;f3&quot;</span><span class="p">,</span> <span class="s2">&quot;f4&quot;</span><span class="p">,</span> <span class="s2">&quot;f5&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pNamesR</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;p3&quot;</span><span class="p">,</span> <span class="s2">&quot;p2&quot;</span><span class="p">,</span> <span class="s2">&quot;p1&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">right</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">lstR</span><span class="p">,</span> <span class="n">pointNames</span><span class="o">=</span><span class="n">pNamesR</span><span class="p">,</span>
+<span class="gp">... </span>                    <span class="n">featureNames</span><span class="o">=</span><span class="n">fNamesR</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">point</span><span class="o">=</span><span class="s1">&#39;strict&#39;</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="s1">&#39;union&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span>
+<span class="go">&lt;DataFrame 3pt x 5ft</span>
+<span class="go">        &#39;f1&#39; &#39;f2&#39; &#39;f3&#39; &#39;f4&#39; &#39;f5&#39;</span>
+<span class="go">      ┌─────────────────────────</span>
+<span class="go"> &#39;p1&#39; │  a    1    X    d    4</span>
+<span class="go"> &#39;p2&#39; │  b    2    Y    e    5</span>
+<span class="go"> &#39;p3&#39; │  c    3    Z    f    6</span>
+<span class="go">&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">lstL</span><span class="p">,</span> <span class="n">pointNames</span><span class="o">=</span><span class="n">pNamesL</span><span class="p">,</span>
+<span class="gp">... </span>                   <span class="n">featureNames</span><span class="o">=</span><span class="n">fNamesL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">point</span><span class="o">=</span><span class="s1">&#39;strict&#39;</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="s1">&#39;intersection&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span>
+<span class="go">&lt;DataFrame 3pt x 1ft</span>
+<span class="go">        &#39;f3&#39;</span>
+<span class="go">      ┌─────</span>
+<span class="go"> &#39;p1&#39; │  X</span>
+<span class="go"> &#39;p2&#39; │  Y</span>
+<span class="go"> &#39;p3&#39; │  Z</span>
+<span class="go">&gt;</span>
+</pre></div>
+</div>
+<p>Additional merge combinations. In this example, the feature
+<code class="docutils literal notranslate"><span class="pre">&quot;id&quot;</span></code> contains a unique value for each point (just as point
+names do). In the example above we matched based on point names,
+here the <code class="docutils literal notranslate"><span class="pre">&quot;id&quot;</span></code> feature will be used to match points.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lstL</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;id1&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;id2&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;id3&#39;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fNamesL</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;f1&quot;</span><span class="p">,</span> <span class="s2">&quot;f2&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">lstL</span><span class="p">,</span> <span class="n">featureNames</span><span class="o">=</span><span class="n">fNamesL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lstR</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;id3&#39;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;id4&#39;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;id5&#39;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="mi">9</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fNamesR</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;f4&quot;</span><span class="p">,</span> <span class="s2">&quot;f5&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">right</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">lstR</span><span class="p">,</span> <span class="n">featureNames</span><span class="o">=</span><span class="n">fNamesR</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">point</span><span class="o">=</span><span class="s1">&#39;union&#39;</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="s1">&#39;union&#39;</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="n">onFeature</span><span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span>
+<span class="go">&lt;DataFrame 5pt x 5ft</span>
+<span class="go">     &#39;f1&#39;  &#39;f2&#39; &#39;id&#39; &#39;f4&#39;  &#39;f5&#39;</span>
+<span class="go">   ┌───────────────────────────</span>
+<span class="go"> 0 │  a   1.000 id1</span>
+<span class="go"> 1 │  b   2.000 id2</span>
+<span class="go"> 2 │  c   3.000 id3   x   7.000</span>
+<span class="go"> 3 │            id4   y   8.000</span>
+<span class="go"> 4 │            id5   z   9.000</span>
+<span class="go">&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">lstL</span><span class="p">,</span> <span class="n">featureNames</span><span class="o">=</span><span class="n">fNamesL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">point</span><span class="o">=</span><span class="s1">&#39;union&#39;</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="s1">&#39;intersection&#39;</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="n">onFeature</span><span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span>
+<span class="go">&lt;DataFrame 5pt x 1ft</span>
+<span class="go">     &#39;id&#39;</span>
+<span class="go">   ┌─────</span>
+<span class="go"> 0 │ id1</span>
+<span class="go"> 1 │ id2</span>
+<span class="go"> 2 │ id3</span>
+<span class="go"> 3 │ id4</span>
+<span class="go"> 4 │ id5</span>
+<span class="go">&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">lstL</span><span class="p">,</span> <span class="n">featureNames</span><span class="o">=</span><span class="n">fNamesL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">point</span><span class="o">=</span><span class="s1">&#39;union&#39;</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="n">onFeature</span><span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span>
+<span class="go">&lt;DataFrame 5pt x 3ft</span>
+<span class="go">     &#39;f1&#39;  &#39;f2&#39; &#39;id&#39;</span>
+<span class="go">   ┌────────────────</span>
+<span class="go"> 0 │  a   1.000 id1</span>
+<span class="go"> 1 │  b   2.000 id2</span>
+<span class="go"> 2 │  c   3.000 id3</span>
+<span class="go"> 3 │            id4</span>
+<span class="go"> 4 │            id5</span>
+<span class="go">&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">lstL</span><span class="p">,</span> <span class="n">featureNames</span><span class="o">=</span><span class="n">fNamesL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">point</span><span class="o">=</span><span class="s1">&#39;intersection&#39;</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="s1">&#39;union&#39;</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="n">onFeature</span><span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span>
+<span class="go">&lt;DataFrame 1pt x 5ft</span>
+<span class="go">     &#39;f1&#39; &#39;f2&#39; &#39;id&#39; &#39;f4&#39; &#39;f5&#39;</span>
+<span class="go">   ┌─────────────────────────</span>
+<span class="go"> 0 │  c    3   id3   x    7</span>
+<span class="go">&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">lstL</span><span class="p">,</span> <span class="n">featureNames</span><span class="o">=</span><span class="n">fNamesL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">point</span><span class="o">=</span><span class="s1">&#39;intersection&#39;</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="n">feature</span><span class="o">=</span><span class="s1">&#39;intersection&#39;</span><span class="p">,</span> <span class="n">onFeature</span><span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span>
+<span class="go">&lt;DataFrame 1pt x 1ft</span>
+<span class="go">     &#39;id&#39;</span>
+<span class="go">   ┌─────</span>
+<span class="go"> 0 │ id3</span>
+<span class="go">&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">lstL</span><span class="p">,</span> <span class="n">featureNames</span><span class="o">=</span><span class="n">fNamesL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">point</span><span class="o">=</span><span class="s1">&#39;intersection&#39;</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="n">onFeature</span><span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span>
+<span class="go">&lt;DataFrame 1pt x 3ft</span>
+<span class="go">     &#39;f1&#39; &#39;f2&#39; &#39;id&#39;</span>
+<span class="go">   ┌───────────────</span>
+<span class="go"> 0 │  c    3   id3</span>
+<span class="go">&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">lstL</span><span class="p">,</span> <span class="n">featureNames</span><span class="o">=</span><span class="n">fNamesL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">point</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="s1">&#39;union&#39;</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="n">onFeature</span><span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span>
+<span class="go">&lt;DataFrame 3pt x 5ft</span>
+<span class="go">     &#39;f1&#39; &#39;f2&#39; &#39;id&#39; &#39;f4&#39;  &#39;f5&#39;</span>
+<span class="go">   ┌──────────────────────────</span>
+<span class="go"> 0 │  a    1   id1</span>
+<span class="go"> 1 │  b    2   id2</span>
+<span class="go"> 2 │  c    3   id3   x   7.000</span>
+<span class="go">&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">lstL</span><span class="p">,</span> <span class="n">featureNames</span><span class="o">=</span><span class="n">fNamesL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">point</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="s1">&#39;intersection&#39;</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="n">onFeature</span><span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span>
+<span class="go">&lt;DataFrame 3pt x 1ft</span>
+<span class="go">     &#39;id&#39;</span>
+<span class="go">   ┌─────</span>
+<span class="go"> 0 │ id1</span>
+<span class="go"> 1 │ id2</span>
+<span class="go"> 2 │ id3</span>
+<span class="go">&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span> <span class="o">=</span> <span class="n">nimble</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">lstL</span><span class="p">,</span> <span class="n">featureNames</span><span class="o">=</span><span class="n">fNamesL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">point</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="n">onFeature</span><span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left</span>
+<span class="go">&lt;DataFrame 3pt x 3ft</span>
+<span class="go">     &#39;f1&#39; &#39;f2&#39; &#39;id&#39;</span>
+<span class="go">   ┌───────────────</span>
+<span class="go"> 0 │  a    1   id1</span>
+<span class="go"> 1 │  b    2   id2</span>
+<span class="go"> 2 │  c    3   id3</span>
+<span class="go">&gt;</span>
+</pre></div>
+</div>
+<p>Keywords: 
+combine, join, unite, group, fuse, consolidate, meld, union,
+intersection, inner, outer, full outer, left</p>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2022, Spark Wave.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/docs/generated/nimble.core.data.Base.merge.rst"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
