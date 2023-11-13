@@ -4381,7 +4381,9 @@ class HighLevelModifyingSparseSafe(DataTestObject):
                 ['Georgia', 11, 3]]
         ftNames = ['Store Location', 'Purchases', 'Returns']
         top10 = nimble.data(raw, featureNames=ftNames)
-        top10.groupByFeature('Store Location')
+        # import pdb ; pdb.set_trace()
+        top10.groupByFeature('Store Location',calculate='max')
+        top10.groupByFeature('Store Location', countUniqueValueOnly=False)
         
         res = 1 
         exp = 1
