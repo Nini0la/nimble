@@ -30,7 +30,7 @@ from nimble._utility import isAllowedSingleElement, validateAllAllowedElements
 from nimble._utility import prettyListString
 from nimble._utility import inspectArguments
 from nimble._utility import tableString
-#from nimble.calculate.utility import ACCEPTED_STATS
+from nimble._utility import _getStatsFunction, acceptedStats
 from .points import Points
 from .features import Features
 from ._dataHelpers import valuesToPythonList, constructIndicesList
@@ -43,8 +43,6 @@ from ._dataHelpers import pyplotRequired, plotOutput, plotFigureHandling
 from ._dataHelpers import plotAxisLabels, plotXTickLabels
 from ._dataHelpers import plotConfidenceIntervalMeanAndError, plotErrorBars
 from ._dataHelpers import plotSingleBarChart, plotMultiBarChart
-
-from nimble._utility import _getStatsFunction
 
 class Axis(ABC):
     """
@@ -881,40 +879,17 @@ class Axis(ABC):
         return ret
 
     def _statistics(self, statisticsFunction, groupByFeature=None):
-        accepted = [
-            'max', 'mean', 'median', 'min', 'unique count',
-            'proportion missing', 'proportion zero', 'standard deviation',
-            'std', 'population std', 'population standard deviation',
-            'sample std', 'sample standard deviation'
-            ]
+        # accepted = [
+        #     'max', 'mean', 'median', 'min', 'unique count',
+        #     'proportion missing', 'proportion zero', 'standard deviation',
+        #     'std', 'population std', 'population standard deviation',
+        #     'sample std', 'sample standard deviation'
+        #     ]
+        accepted = acceptedStats
         #accepted = nimble.calculate.utility.ACCEPTED_STATS
         cleanFuncName = validateInputString(statisticsFunction, accepted,
                                             'statistics')
         toCall = _getStatsFunction(cleanFuncName)
-
-        # if cleanFuncName == 'max':
-        #     toCall = nimble.calculate.maximum
-        # elif cleanFuncName == 'mean':
-        #     toCall = nimble.calculate.mean
-        # elif cleanFuncName == 'median':
-        #     toCall = nimble.calculate.median
-        # elif cleanFuncName == 'min':
-        #     toCall = nimble.calculate.minimum
-        # elif cleanFuncName == 'uniquecount':
-        #     toCall = nimble.calculate.uniqueCount
-        # elif cleanFuncName == 'proportionmissing':
-        #     toCall = nimble.calculate.proportionMissing
-        # elif cleanFuncName == 'proportionzero':
-        #     toCall = nimble.calculate.proportionZero
-        # elif cleanFuncName in ['std', 'standarddeviation', 'samplestd',
-        #                        'samplestandarddeviation']:
-        #     toCall = nimble.calculate.standardDeviation
-        # elif cleanFuncName in ['populationstd', 'populationstandarddeviation']:
-
-        #     def populationStandardDeviation(values):
-        #         return nimble.calculate.standardDeviation(values, False)
-
-        #     toCall = populationStandardDeviation
 
         if self._axis == 'point' or groupByFeature is None:
             return self._statisticsBackend(cleanFuncName, toCall)
