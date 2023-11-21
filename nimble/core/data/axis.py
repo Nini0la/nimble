@@ -879,12 +879,6 @@ class Axis(ABC):
         return ret
 
     def _statistics(self, statisticsFunction, groupByFeature=None):
-        # accepted = [
-        #     'max', 'mean', 'median', 'min', 'unique count',
-        #     'proportion missing', 'proportion zero', 'standard deviation',
-        #     'std', 'population std', 'population standard deviation',
-        #     'sample std', 'sample standard deviation'
-        #     ]
         accepted = acceptedStats
         #accepted = nimble.calculate.utility.ACCEPTED_STATS
         cleanFuncName = validateInputString(statisticsFunction, accepted,
