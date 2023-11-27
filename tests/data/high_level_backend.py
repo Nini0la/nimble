@@ -4368,51 +4368,6 @@ class HighLevelModifyingSparseSafe(DataTestObject):
         exp = toTest.features.statistics('populationstd')
         res = toTest.features.populationStandardDeviation()
         assert exp == res
-    
-    # def test_groupByFeature_calculate(self):
-    #     import pdb; pdb.set_trace()
-    #     raw = [['Clemson', 15, 0],
-    #             ['Clemson', 14, 1],
-    #             ['Oklahoma', 13, 1],
-    #             ['Oklahoma', 12, 2],
-    #             ['Oklahoma', 12, 1],
-    #             ['Georgia', 10, 3],
-    #             ['Georgia', 10, 3],
-    #             ['Georgia', 11, 3]]
-    #     ftNames = ['Store Location', 'Purchases', 'Returns']
-    #     top10 = nimble.data(raw, featureNames=ftNames)
-    #     # import pdb ; pdb.set_trace()
-    #     top10.groupByFeature('Store Location',calculate='max')
-    #     top10.groupByFeature('Store Location', countUniqueValueOnly=False)
-        
-    #     res = 1 
-    #     exp = 1
-    #     assert exp == res
-        
-    # def test_groupByFeature2_calculate(self):
-    #     import pdb; pdb.set_trace()
-    #     raw = [['Clemson', 15, 0],
-    #             ['Clemson', 14, 1],
-    #             ['Oklahoma', 13, 1],
-    #             ['Oklahoma', 12, 2],
-    #             ['Oklahoma', 12, 1],
-    #             ['Georgia', 10, 3],
-    #             ['Georgia', 10, 3],
-    #             ['Georgia', 11, 3]]
-    #     ftNames = ['Store Location', 'Purchases', 'Returns']
-    #     top10 = nimble.data(raw, featureNames=ftNames)
-    #     #top10.groupByFeature('Store Location')
-                                        
-    #     def typeCounter(pt):  
-    #         commonGroup = pt[0]  
-    #         counterN = pt[1]
-    #         counterN2 = pt[2] 
-    #         return [(commonGroup, counterN, counterN2)] 
-
-    #     def featureReducer(commonGroup, counterN, counterN2):   
-    #         return (commonGroup, sum(counterN), sum(counterN2))
-
-    #     desiredTable = top10.points.mapReduce(typeCounter, featureReducer)
        
     ##################################
     # groupByFeature calculate tests #
@@ -4548,7 +4503,7 @@ class HighLevelModifyingSparseSafe(DataTestObject):
         assert exp2[:,['Purchases','Returns']] == res['Oklahoma']
     
     def test_groupByFeature_population_standard_deviation(self):
-        import pdb; pdb.set_trace()
+        #import pdb; pdb.set_trace()
         raw = [['Clemson', 15, 0], ['Clemson', 14, 1], ['Oklahoma', 13, 1], 
                ['Oklahoma', 12, 2], ['Oklahoma', 12, 1]]
         ftNames = ['Location', 'Purchases', 'Returns']
@@ -4563,6 +4518,3 @@ class HighLevelModifyingSparseSafe(DataTestObject):
         exp2 = toTest2.features.populationStandardDeviation()
         assert exp1[:,['Purchases','Returns']] == res['Clemson']
         assert exp2[:,['Purchases','Returns']] == res['Oklahoma']
-        
-        
-    
