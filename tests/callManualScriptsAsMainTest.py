@@ -15,6 +15,7 @@ def test_callAllAsMain():
     examplesDir = os.path.join(os.getcwd(), 'tests', 'manualScripts')
     examplesFiles = os.listdir(examplesDir)
     cleaned = []
+    
     for fileName in examplesFiles:
         if fileName.endswith('.py'):
             cleaned.append(fileName)
