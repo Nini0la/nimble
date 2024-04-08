@@ -1,0 +1,37 @@
+name: Manual Specific Test Trigger
+
+on:
+  workflow_dispatch:
+    inputs:
+      branchName:
+        description: 'Branch Name to Run Tests On'
+        required: true
+        type: string
+      testName:
+        description: 'Specific Test Name to Run'
+        required: true
+        type: string
+
+jobs:
+  checkout-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the specified branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.inputs.branchName }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+          cache: pip
+          cache-dependency-path: pyproject.toml
+
+      - name: Install Dependencies
+        run: |
+          pip install pytest
+          # Add additional dependencies here
+
+      - name: Run Specific Test
+        run: pytest -v -k ${{ github.event.inputs.testName }}
