@@ -254,7 +254,6 @@ def skipMissingPackage(package):
     reason = package + ' package is not available'
     return pytest.mark.skipif(missing, reason=reason)
 
-
 class PortableNamedTempFileContext():
     """
     A wrapper for NamedTemporaryFile which guarantees that closing
