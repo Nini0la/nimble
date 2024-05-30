@@ -14,6 +14,7 @@ from packaging.version import Version
 
 from nimble.exceptions import PackageException
 
+
 def _getNimbleMetadata():
     checker = importlib.metadata.requires
     try:
